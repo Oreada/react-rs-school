@@ -9,8 +9,18 @@ export class SearchBar extends React.Component<Record<string, never>, SearchBarS
 		super(props);
 		this.state = { value: '' };
 	}
+
 	changeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
 		this.setState({ value: event.target.value });
+	}
+
+	componentDidMount() {
+		const storageValue = localStorage.getItem('valueSearchBar') || '';
+		this.setState({ value: storageValue });
+	}
+
+	componentWillUnmount() {
+		localStorage.setItem('valueSearchBar', this.state.value);
 	}
 
 	render(): ReactNode {
