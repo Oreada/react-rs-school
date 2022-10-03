@@ -1,7 +1,7 @@
 import React, { ReactNode } from "react";
 
 export interface IProduct {
-	id?: number; //! нужен ли знак вопроса - ???
+	id?: number; //! пока использую только для key
 	image: string;
 	name: string;
 	brand: string;
@@ -18,9 +18,9 @@ export interface IProduct {
 // }
 
 export class Product extends React.Component<IProduct> {
-	constructor(props: IProduct) {
-		super(props);
-	}
+	// constructor(props: IProduct) {
+	// 	super(props);
+	// }
 
 	render(): ReactNode {
 		return (
