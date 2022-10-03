@@ -6,17 +6,17 @@ import { ErrorPage } from './pages/ErrorPage';
 import { HomePage } from './pages/HomePage';
 
 function App() {
-    return (
-        <div className="container">
-            <Navigation />
-            <Routes>
-                <Route path='/' element={<HomePage />} />
-                <Route path='/about' element={<AboutPage />} />
-                <Route path='/404' element={<ErrorPage />} />
-                <Route path="*" element={<ErrorPage />} />
-            </Routes>
-        </div>
-    );
+  return (
+    <div className="container">
+      <Navigation />
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/about" element={<AboutPage />} />
+        <Route path="/404" element={<ErrorPage />} />
+        <Route path="*" element={<ErrorPage />} />
+      </Routes>
+    </div>
+  );
 }
 
 export default App;
