@@ -24,7 +24,7 @@ export class Product extends React.Component<IProduct> {
 
   render(): ReactNode {
     return (
-      <div className="product">
+      <div className="product" data-testid="product">
         <div className="product__box">
           <div className="product__picture">
             <img src={this.props.image} alt="Backpack" className="product__image" />

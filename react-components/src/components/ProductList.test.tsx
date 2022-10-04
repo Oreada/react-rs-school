@@ -35,6 +35,7 @@ describe('ProductList component', () => {
     expect(screen.getByTestId('products-list')).toBeInTheDocument();
     expect(screen.getByText(/Deuter/)).toBeInTheDocument();
   });
+
   test('ProductList snapshot', () => {
     const list = render(<ProductList data={data} />);
 
