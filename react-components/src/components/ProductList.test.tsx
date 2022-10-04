@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react';
-import { ProductList } from '../components/ProductsList';
+import { ProductList } from './ProductsList';
 
 const data = [
   {
