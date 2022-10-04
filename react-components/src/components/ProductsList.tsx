@@ -1,12 +1,19 @@
 import React, { ReactNode } from 'react';
-import { products } from '../data/products';
 import { IProduct, Product } from './Product';
 
-export class ProductList extends React.Component {
+interface ProductListProps {
+  data: Array<IProduct>;
+}
+
+export class ProductList extends React.Component<ProductListProps> {
+  constructor(props: ProductListProps) {
+    super(props);
+  }
+
   render(): ReactNode {
     return (
       <>
-        {products.map((product: IProduct) => (
+        {this.props.data.map((product: IProduct) => (
           <Product
             key={product.id}
             image={product.image}
