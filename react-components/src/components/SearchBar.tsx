@@ -25,7 +25,13 @@ export class SearchBar extends React.Component<Record<string, never>, SearchBarS
 
   render(): ReactNode {
     return (
-      <form role="search" method="get" className="search-form form" action="">
+      <form
+        role="search"
+        method="get"
+        className="search-form form"
+        action=""
+        data-testid="form-search"
+      >
         <label>
           <span className="screen-reader-text">Search for...</span>
           <input
@@ -36,6 +42,7 @@ export class SearchBar extends React.Component<Record<string, never>, SearchBarS
             value={this.state.value}
             name="search"
             onChange={this.changeHandler}
+            data-testid="input-search"
           />
         </label>
         <input type="submit" className="search-submit button" value="" />
