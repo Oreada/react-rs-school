@@ -9,9 +9,7 @@ export class HomePage extends React.Component {
     return (
       <main className="main">
         <SearchBar />
-        <div className="products__list">
-          <ProductList data={products} />
-        </div>
+        <ProductList data={products} />
       </main>
     );
   }

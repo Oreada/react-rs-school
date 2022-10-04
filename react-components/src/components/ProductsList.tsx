@@ -12,7 +12,7 @@ export class ProductList extends React.Component<ProductListProps> {
 
   render(): ReactNode {
     return (
-      <>
+      <div className="products__list" data-testid="products-list">
         {this.props.data.map((product: IProduct) => (
           <Product
             key={product.id}
@@ -27,7 +27,7 @@ export class ProductList extends React.Component<ProductListProps> {
             storage={product.storage}
           />
         ))}
-      </>
+      </div>
     );
   }
 }
