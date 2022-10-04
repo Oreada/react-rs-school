@@ -18,9 +18,9 @@ export interface IProduct {
 // }
 
 export class Product extends React.Component<IProduct> {
-  // constructor(props: IProduct) {
-  // 	super(props);
-  // }
+  constructor(props: IProduct) {
+    super(props);
+  }
 
   render(): ReactNode {
     return (
