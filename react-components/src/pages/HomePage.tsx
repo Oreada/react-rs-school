@@ -7,7 +7,7 @@ import { products } from '../data/products';
 export class HomePage extends React.Component {
   render(): ReactNode {
     return (
-      <main className="main">
+      <main className="home-page">
         <SearchBar />
         <ProductList data={products} />
       </main>
