@@ -25,13 +25,7 @@ export class SearchBar extends React.Component<Record<string, never>, SearchBarS
 
   render(): ReactNode {
     return (
-      <form
-        role="search"
-        method="get"
-        className="search-form form"
-        action=""
-        data-testid="form-search"
-      >
+      <form role="search" method="get" className="search-form" action="" data-testid="form-search">
         <label>
           <span className="screen-reader-text">Search for...</span>
           <input
