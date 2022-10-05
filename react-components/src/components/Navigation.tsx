@@ -13,6 +13,9 @@ export class Navigation extends React.Component {
           <NavLink to="/about" className={({ isActive }) => (isActive ? 'link-active' : 'link')}>
             About
           </NavLink>
+          <NavLink to="/forms" className={({ isActive }) => (isActive ? 'link-active' : 'link')}>
+            Forms
+          </NavLink>
         </span>
       </nav>
     );
