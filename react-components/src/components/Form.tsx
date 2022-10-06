@@ -1,5 +1,6 @@
 import React from 'react';
 import { ReactNode } from 'react';
+import { Card } from './Card';
 
 interface FormState {
   inputNameText: string;
@@ -7,7 +8,7 @@ interface FormState {
   textareaText: string;
   selectText: string;
   checkboxText: string;
-  showData: {
+  writeData: {
     name: string;
     phone: string;
     adress: string;
@@ -24,7 +25,7 @@ export class Form extends React.Component<Record<string, never>, FormState> {
     // selectText: 'Self-delivery',
     selectText: '',
     checkboxText: 'cash',
-    showData: {
+    writeData: {
       name: '',
       phone: '',
       adress: '',
@@ -77,7 +78,7 @@ export class Form extends React.Component<Record<string, never>, FormState> {
       // inputText: '',
       // textareaText: '',
       // selectText: '',
-      showData: {
+      writeData: {
         name: this.state.inputNameText,
         phone: this.state.inputPhoneText,
         adress: this.state.textareaText,
@@ -147,13 +148,13 @@ export class Form extends React.Component<Record<string, never>, FormState> {
             Submit
           </button>
         </form>
-        <div className="form-card card">
-          <p className="card__item">Name: {this.state.showData.name}</p>
-          <p className="card__item">Phone number: {this.state.showData.phone}</p>
-          <p className="card__item">Adress: {this.state.showData.adress}</p>
-          <p className="card__item">Delivery method: {this.state.showData.delivery}</p>
-          <p className="card__item">Payment option: {this.state.showData.payment}</p>
-        </div>
+        <Card
+          name={this.state.writeData.name}
+          phone={this.state.writeData.phone}
+          adress={this.state.writeData.adress}
+          delivery={this.state.writeData.delivery}
+          payment={this.state.writeData.payment}
+        />
       </>
     );
   }
