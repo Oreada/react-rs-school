@@ -1,6 +1,6 @@
 import { IProduct } from '../components/Product';
 
-export const products: Array<IProduct> = [
+export const PRODUCTS: Array<IProduct> = [
   {
     id: 1,
     image: './images/blackdiamond-blitz-black.jpg',
