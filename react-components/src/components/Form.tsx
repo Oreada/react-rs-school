@@ -1,8 +1,11 @@
 import React from 'react';
 import { ReactNode } from 'react';
-import { Card } from './Card';
+import { CARDS } from '../data/cards';
+import { ICard } from './Card';
+import { CardsList } from './CardsList';
 
 interface FormState {
+  cards: Array<ICard>;
   inputNameText: string;
   inputPhoneText: string;
   textareaText: string;
@@ -19,10 +22,10 @@ interface FormState {
 
 export class Form extends React.Component<Record<string, never>, FormState> {
   state = {
+    cards: CARDS,
     inputNameText: '',
     inputPhoneText: '',
     textareaText: '',
-    // selectText: 'Self-delivery',
     selectText: '',
     checkboxText: 'cash',
     writeData: {
@@ -59,7 +62,6 @@ export class Form extends React.Component<Record<string, never>, FormState> {
   };
 
   handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    // console.log(event.target.checked);
     let payment = '';
     if (event.target.checked) {
       payment = 'card';
@@ -72,20 +74,33 @@ export class Form extends React.Component<Record<string, never>, FormState> {
     });
   };
 
+  addCard = (card: ICard) => {
+    console.log(card);
+    this.setState(
+      {
+        cards: [...this.state.cards, card],
+      },
+      () => console.log(this.state.cards)
+    );
+  };
+
   handleSubmit = (event: React.MouseEvent) => {
     event.preventDefault();
-    this.setState({
-      // inputText: '',
-      // textareaText: '',
-      // selectText: '',
-      writeData: {
-        name: this.state.inputNameText,
-        phone: this.state.inputPhoneText,
-        adress: this.state.textareaText,
-        delivery: this.state.selectText,
-        payment: this.state.checkboxText,
+    this.setState(
+      {
+        // inputText: '',
+        // textareaText: '',
+        // selectText: '',
+        writeData: {
+          name: this.state.inputNameText,
+          phone: this.state.inputPhoneText,
+          adress: this.state.textareaText,
+          delivery: this.state.selectText,
+          payment: this.state.checkboxText,
+        },
       },
-    });
+      () => this.addCard(this.state.writeData)
+    );
   };
 
   render(): ReactNode {
@@ -128,7 +143,11 @@ export class Form extends React.Component<Record<string, never>, FormState> {
             onChange={this.handleTextareaChange}
           ></textarea>
           {/* select: DELIVERY */}
-          <select value={this.state.selectText} onChange={this.handleSelectChange}>
+          <select
+            className="form-select"
+            value={this.state.selectText}
+            onChange={this.handleSelectChange}
+          >
             <option value="">--Delivery method--</option>
             <option value="self-delivery">Self-delivery</option>
             <option value="courier delivery">Courier delivery</option>
@@ -148,13 +167,7 @@ export class Form extends React.Component<Record<string, never>, FormState> {
             Submit
           </button>
         </form>
-        <Card
-          name={this.state.writeData.name}
-          phone={this.state.writeData.phone}
-          adress={this.state.writeData.adress}
-          delivery={this.state.writeData.delivery}
-          payment={this.state.writeData.payment}
-        />
+        <CardsList data={this.state.cards} />
       </>
     );
   }

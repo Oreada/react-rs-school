@@ -328,6 +328,7 @@ input.search-submit {
 .form {
     display: flex;
     flex-direction: column;
+    row-gap: 10px;
 }
 
 .form-label-input {
@@ -341,6 +342,10 @@ input.search-submit {
 
 .form-label-textarea {
     align-self: flex-start;
+}
+
+.form-select {
+    border: 1px solid rgb(37, 57, 14);
 }
 
 .form-button {
@@ -455,6 +460,17 @@ input.search-submit {
 
 .form-card {}
 
+.cards__list {
+    display: grid;
+    /* justify-content: center; */
+    /* grid-template-columns: repeat(auto-fit, 240px); */
+    grid-template-columns: repeat(1fr);
+    row-gap: 30px;
+
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
 .card {
     display: flex;
     flex-direction: column;
@@ -478,14 +494,3 @@ input.search-submit {
 }
 
 .card__item {}
-
-.cards__list {
-    display: grid;
-    justify-content: center;
-    /* grid-template-columns: repeat(auto-fit, 240px); */
-    grid-template-columns: repeat(1fr);
-    row-gap: 30px;
-
-    padding-top: 50px;
-    padding-bottom: 50px;
-}
