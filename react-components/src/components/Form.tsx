@@ -2,6 +2,7 @@ import React from 'react';
 import { ReactNode } from 'react';
 import { ICard } from './Card';
 import { CardsList } from './CardsList';
+import { ErrorMessage } from './ErrorMessage';
 
 interface FormProps {
   addCard: (card: ICard) => void;
@@ -14,6 +15,7 @@ interface FormState {
   adressField: string;
   deliveryField: string;
   paymentField: boolean;
+  errorMessage: string;
 }
 
 export class Form extends React.Component<FormProps, FormState> {
@@ -21,13 +23,40 @@ export class Form extends React.Component<FormProps, FormState> {
     super(props);
   }
 
+  state = {
+    nameField: '',
+    phoneField: '',
+    adressField: '',
+    deliveryField: '',
+    paymentField: false,
+    errorMessage: '',
+  };
+
   refNameField: React.RefObject<HTMLInputElement> = React.createRef();
   refPhoneField: React.RefObject<HTMLInputElement> = React.createRef();
   refAdressField: React.RefObject<HTMLTextAreaElement> = React.createRef();
   refDeliveryField: React.RefObject<HTMLSelectElement> = React.createRef();
   refPaymentField: React.RefObject<HTMLInputElement> = React.createRef();
 
+  validateFields = () => {
+    // let isValid = true;
+
+    if (!this.state.nameField.length) {
+      // isValid = false;
+      this.setState({
+        errorMessage: 'Enter your name',
+      });
+      console.log('Enter your name');
+    } else {
+      this.setState({
+        errorMessage: '',
+      });
+    }
+  };
+
   onSubmit = (): void => {
+    this.validateFields();
+
     this.props.addCard({
       name: this.state.nameField,
       phone: this.state.phoneField,
@@ -65,6 +94,9 @@ export class Form extends React.Component<FormProps, FormState> {
             id="form-input-name"
             ref={this.refNameField}
           />
+          {this.state.errorMessage && <ErrorMessage errorMessage={this.state.errorMessage} />}
+          {/* <ErrorMessage errorMessage={'my test message'} /> */}
+          {/* {this.state.errorMessage} */}
 
           <label className="form-label-input" htmlFor="form-input-phone">
             Phone number:
