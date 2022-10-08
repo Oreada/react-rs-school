@@ -1,113 +1,60 @@
 import React from 'react';
 import { ReactNode } from 'react';
-import { CARDS } from '../data/cards';
 import { ICard } from './Card';
 import { CardsList } from './CardsList';
 
-interface FormState {
+interface FormProps {
+  addCard: (card: ICard) => void;
   cards: Array<ICard>;
-  inputNameText: string;
-  inputPhoneText: string;
-  textareaText: string;
-  selectText: string;
-  checkboxText: string;
-  writeData: {
-    name: string;
-    phone: string;
-    adress: string;
-    delivery: string;
-    payment: string;
-  };
 }
 
-export class Form extends React.Component<Record<string, never>, FormState> {
-  state = {
-    cards: CARDS,
-    inputNameText: '',
-    inputPhoneText: '',
-    textareaText: '',
-    selectText: '',
-    checkboxText: 'cash',
-    writeData: {
-      name: '',
-      phone: '',
-      adress: '',
-      delivery: '',
-      payment: '',
-    },
-  };
+interface FormState {
+  nameField: string;
+  phoneField: string;
+  adressField: string;
+  deliveryField: string;
+  paymentField: boolean;
+}
 
-  handleInputNameChange = ({ target: { value } }: { target: { value: string } }) => {
-    this.setState({
-      inputNameText: value,
+export class Form extends React.Component<FormProps, FormState> {
+  constructor(props: FormProps) {
+    super(props);
+  }
+
+  refNameField: React.RefObject<HTMLInputElement> = React.createRef();
+  refPhoneField: React.RefObject<HTMLInputElement> = React.createRef();
+  refAdressField: React.RefObject<HTMLTextAreaElement> = React.createRef();
+  refDeliveryField: React.RefObject<HTMLSelectElement> = React.createRef();
+  refPaymentField: React.RefObject<HTMLInputElement> = React.createRef();
+
+  onSubmit = (): void => {
+    this.props.addCard({
+      name: this.state.nameField,
+      phone: this.state.phoneField,
+      adress: this.state.adressField,
+      delivery: this.state.deliveryField,
+      payment: this.state.paymentField ? 'card' : 'cash',
     });
   };
 
-  handleInputPhoneChange = ({ target: { value } }: { target: { value: string } }) => {
-    this.setState({
-      inputPhoneText: value,
-    });
-  };
-
-  handleTextareaChange = ({ target: { value } }: { target: { value: string } }) => {
-    this.setState({
-      textareaText: value,
-    });
-  };
-
-  handleSelectChange = ({ target: { value } }: { target: { value: string } }) => {
-    this.setState({
-      selectText: value,
-    });
-  };
-
-  handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    let payment = '';
-    if (event.target.checked) {
-      payment = 'card';
-    } else {
-      payment = 'cash';
-    }
-
-    this.setState({
-      checkboxText: payment,
-    });
-  };
-
-  addCard = (card: ICard) => {
-    console.log(card);
-    this.setState(
-      {
-        cards: [...this.state.cards, card],
-      },
-      () => console.log(this.state.cards)
-    );
-  };
-
-  handleSubmit = (event: React.MouseEvent) => {
+  handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     this.setState(
       {
-        // inputText: '',
-        // textareaText: '',
-        // selectText: '',
-        writeData: {
-          name: this.state.inputNameText,
-          phone: this.state.inputPhoneText,
-          adress: this.state.textareaText,
-          delivery: this.state.selectText,
-          payment: this.state.checkboxText,
-        },
+        nameField: (this.refNameField.current as HTMLInputElement).value,
+        phoneField: (this.refPhoneField.current as HTMLInputElement).value,
+        adressField: (this.refAdressField.current as HTMLTextAreaElement).value,
+        deliveryField: (this.refDeliveryField.current as HTMLSelectElement).value,
+        paymentField: (this.refPaymentField.current as HTMLInputElement).checked,
       },
-      () => this.addCard(this.state.writeData)
+      () => this.onSubmit()
     );
   };
 
   render(): ReactNode {
     return (
       <>
-        <form className="form">
-          {/* input: NAME */}
+        <form className="form" onSubmit={this.handleSubmit}>
           <label className="form-label-input" htmlFor="form-input-name">
             Name:
           </label>
@@ -116,10 +63,9 @@ export class Form extends React.Component<Record<string, never>, FormState> {
             type="text"
             name="name"
             id="form-input-name"
-            value={this.state.inputNameText}
-            onChange={this.handleInputNameChange}
+            ref={this.refNameField}
           />
-          {/* input: PHONE */}
+
           <label className="form-label-input" htmlFor="form-input-phone">
             Phone number:
           </label>
@@ -128,10 +74,9 @@ export class Form extends React.Component<Record<string, never>, FormState> {
             type="number"
             name="name"
             id="form-input-phone"
-            value={this.state.inputPhoneText}
-            onChange={this.handleInputPhoneChange}
+            ref={this.refPhoneField}
           />
-          {/* textarea: ADRESS */}
+
           <label className="form-label-textarea" htmlFor="form-textarea">
             Adress:
           </label>
@@ -139,35 +84,26 @@ export class Form extends React.Component<Record<string, never>, FormState> {
             className="form-textarea"
             name=""
             id="form-textarea"
-            value={this.state.textareaText}
-            onChange={this.handleTextareaChange}
+            ref={this.refAdressField}
           ></textarea>
-          {/* select: DELIVERY */}
-          <select
-            className="form-select"
-            value={this.state.selectText}
-            onChange={this.handleSelectChange}
-          >
+
+          <select className="form-select" ref={this.refDeliveryField}>
             <option value="">--Delivery method--</option>
             <option value="self-delivery">Self-delivery</option>
             <option value="courier delivery">Courier delivery</option>
           </select>
-          {/* checkbox switcher: PAYMENT */}
+
           <label className="toggle">
-            <input
-              type="checkbox"
-              value={this.state.checkboxText}
-              onChange={this.handleCheckboxChange}
-            />
+            <input type="checkbox" ref={this.refPaymentField} />
             <span className="slider"></span>
             <span className="labels" data-on="card" data-off="cash"></span>
           </label>
-          {/* button */}
-          <button type="submit" className="form-button" onClick={this.handleSubmit}>
+
+          <button type="submit" className="form-button" value="Submit">
             Submit
           </button>
         </form>
-        <CardsList data={this.state.cards} />
+        <CardsList data={this.props.cards} />
       </>
     );
   }
