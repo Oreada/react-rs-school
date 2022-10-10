@@ -2,8 +2,8 @@ import { render, screen } from '@testing-library/react';
 import { Card } from './Card';
 import { CARDS } from '../data/cards';
 
-describe('Form component', () => {
-  test('Form renders', () => {
+describe('Card component', () => {
+  test('Card renders', () => {
     render(
       <Card
         name={CARDS[0].name}
