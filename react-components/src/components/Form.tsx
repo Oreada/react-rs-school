@@ -168,6 +168,7 @@ export class Form extends React.Component<FormProps, FormState> {
           className="form"
           onSubmit={this.handleSubmit}
           onChange={this.handleChange}
+          id="form"
           data-testid="form"
         >
           <label className="form-label-input" htmlFor="form-input-name">
@@ -211,7 +212,12 @@ export class Form extends React.Component<FormProps, FormState> {
           {this.state.adressErrorMessage && (
             <ErrorMessage errorMessage={this.state.adressErrorMessage} />
           )}
-          <select className="form-select" ref={this.refDeliveryField} data-testid="form-select">
+          <select
+            className="form-select"
+            ref={this.refDeliveryField}
+            id="form-select"
+            data-testid="form-select"
+          >
             <option value="">--Delivery method--</option>
             <option value="self-delivery">Self-delivery</option>
             <option value="courier delivery">Courier delivery</option>
@@ -220,7 +226,12 @@ export class Form extends React.Component<FormProps, FormState> {
             <ErrorMessage errorMessage={this.state.deliveryErrorMessage} />
           )}
           <label className="toggle">
-            <input type="checkbox" ref={this.refPaymentField} data-testid="form-checkbox" />
+            <input
+              type="checkbox"
+              ref={this.refPaymentField}
+              id="form-checkbox"
+              data-testid="form-checkbox"
+            />
             <span className="slider"></span>
             <span className="labels" data-on="card" data-off="cash"></span>
           </label>
@@ -229,6 +240,7 @@ export class Form extends React.Component<FormProps, FormState> {
             className="form-button"
             value="Submit"
             disabled={this.state.isDisabled}
+            data-testid="form-button"
           >
             Submit
           </button>
