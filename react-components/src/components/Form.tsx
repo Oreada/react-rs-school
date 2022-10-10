@@ -164,7 +164,12 @@ export class Form extends React.Component<FormProps, FormState> {
   render(): ReactNode {
     return (
       <>
-        <form className="form" onSubmit={this.handleSubmit} onChange={this.handleChange}>
+        <form
+          className="form"
+          onSubmit={this.handleSubmit}
+          onChange={this.handleChange}
+          data-testid="form"
+        >
           <label className="form-label-input" htmlFor="form-input-name">
             Name:
           </label>
@@ -174,6 +179,7 @@ export class Form extends React.Component<FormProps, FormState> {
             name="name"
             id="form-input-name"
             ref={this.refNameField}
+            data-testid="form-input-name"
           />
           {this.state.nameErrorMessage && (
             <ErrorMessage errorMessage={this.state.nameErrorMessage} />
@@ -187,6 +193,7 @@ export class Form extends React.Component<FormProps, FormState> {
             name="name"
             id="form-input-phone"
             ref={this.refPhoneField}
+            data-testid="form-input-phone"
           />
           {this.state.phoneErrorMessage && (
             <ErrorMessage errorMessage={this.state.phoneErrorMessage} />
@@ -199,11 +206,12 @@ export class Form extends React.Component<FormProps, FormState> {
             name=""
             id="form-textarea"
             ref={this.refAdressField}
+            data-testid="form-textarea"
           ></textarea>
           {this.state.adressErrorMessage && (
             <ErrorMessage errorMessage={this.state.adressErrorMessage} />
           )}
-          <select className="form-select" ref={this.refDeliveryField}>
+          <select className="form-select" ref={this.refDeliveryField} data-testid="form-select">
             <option value="">--Delivery method--</option>
             <option value="self-delivery">Self-delivery</option>
             <option value="courier delivery">Courier delivery</option>
@@ -212,7 +220,7 @@ export class Form extends React.Component<FormProps, FormState> {
             <ErrorMessage errorMessage={this.state.deliveryErrorMessage} />
           )}
           <label className="toggle">
-            <input type="checkbox" ref={this.refPaymentField} />
+            <input type="checkbox" ref={this.refPaymentField} data-testid="form-checkbox" />
             <span className="slider"></span>
             <span className="labels" data-on="card" data-off="cash"></span>
           </label>
