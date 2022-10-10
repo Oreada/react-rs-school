@@ -15,7 +15,7 @@ export class Card extends React.Component<ICard> {
 
   render(): ReactNode {
     return (
-      <div className="form-card card">
+      <div className="form-card card" data-testid="card">
         <p className="card__item">Name: {this.props.name}</p>
         <p className="card__item">Phone number: {this.props.phone}</p>
         <p className="card__item">Adress: {this.props.adress}</p>
