@@ -7,7 +7,7 @@ interface ErrorMessageProps {
 export class ErrorMessage extends React.Component<ErrorMessageProps> {
   render(): ReactNode {
     return (
-      <div className="text-center text-xl text-red-800" data-testid="error-message">
+      <div className="error-message" data-testid="error-message">
         {this.props.errorMessage}
       </div>
     );
