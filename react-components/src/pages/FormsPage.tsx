@@ -8,15 +8,15 @@ interface FormPageState {
 }
 
 export class FormsPage extends React.Component<Record<string, never>, FormPageState> {
+  state = {
+    cards: [],
+  };
+
   addCard = (card: ICard) => {
     this.setState(({ cards }) => {
       const prevCards = [...cards];
       return { cards: [...prevCards, card] };
     });
-  };
-
-  state = {
-    cards: [],
   };
 
   render(): ReactNode {
