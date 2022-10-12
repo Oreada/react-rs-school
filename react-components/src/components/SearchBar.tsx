@@ -2,7 +2,7 @@ import React, { ReactNode } from 'react';
 import { IArtWork } from './ArtWork';
 
 interface SearchBarProps {
-  changeArtWorks: (newList: Array<IArtWork>) => void;
+  changeHomePageState: (newList: Array<IArtWork>, newLoading: boolean) => void;
 }
 
 interface SearchBarState {
@@ -30,6 +30,9 @@ export class SearchBar extends React.Component<SearchBarProps, SearchBarState> {
 
   searchHandler = async (event: React.MouseEvent<HTMLInputElement, MouseEvent>) => {
     event.preventDefault();
+
+    this.props.changeHomePageState([], true);
+
     try {
       const response = await fetch(
         `https://api.artic.edu/api/v1/artworks/search?q=${this.state.value}&query[term][is_public_domain]=true&fields=id,title,artist_title,date_display,artwork_type_title,dimensions,artist_display,image_id&page=1&limit=20`
@@ -37,7 +40,7 @@ export class SearchBar extends React.Component<SearchBarProps, SearchBarState> {
       const artWorksList = (await response.json()).data;
       console.log(artWorksList);
 
-      this.props.changeArtWorks(artWorksList);
+      this.props.changeHomePageState(artWorksList, false);
     } catch (e: unknown) {
       const err = e as Error;
       console.log(err.message);

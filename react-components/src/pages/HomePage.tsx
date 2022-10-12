@@ -6,16 +6,19 @@ import { SearchBar } from '../components/SearchBar';
 
 interface HomePageState {
   dataList: Array<IArtWork>;
+  loading: boolean;
 }
 
 export class HomePage extends React.Component<Record<string, never>, HomePageState> {
   state = {
     dataList: [],
+    loading: true,
   };
 
-  changeArtWorks = (newList: Array<IArtWork>) => {
+  changeHomePageState = (newList: Array<IArtWork>, newLoading: boolean) => {
     this.setState({
       dataList: newList,
+      loading: newLoading,
     });
   };
 
@@ -28,6 +31,7 @@ export class HomePage extends React.Component<Record<string, never>, HomePageSta
       console.log(artWorksList);
       this.setState({
         dataList: artWorksList,
+        loading: false,
       });
     } catch (e: unknown) {
       const err = e as Error;
@@ -38,8 +42,8 @@ export class HomePage extends React.Component<Record<string, never>, HomePageSta
   render(): ReactNode {
     return (
       <main className="home-page">
-        <SearchBar changeArtWorks={this.changeArtWorks} />
-        <ArtWorksList data={this.state.dataList} />
+        <SearchBar changeHomePageState={this.changeHomePageState} />
+        <ArtWorksList data={this.state.dataList} loading={this.state.loading} />
       </main>
     );
   }

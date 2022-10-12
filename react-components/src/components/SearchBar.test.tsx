@@ -35,15 +35,15 @@ Object.defineProperty(window, 'localStorage', { value: localStorageMock });
 
 describe('SearchBar', () => {
   test('Calls localStorage setItem on unmount', () => {
-    render(<SearchBar changeArtWorks={changeArtWorks} />);
+    render(<SearchBar changeHomePageState={changeArtWorks} />);
     localStorageMock.setItem = jest.fn();
-    const { unmount } = render(<SearchBar changeArtWorks={changeArtWorks} />);
+    const { unmount } = render(<SearchBar changeHomePageState={changeArtWorks} />);
     unmount();
     expect(localStorageMock.setItem).toHaveBeenCalledTimes(1);
   });
 
   test('SearchBar renders', () => {
-    render(<SearchBar changeArtWorks={changeArtWorks} />);
+    render(<SearchBar changeHomePageState={changeArtWorks} />);
 
     expect(screen.getByTestId('form-search')).toBeInTheDocument();
   });
