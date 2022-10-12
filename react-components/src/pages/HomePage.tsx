@@ -13,6 +13,12 @@ export class HomePage extends React.Component<Record<string, never>, HomePageSta
     dataList: [],
   };
 
+  changeArtWorks = (newList: Array<IArtWork>) => {
+    this.setState({
+      dataList: newList,
+    });
+  };
+
   async componentDidMount(): Promise<void> {
     try {
       const response = await fetch(
@@ -32,7 +38,7 @@ export class HomePage extends React.Component<Record<string, never>, HomePageSta
   render(): ReactNode {
     return (
       <main className="home-page">
-        <SearchBar />
+        <SearchBar changeArtWorks={this.changeArtWorks} />
         <ArtWorksList data={this.state.dataList} />
       </main>
     );
