@@ -28,12 +28,12 @@ export class ArtWork extends React.Component<IArtWork> {
     const imagePath = getImagePath(this.props.image_id);
 
     return (
-      <div className="product" data-testid="product">
-        <div className="product__box">
-          <div className="product__picture">
-            <img src={imagePath} alt="ArtWork" className="product__image" />
+      <div className="artwork" data-testid="artwork">
+        <div className="artwork__box">
+          <div className="artwork__picture">
+            <img src={imagePath} alt="ArtWork" className="artwork__image" />
           </div>
-          <div className="product__info info">
+          <div className="artwork__info info">
             <div className="info__item">{this.props.title}</div>
             <div className="info__item">{this.props.artist_title}</div>
             <div className="info__item">{this.props.date_display}</div>
