@@ -281,10 +281,38 @@ input.search-submit {
 }
 
 .artwork__info {
+    flex: 1 0 auto;
     text-align: center;
+
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 
 .info__item {}
+
+.info__item_artist {
+    font-weight: 600;
+}
+
+.artwork__button {
+    display: block;
+    min-width: 200px;
+    height: 40px;
+
+    font-size: 18px;
+    line-height: 120%;
+    background-color: rgb(37, 57, 14);
+    color: #f0ead6;
+
+    transition: all 0.3s ease 0s;
+}
+
+.artwork__button:hover {
+    background-color: #f9d342;
+    color: black;
+    /* color: rgb(37, 57, 14); */
+}
 
 /*
 .artwork__buttons-wrapper {
@@ -557,4 +585,68 @@ input.search-submit {
     color: rgb(172, 7, 7);
 }
 
-/* ------------------------------------------------------ */
+/* -------------- modal ---------------------------------------- */
+
+.modal__overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: black;
+    opacity: 0.5;
+}
+
+/* w-4/5 h-4/5 p-5 rounded bg-white absolute top-10 left-1/2 -translate-x-1/2 */
+
+.modal__main {
+    width: 80%;
+    height: 90%;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    padding: 20px;
+    /* border-radius: 10px; */
+    background-color: #fff;
+}
+
+/* ----------- details ------------------------------------------- */
+
+.details {
+    height: 100%;
+}
+
+.details__box {
+    height: 100%;
+    display: grid;
+    /* justify-self: center; */
+    align-content: center;
+    grid-template-columns: 1fr 30%;
+    gap: 30px;
+}
+
+.details__picture {
+    /* max-width: auto; */
+    max-height: 100%;
+}
+
+.details__image {
+    max-width: auto;
+    max-height: 500px;
+}
+
+.details__info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+}
+
+.details__item {}
+
+.details__header {
+    font-size: 14px;
+    text-transform: uppercase;
+    text-decoration: underline;
+}
