@@ -12,11 +12,8 @@ export function getImagePath(imageId: string) {
 export interface IArtWork {
   id: number;
   image_id: string;
-  artist_display: string;
   artist_title: string;
-  artwork_type_title: string;
   date_display: string;
-  dimensions: string;
   title: string;
   onClick: (newModal: boolean) => void;
   forDetails: (dataDetails: IDetailsData | null, loadingDetails: boolean) => void;

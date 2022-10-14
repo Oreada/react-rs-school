@@ -66,11 +66,8 @@ export class ArtWorksList extends React.Component<ArtWorksListProps, ArtWorksLis
             key={item.id}
             id={item.id}
             image_id={item.image_id}
-            artist_display={item.artist_display}
             artist_title={item.artist_title}
-            artwork_type_title={item.artwork_type_title}
             date_display={item.date_display}
-            dimensions={item.dimensions}
             title={item.title}
             onClick={this.changeModalState}
             forDetails={this.changeDetailsState}
