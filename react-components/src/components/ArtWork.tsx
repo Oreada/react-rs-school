@@ -49,7 +49,7 @@ export class ArtWork extends React.Component<IArtWork> {
     const imagePath = getImagePath(this.props.image_id);
 
     return (
-      <div className="artwork" data-testid="artwork">
+      <li className="artwork" data-testid="artwork">
         <div className="artwork__box">
           <div className="artwork__picture">
             <img src={imagePath} alt="ArtWork" className="artwork__image" />
@@ -63,7 +63,7 @@ export class ArtWork extends React.Component<IArtWork> {
             Read more
           </button>
         </div>
-      </div>
+      </li>
     );
   }
 }

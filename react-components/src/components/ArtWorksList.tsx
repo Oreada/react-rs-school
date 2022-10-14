@@ -56,7 +56,7 @@ export class ArtWorksList extends React.Component<ArtWorksListProps, ArtWorksLis
 
   render(): ReactNode {
     return (
-      <div className="artworks__list" data-testid="artworks-list">
+      <ul className="artworks__list" data-testid="artworks-list">
         {this.props.loading && <Loader />}
 
         {this.props.errorMessage && <ErrorMessage errorMessage={this.props.errorMessage} />}
@@ -81,7 +81,7 @@ export class ArtWorksList extends React.Component<ArtWorksListProps, ArtWorksLis
             {!this.state.loadingDetails && <Details data={this.state.details} />}
           </Modal>
         )}
-      </div>
+      </ul>
     );
   }
 }
