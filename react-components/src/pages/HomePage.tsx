@@ -34,7 +34,11 @@ export class HomePage extends React.Component<Record<string, never>, HomePageSta
       const response = await fetch(
         `https://api.artic.edu/api/v1/artworks/search?q=painting&query[term][is_public_domain]=true&fields=id,title,artist_title,date_display,image_id&page=1&limit=10`
       );
-      const artWorksList = (await response.json()).data;
+      if (!response.ok) {
+        throw new Error(`Request failed with status code ${response.status}`);
+      }
+      const respJson = await response.json();
+      const artWorksList = respJson.data;
       //console.log('artWorksList', artWorksList);
       this.setState({
         dataList: artWorksList,
@@ -58,7 +62,7 @@ export class HomePage extends React.Component<Record<string, never>, HomePageSta
 
   render(): ReactNode {
     return (
-      <main className="home-page">
+      <main className="home-page" data-testid="home-page">
         <SearchBar changeHomePageState={this.changeHomePageState} />
         <ArtWorksList
           data={this.state.dataList}
