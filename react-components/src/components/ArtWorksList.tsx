@@ -1,5 +1,6 @@
 import React, { ReactNode } from 'react';
-import { ArtWork, IArtWork } from './ArtWork';
+import { IArtWorkData } from '../pages/HomePage';
+import { ArtWork } from './ArtWork';
 import { Details } from './Details';
 import { ErrorMessage } from './ErrorMessage';
 import { Loader } from './Loader';
@@ -17,7 +18,7 @@ export interface IDetailsData {
 }
 
 interface ArtWorksListProps {
-  data: Array<IArtWork>;
+  data: Array<IArtWorkData>;
   loading: boolean;
   errorMessage: string;
 }
@@ -61,7 +62,7 @@ export class ArtWorksList extends React.Component<ArtWorksListProps, ArtWorksLis
 
         {this.props.errorMessage && <ErrorMessage errorMessage={this.props.errorMessage} />}
 
-        {(this.props.data as Array<IArtWork>).map((item: IArtWork) => (
+        {(this.props.data as Array<IArtWorkData>).map((item: IArtWorkData) => (
           <ArtWork
             key={item.id}
             id={item.id}

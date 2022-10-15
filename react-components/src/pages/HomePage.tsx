@@ -1,11 +1,19 @@
 import React from 'react';
 import { ReactNode } from 'react';
-import { IArtWork } from '../components/ArtWork';
+// import { IArtWork } from '../components/ArtWork';
 import { ArtWorksList } from '../components/ArtWorksList';
 import { SearchBar } from '../components/SearchBar';
 
+export interface IArtWorkData {
+  id: number;
+  image_id: string;
+  artist_title: string;
+  date_display: string;
+  title: string;
+}
+
 interface HomePageState {
-  dataList: Array<IArtWork>;
+  dataList: Array<IArtWorkData>;
   loading: boolean;
   errorMessage: string;
 }
@@ -18,7 +26,7 @@ export class HomePage extends React.Component<Record<string, never>, HomePageSta
   };
 
   changeHomePageState = (
-    newList: Array<IArtWork>,
+    newList: Array<IArtWorkData>,
     newLoading: boolean,
     newErrorMessage: string
   ) => {
