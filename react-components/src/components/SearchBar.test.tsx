@@ -61,9 +61,9 @@ afterEach(() => server.resetHandlers());
 
 describe('SearchBar', () => {
   test('Place the searching data at HomePage', async () => {
-    const { findByTestId, findByText } = render(<HomePage />);
-    const submitButton = await findByTestId('input-submit');
-    userEvent.click(submitButton);
+    const { findByText } = render(<HomePage />);
+    //const submitButton = await findByTestId('input-submit');
+    //userEvent.click(submitButton);
 
     const element = await findByText(/Amadeo/i);
     expect(element).toBeInTheDocument();
