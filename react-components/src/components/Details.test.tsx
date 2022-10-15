@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import { Details } from './Details';
 
-const detailsExample = {
+export const detailsExample = {
   artist_display: 'Amedeo Modigliani Italian, 1884–1920',
   artist_title: 'Amedeo Modigliani',
   artwork_type_title: 'Painting',
