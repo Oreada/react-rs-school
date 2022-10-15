@@ -38,6 +38,9 @@ export class HomePage extends React.Component<Record<string, never>, HomePageSta
         throw new Error(`Request failed with status code ${response.status}`);
       }
       const respJson = await response.json();
+      if (!respJson.hasOwnProperty('data')) {
+        throw new Error(`Incorrect content format`);
+      }
       const artWorksList = respJson.data;
       //console.log('artWorksList', artWorksList);
       this.setState({

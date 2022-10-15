@@ -33,6 +33,34 @@ describe('HomePage component', () => {
     expect(element).toBeInTheDocument();
   });
 
+  test('Content format checks', async () => {
+    server.use(
+      rest.get('https://api.artic.edu/api/v1/artworks/search', (req, res, ctx) => {
+        return res(
+          ctx.status(200),
+          ctx.json({
+            content: [
+              {
+                id: 123,
+                image_id: 'rtyu',
+                artist_title: 'qwerty',
+                date_display: 'dsdsds',
+                title: 'gdfgdf',
+              },
+            ],
+          })
+        );
+      })
+    );
+
+    const { findByText, findByTestId } = render(<HomePage />);
+    const elementById = await findByTestId('error-message');
+    expect(elementById).toBeInTheDocument();
+
+    const elementByText = await findByText(/Incorrect content format/i);
+    expect(elementByText).toBeInTheDocument();
+  });
+
   test('Handles failure', async () => {
     server.use(
       rest.get('https://api.artic.edu/api/v1/artworks/search', (req, res, ctx) => {
