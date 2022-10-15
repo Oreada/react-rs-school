@@ -40,7 +40,14 @@ export class SearchBar extends React.Component<SearchBarProps, SearchBarState> {
       const response = await fetch(
         `https://api.artic.edu/api/v1/artworks/search?q=${this.state.value}&query[term][is_public_domain]=true&fields=id,title,artist_title,date_display,image_id&page=1&limit=20`
       );
-      const artWorksList = (await response.json()).data;
+      if (!response.ok) {
+        throw new Error(`Request failed with status code ${response.status}`);
+      }
+      const respJson = await response.json();
+      if (!respJson.hasOwnProperty('data')) {
+        throw new Error(`Incorrect content format`);
+      }
+      const artWorksList = respJson.data;
       console.log(artWorksList);
 
       this.props.changeHomePageState(artWorksList, false, '');
@@ -72,6 +79,7 @@ export class SearchBar extends React.Component<SearchBarProps, SearchBarState> {
           className="search-submit button"
           value=""
           onClick={this.searchHandler}
+          data-testid="input-submit"
         />
       </form>
     );
