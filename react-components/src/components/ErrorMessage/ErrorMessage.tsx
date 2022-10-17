@@ -1,4 +1,5 @@
 import React, { ReactNode } from 'react';
+import styles from './ErrorMessage.module.css';
 
 interface ErrorMessageProps {
   errorMessage: string;
@@ -7,7 +8,7 @@ interface ErrorMessageProps {
 export class ErrorMessage extends React.Component<ErrorMessageProps> {
   render(): ReactNode {
     return (
-      <div className="error-message" data-testid="error-message">
+      <div className={styles['error-message']} data-testid="error-message">
         {this.props.errorMessage}
       </div>
     );
