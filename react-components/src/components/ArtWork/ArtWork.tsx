@@ -2,6 +2,7 @@ import React, { ReactNode } from 'react';
 import { IDetailsData } from '../ArtWorksList/ArtWorksList';
 import { getImagePath } from '../../api/helpers';
 import { getDetails } from '../../api/getDetails';
+import styles from './ArtWork.module.css';
 
 export interface IArtWork {
   id: number;
@@ -36,18 +37,18 @@ export class ArtWork extends React.Component<IArtWork> {
     const imagePath = getImagePath(this.props.image_id);
 
     return (
-      <li className="artwork" data-testid="artwork">
-        <div className="artwork__box">
-          <div className="artwork__picture">
-            <img src={imagePath} alt="ArtWork" className="artwork__image" />
+      <li className={styles['artwork']} data-testid="artwork">
+        <div className={styles['artwork__box']}>
+          <div className={styles['artwork__picture']}>
+            <img src={imagePath} alt="ArtWork" className={styles['artwork__image']} />
           </div>
-          <div className="artwork__info info">
-            <div className="info__item info__item_title">&quot;{this.props.title}&quot;</div>
-            <div className="info__item info__item_artist">{this.props.artist_title}</div>
-            <div className="info__item info__date">{this.props.date_display}</div>
+          <div className={styles['artwork__info']}>
+            <div className={styles['info__item_title']}>&quot;{this.props.title}&quot;</div>
+            <div className={styles['info__item_artist']}>{this.props.artist_title}</div>
+            <div className={styles['info__item_date']}>{this.props.date_display}</div>
           </div>
           <button
-            className="artwork__button"
+            className={styles['artwork__button']}
             onClick={this.clickHandler}
             data-id={this.props.id}
             data-testid="artwork-button"
