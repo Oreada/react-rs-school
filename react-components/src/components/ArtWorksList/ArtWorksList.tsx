@@ -5,6 +5,7 @@ import { Details } from '../Details/Details';
 import { ErrorMessage } from '../ErrorMessage/ErrorMessage';
 import { Loader } from '../Loader/Loader';
 import { Modal } from '../Modal/Modal';
+import styles from './ArtWorksList.module.css';
 
 export interface IDetailsData {
   id: number;
@@ -57,7 +58,7 @@ export class ArtWorksList extends React.Component<ArtWorksListProps, ArtWorksLis
 
   render(): ReactNode {
     return (
-      <ul className="artworks__list" data-testid="artworks-list">
+      <ul className={styles['artworks__list']} data-testid="artworks-list">
         {this.props.loading && <Loader />}
 
         {this.props.errorMessage && <ErrorMessage errorMessage={this.props.errorMessage} />}
