@@ -17,3 +17,16 @@
     display: flex;
     gap: 5px;
 }
+
+/* Specific styles for non-active links */
+.link {
+    color: white;
+    padding: 5px;
+}
+
+/* Specific styles for active links */
+.link-active {
+    color: black;
+    background: #f9d342;
+    padding: 5px;
+}
