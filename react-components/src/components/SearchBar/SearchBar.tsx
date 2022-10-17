@@ -1,6 +1,7 @@
 import React, { ReactNode } from 'react';
 import { searchData } from '../../api/searchData';
 import { IArtWorkData } from '../../pages/HomePage/HomePage';
+import styles from './SearchBar.module.css';
 
 interface SearchBarProps {
   changeHomePageState: (
@@ -48,12 +49,18 @@ export class SearchBar extends React.Component<SearchBarProps, SearchBarState> {
 
   render(): ReactNode {
     return (
-      <form role="search" method="get" className="search-form" action="" data-testid="form-search">
-        <label>
-          <span className="screen-reader-text">Search for...</span>
+      <form
+        role="search"
+        method="get"
+        className={styles['search-form']}
+        action=""
+        data-testid="form-search"
+      >
+        <label className={styles['search-form-label']}>
+          <span className={styles['screen-reader-text']}>Search for...</span>
           <input
             type="search"
-            className="search-field"
+            className={styles['search-field']}
             placeholder="Input something: 'Monet', 'Gogh', 'rabbit'..."
             autoComplete="off"
             value={this.state.value}
@@ -64,7 +71,7 @@ export class SearchBar extends React.Component<SearchBarProps, SearchBarState> {
         </label>
         <input
           type="submit"
-          className="search-submit button"
+          className={styles['search-submit']}
           value=""
           onClick={this.searchHandler}
           data-testid="input-submit"
