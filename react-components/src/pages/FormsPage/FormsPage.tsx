@@ -1,7 +1,7 @@
 import React from 'react';
 import { ReactNode } from 'react';
-import { ICard } from '../components/Card/Card';
-import { Form } from '../components/Form/Form';
+import { ICard } from '../../components/Card/Card';
+import { Form } from '../../components/Form/Form';
 
 interface FormPageState {
   cards: Array<ICard>;
