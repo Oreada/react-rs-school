@@ -1,5 +1,5 @@
 import React, { ReactNode } from 'react';
-import { getImagePath } from './ArtWork';
+import { getImagePath } from '../api/helpers';
 import { IDetailsData } from './ArtWorksList';
 
 export interface IDetails {

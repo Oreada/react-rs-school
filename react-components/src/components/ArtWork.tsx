@@ -1,13 +1,6 @@
 import React, { ReactNode } from 'react';
 import { IDetailsData } from './ArtWorksList';
-
-export function getImagePath(imageId: string) {
-  if (imageId) {
-    return `https://www.artic.edu/iiif/2/${imageId}/full/843,/0/default.jpg`;
-  } else {
-    return './images/no-image-available.png';
-  }
-}
+import { getImagePath } from '../api/helpers';
 
 export interface IArtWork {
   id: number;
