@@ -128,29 +128,6 @@ img {
 
 /* --------------------- */
 
-/* ------------- preload with animation ----------------------------------------- */
-
-.preload {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.preload__bg {
-    background-image: url(../public/images/preload.svg);
-    background-repeat: no-repeat;
-    background-position: center;
-    width: 185px;
-    height: 185px;
-    animation: rotation 2s linear infinite;
-}
-
-@keyframes rotation {
-    to {
-        transform: rotate(-360deg);
-    }
-}
-
 /* ------------------------------------------------------ */
 
 .error-message {
