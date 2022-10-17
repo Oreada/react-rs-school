@@ -1,10 +1,10 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { Navigation } from './components/Navigation/Navigation';
-import { AboutPage } from './pages/AboutPage';
-import { ErrorPage } from './pages/ErrorPage';
-import { HomePage } from './pages/HomePage';
-import { FormsPage } from './pages/FormsPage';
+import { AboutPage } from './pages/AboutPage/AboutPage';
+import { ErrorPage } from './pages/ErrorPage/ErrorPage';
+import { HomePage } from './pages/HomePage/HomePage';
+import { FormsPage } from './pages/FormsPage/FormsPage';
 
 function App() {
   return (
