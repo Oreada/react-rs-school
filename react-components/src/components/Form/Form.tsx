@@ -3,6 +3,7 @@ import { ReactNode } from 'react';
 import { ICard } from '../Card/Card';
 import { CardsList } from '../CardsList/CardsList';
 import { ErrorMessage } from '../ErrorMessage/ErrorMessage';
+import styles from './Form.module.css';
 
 interface FormProps {
   addCard: (card: ICard) => void;
@@ -165,17 +166,17 @@ export class Form extends React.Component<FormProps, FormState> {
     return (
       <>
         <form
-          className="form"
+          className={styles['form']}
           onSubmit={this.handleSubmit}
           onChange={this.handleChange}
           id="form"
           data-testid="form"
         >
-          <label className="form-label-input" htmlFor="form-input-name">
+          <label className={styles['form-label-input']} htmlFor="form-input-name">
             Name:
           </label>
           <input
-            className="form-input"
+            className={styles['form-input']}
             type="text"
             name="name"
             id="form-input-name"
@@ -185,11 +186,11 @@ export class Form extends React.Component<FormProps, FormState> {
           {this.state.nameErrorMessage && (
             <ErrorMessage errorMessage={this.state.nameErrorMessage} />
           )}
-          <label className="form-label-input" htmlFor="form-input-phone">
+          <label className={styles['form-label-input']} htmlFor="form-input-phone">
             Phone number:
           </label>
           <input
-            className="form-input"
+            className={styles['form-input']}
             type="number"
             name="name"
             id="form-input-phone"
@@ -199,11 +200,11 @@ export class Form extends React.Component<FormProps, FormState> {
           {this.state.phoneErrorMessage && (
             <ErrorMessage errorMessage={this.state.phoneErrorMessage} />
           )}
-          <label className="form-label-textarea" htmlFor="form-textarea">
+          <label className={styles['form-label-textarea']} htmlFor="form-textarea">
             Adress:
           </label>
           <textarea
-            className="form-textarea"
+            className={styles['form-textarea']}
             name=""
             id="form-textarea"
             ref={this.refAdressField}
@@ -213,7 +214,7 @@ export class Form extends React.Component<FormProps, FormState> {
             <ErrorMessage errorMessage={this.state.adressErrorMessage} />
           )}
           <select
-            className="form-select"
+            className={styles['form-select']}
             ref={this.refDeliveryField}
             id="form-select"
             data-testid="form-select"
@@ -225,19 +226,19 @@ export class Form extends React.Component<FormProps, FormState> {
           {this.state.deliveryErrorMessage && (
             <ErrorMessage errorMessage={this.state.deliveryErrorMessage} />
           )}
-          <label className="toggle">
+          <label className={styles['toggle']}>
             <input
               type="checkbox"
               ref={this.refPaymentField}
               id="form-checkbox"
               data-testid="form-checkbox"
             />
-            <span className="slider"></span>
-            <span className="labels" data-on="card" data-off="cash"></span>
+            <span className={styles['slider']}></span>
+            <span className={styles['labels']} data-on="card" data-off="cash"></span>
           </label>
           <button
             type="submit"
-            className="form-button"
+            className={styles['form-button']}
             value="Submit"
             disabled={this.state.isDisabled}
             data-testid="form-button"
@@ -245,17 +246,17 @@ export class Form extends React.Component<FormProps, FormState> {
             Submit
           </button>
           <div
-            className="form-saved"
+            className={styles['form-saved']}
             style={this.state.isSubmitted ? { visibility: 'visible' } : { visibility: 'hidden' }}
           >
             <img
-              className="form-saved__icon"
+              className={styles['form-saved__icon']}
               src="./images/checked-icon.svg"
               width="20px"
               height="20px"
               alt="Checked"
             />
-            <p className="form-saved__text">The data was successfully saved</p>
+            <p className={styles['form-saved__text']}>The data was successfully saved</p>
           </div>
         </form>
         <CardsList data={this.props.cards} />
