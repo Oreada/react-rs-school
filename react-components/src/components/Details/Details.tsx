@@ -1,6 +1,6 @@
 import React, { ReactNode } from 'react';
-import { getImagePath } from '../api/helpers';
-import { IDetailsData } from './ArtWorksList';
+import { getImagePath } from '../../api/helpers';
+import { IDetailsData } from '../ArtWorksList/ArtWorksList';
 
 export interface IDetails {
   data: IDetailsData | null;

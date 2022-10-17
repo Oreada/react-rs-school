@@ -1,10 +1,10 @@
 import React, { ReactNode } from 'react';
-import { IArtWorkData } from '../pages/HomePage';
-import { ArtWork } from './ArtWork';
-import { Details } from './Details';
-import { ErrorMessage } from './ErrorMessage';
-import { Loader } from './Loader';
-import { Modal } from './Modal';
+import { IArtWorkData } from '../../pages/HomePage';
+import { ArtWork } from '../ArtWork/ArtWork';
+import { Details } from '../Details/Details';
+import { ErrorMessage } from '../ErrorMessage/ErrorMessage';
+import { Loader } from '../Loader/Loader';
+import { Modal } from '../Modal/Modal';
 
 export interface IDetailsData {
   id: number;

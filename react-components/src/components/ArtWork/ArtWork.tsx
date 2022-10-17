@@ -1,7 +1,7 @@
 import React, { ReactNode } from 'react';
-import { IDetailsData } from './ArtWorksList';
-import { getImagePath } from '../api/helpers';
-import { getDetails } from '../api/getDetails';
+import { IDetailsData } from '../ArtWorksList/ArtWorksList';
+import { getImagePath } from '../../api/helpers';
+import { getDetails } from '../../api/getDetails';
 
 export interface IArtWork {
   id: number;

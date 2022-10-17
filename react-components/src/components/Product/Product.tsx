@@ -13,10 +13,6 @@ export interface IProduct {
   storage: number;
 }
 
-// interface ProductProps {
-// 	product: IProduct;
-// }
-
 export class Product extends React.Component<IProduct> {
   constructor(props: IProduct) {
     super(props);

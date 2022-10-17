@@ -1,8 +1,8 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { Form } from './Form';
-import { CARDS } from '../data/cards';
-import { ICard } from './Card';
+import { CARDS } from '../../data/cards';
+import { ICard } from '../Card/Card';
 
 const addCardFunc: (card: ICard) => void = jest.fn();
 

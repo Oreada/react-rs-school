@@ -1,4 +1,4 @@
-import { IProduct } from '../components/Product';
+import { IProduct } from '../components/Product/Product';
 
 export const PRODUCTS: Array<IProduct> = [
   {

@@ -1,5 +1,5 @@
 import React, { ReactNode } from 'react';
-import { ICard, Card } from './Card';
+import { ICard, Card } from '../Card/Card';
 
 interface CardsListProps {
   data: Array<ICard>;

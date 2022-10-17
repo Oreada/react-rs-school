@@ -1,4 +1,4 @@
-import { IDetailsData } from '../components/ArtWorksList';
+import { IDetailsData } from '../components/ArtWorksList/ArtWorksList';
 
 export const getDetails = async (idArtWork: number): Promise<IDetailsData | undefined> => {
   try {

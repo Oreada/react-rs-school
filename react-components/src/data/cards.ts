@@ -1,4 +1,4 @@
-import { ICard } from '../components/Card';
+import { ICard } from '../components/Card/Card';
 
 export const CARDS: Array<ICard> = [
   {

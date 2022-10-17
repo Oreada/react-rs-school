@@ -1,8 +1,8 @@
 import React from 'react';
 import { ReactNode } from 'react';
-import { ICard } from './Card';
-import { CardsList } from './CardsList';
-import { ErrorMessage } from './ErrorMessage';
+import { ICard } from '../Card/Card';
+import { CardsList } from '../CardsList/CardsList';
+import { ErrorMessage } from '../ErrorMessage/ErrorMessage';
 
 interface FormProps {
   addCard: (card: ICard) => void;

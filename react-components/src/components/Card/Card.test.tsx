@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import { Card } from './Card';
-import { CARDS } from '../data/cards';
+import { CARDS } from '../../data/cards';
 
 describe('Card component', () => {
   test('Card renders', () => {

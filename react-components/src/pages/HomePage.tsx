@@ -1,8 +1,8 @@
 import React from 'react';
 import { ReactNode } from 'react';
 // import { IArtWork } from '../components/ArtWork';
-import { ArtWorksList } from '../components/ArtWorksList';
-import { SearchBar } from '../components/SearchBar';
+import { ArtWorksList } from '../components/ArtWorksList/ArtWorksList';
+import { SearchBar } from '../components/SearchBar/SearchBar';
 import { getData } from '../api/getData';
 
 export interface IArtWorkData {
