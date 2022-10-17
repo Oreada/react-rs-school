@@ -1,6 +1,6 @@
 import React, { ReactNode } from 'react';
 import { searchData } from '../../api/searchData';
-import { IArtWorkData } from '../../pages/HomePage';
+import { IArtWorkData } from '../../pages/HomePage/HomePage';
 
 interface SearchBarProps {
   changeHomePageState: (

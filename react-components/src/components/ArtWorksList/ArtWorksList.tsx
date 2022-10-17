@@ -1,5 +1,5 @@
 import React, { ReactNode } from 'react';
-import { IArtWorkData } from '../../pages/HomePage';
+import { IArtWorkData } from '../../pages/HomePage/HomePage';
 import { ArtWork } from '../ArtWork/ArtWork';
 import { Details } from '../Details/Details';
 import { ErrorMessage } from '../ErrorMessage/ErrorMessage';

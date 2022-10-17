@@ -4,7 +4,7 @@ import { IDetailsData } from '../ArtWorksList/ArtWorksList';
 import { rest } from 'msw';
 import { setupServer } from 'msw/node';
 import userEvent from '@testing-library/user-event';
-import { HomePage } from '../../pages/HomePage';
+import { HomePage } from '../../pages/HomePage/HomePage';
 
 const artWorkExample = {
   id: 55,
