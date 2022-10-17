@@ -1,12 +1,11 @@
 import { render, screen } from '@testing-library/react';
-import { IArtWork } from './ArtWork';
 import { SearchBar } from './SearchBar';
 import { rest } from 'msw';
 import { setupServer } from 'msw/node';
 import userEvent from '@testing-library/user-event';
-import { HomePage } from '../pages/HomePage';
+import { HomePage, IArtWorkData } from '../pages/HomePage';
 
-const changeArtWorks: (newList: Array<IArtWork>) => void = jest.fn();
+const changeArtWorks: (newList: Array<IArtWorkData>) => void = jest.fn();
 
 const localStorageMock = (function () {
   let store: Record<string, never | string> = {};
