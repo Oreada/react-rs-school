@@ -21,7 +21,7 @@ export class FormsPage extends React.Component<Record<string, never>, FormPageSt
 
   render(): ReactNode {
     return (
-      <div className="form-page">
+      <div className="form-page" data-testid="form-page">
         <Form addCard={this.addCard} cards={this.state.cards} />
       </div>
     );
