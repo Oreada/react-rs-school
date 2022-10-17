@@ -128,37 +128,6 @@ img {
 
 /* --------------------- */
 
-/* -------------- form-card ------------------ */
-
-
-.form-card {
-    align-self: stretch;
-}
-
-.card {
-    /* min-width: 100%; */
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 20px;
-
-    font-size: 18px;
-    line-height: 120%;
-
-    background-color: #f0ead6;
-    border-radius: 5px;
-
-    padding: 20px;
-
-    transition: all 0.3s ease 0s;
-}
-
-.card:hover {
-    box-shadow: 0px 0px 20px #4e4d4d;
-}
-
-.card__item {}
-
 /* ------------- preload with animation ----------------------------------------- */
 
 .preload {
