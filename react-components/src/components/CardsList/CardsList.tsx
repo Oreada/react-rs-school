@@ -1,5 +1,6 @@
 import React, { ReactNode } from 'react';
 import { ICard, Card } from '../Card/Card';
+import styles from './CardsList.module.css';
 
 interface CardsListProps {
   data: Array<ICard>;
@@ -12,7 +13,7 @@ export class CardsList extends React.Component<CardsListProps> {
 
   render(): ReactNode {
     return (
-      <div className="cards__list" data-testid="cards-list">
+      <div className={styles['cards__list']} data-testid="cards-list">
         {this.props.data.map((card: ICard, index: number) => (
           <Card
             key={index}
