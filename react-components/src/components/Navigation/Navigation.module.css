@@ -1,0 +1,19 @@
+.navigation {
+    height: 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 5px;
+    padding-right: 5px;
+    color: white;
+    background-color: rgb(37, 57, 14);
+}
+
+.navigation__title {
+    font-weight: 600;
+}
+
+.navigation__links {
+    display: flex;
+    gap: 5px;
+}

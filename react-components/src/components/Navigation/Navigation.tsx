@@ -1,15 +1,13 @@
 import React, { ReactNode } from 'react';
 import { NavLink } from 'react-router-dom';
+import styles from './Navigation.module.css';
 
 export class Navigation extends React.Component {
   render(): ReactNode {
     return (
-      <nav
-        className="h-[50px] flex justify-between items-center px-5 bg-lime-900 text-white"
-        data-testid="navigation"
-      >
-        <span className="font-bold">Art Institute of Chicago</span>
-        <span className="flex gap-5">
+      <nav className={styles.navigation} data-testid="navigation">
+        <span className={styles.navigation__title}>Art Institute of Chicago</span>
+        <span className={styles.navigation__links}>
           <NavLink to="/" className={({ isActive }) => (isActive ? 'link-active' : 'link')} end>
             Home
           </NavLink>
