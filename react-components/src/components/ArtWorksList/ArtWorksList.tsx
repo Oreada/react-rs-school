@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import React, { useState } from 'react';
 import { IArtWorkData } from '../../pages/HomePage/HomePage';
 import { ArtWork } from '../ArtWork/ArtWork';
 import { Details } from '../Details/Details';
@@ -30,60 +30,61 @@ interface ArtWorksListState {
   loadingDetails: boolean;
 }
 
-export class ArtWorksList extends React.Component<ArtWorksListProps, ArtWorksListState> {
-  constructor(props: ArtWorksListProps) {
-    super(props);
-  }
-
-  state = {
+export function ArtWorksList(props: ArtWorksListProps) {
+  const [listState, setListState] = useState<ArtWorksListState>({
     modal: false,
     details: null,
     loadingDetails: true,
-  };
+  });
 
-  changeModalState = (newModal: boolean) => {
-    this.setState({
-      modal: newModal, //! нужно менять на фолс при клике на область модального окна и менять на тру при клике на карточку
+  const changeModalState = (newModal: boolean) => {
+    setListState((prev) => {
+      return {
+        modal: newModal, //! нужно менять на фолс при клике на область модального окна и менять на тру при клике на карточку
+        details: prev.details,
+        loadingDetails: prev.loadingDetails,
+      };
     });
     console.log('changeModalState works');
   };
 
-  changeDetailsState = (dataDetails: IDetailsData | null, loadingDetails: boolean) => {
-    this.setState({
-      details: dataDetails,
-      loadingDetails: loadingDetails,
+  const changeDetailsState = (dataDetails: IDetailsData | null, loadingDetails: boolean) => {
+    setListState((prev) => {
+      return {
+        modal: prev.modal, //! нужно менять на фолс при клике на область модального окна и менять на тру при клике на карточку
+        details: dataDetails,
+        loadingDetails: loadingDetails,
+      };
     });
     console.log('changeDetailsState works');
   };
 
-  render(): ReactNode {
-    return (
-      <ul className={styles['artworks__list']} data-testid="artworks-list">
-        {this.props.loading && <Loader />}
+  return (
+    <ul className={styles['artworks__list']} data-testid="artworks-list">
+      {props.loading && <Loader />}
 
-        {this.props.errorMessage && <ErrorMessage errorMessage={this.props.errorMessage} />}
+      {props.errorMessage && <ErrorMessage errorMessage={props.errorMessage} />}
 
-        {(this.props.data as Array<IArtWorkData>).map((item: IArtWorkData) => (
-          <ArtWork
-            key={item.id}
-            id={item.id}
-            image_id={item.image_id}
-            artist_title={item.artist_title}
-            date_display={item.date_display}
-            title={item.title}
-            onClick={this.changeModalState}
-            forDetails={this.changeDetailsState}
-          />
-        ))}
+      {(props.data as Array<IArtWorkData>).map((item: IArtWorkData) => (
+        <ArtWork
+          key={item.id}
+          id={item.id}
+          image_id={item.image_id}
+          artist_title={item.artist_title}
+          date_display={item.date_display}
+          title={item.title}
+          onClick={changeModalState}
+          forDetails={changeDetailsState}
+        />
+      ))}
 
-        {this.state.modal && (
-          <Modal title="Details of artwork" onClose={this.changeModalState}>
-            {this.state.loadingDetails && <Loader />}
+      {listState.modal && (
+        <Modal title="Details of artwork" onClose={changeModalState}>
+          {listState.loadingDetails && <Loader />}
 
-            {!this.state.loadingDetails && <Details data={this.state.details} />}
-          </Modal>
-        )}
-      </ul>
-    );
-  }
+          {!listState.loadingDetails && <Details data={listState.details} />}
+        </Modal>
+      )}
+    </ul>
+  );
 }
