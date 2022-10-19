@@ -1,29 +1,17 @@
-import React from 'react';
-import { ReactNode } from 'react';
+import React, { useState } from 'react';
 import { ICard } from '../../components/Card/Card';
 import { Form } from '../../components/Form/Form';
 
-interface FormPageState {
-  cards: Array<ICard>;
-}
+export function FormsPage() {
+  const [cardsList, setCardsList] = useState<Array<ICard>>([]);
 
-export class FormsPage extends React.Component<Record<string, never>, FormPageState> {
-  state = {
-    cards: [],
+  const addCard = (card: ICard) => {
+    setCardsList((prev) => [...prev, card]);
   };
 
-  addCard = (card: ICard) => {
-    this.setState(({ cards }) => {
-      const prevCards = [...cards];
-      return { cards: [...prevCards, card] };
-    });
-  };
-
-  render(): ReactNode {
-    return (
-      <div className="form-page" data-testid="form-page">
-        <Form addCard={this.addCard} cards={this.state.cards} />
-      </div>
-    );
-  }
+  return (
+    <div className="form-page" data-testid="form-page">
+      <Form addCard={addCard} cards={cardsList} />
+    </div>
+  );
 }
