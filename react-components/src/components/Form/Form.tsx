@@ -1,8 +1,8 @@
-import React from 'react';
-import { ReactNode } from 'react';
+import React, { useState } from 'react';
 import { ICard } from '../Card/Card';
 import { CardsList } from '../CardsList/CardsList';
 import { ErrorMessage } from '../ErrorMessage/ErrorMessage';
+import { useForm, SubmitHandler } from 'react-hook-form';
 import styles from './Form.module.css';
 
 interface FormProps {
@@ -10,257 +10,152 @@ interface FormProps {
   cards: Array<ICard>;
 }
 
-interface FormState {
+interface FormValues {
   nameField: string;
   phoneField: string;
   adressField: string;
   deliveryField: string;
   paymentField: boolean;
-  nameErrorMessage: string;
-  phoneErrorMessage: string;
-  adressErrorMessage: string;
-  deliveryErrorMessage: string;
-  isSubmitted: boolean;
-  isDisabled: boolean;
 }
 
-export class Form extends React.Component<FormProps, FormState> {
-  constructor(props: FormProps) {
-    super(props);
-  }
+export function Form(props: FormProps) {
+  const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
 
-  state = {
-    nameField: '',
-    phoneField: '',
-    adressField: '',
-    deliveryField: '',
-    paymentField: false,
-    nameErrorMessage: '',
-    phoneErrorMessage: '',
-    adressErrorMessage: '',
-    deliveryErrorMessage: '',
-    isSubmitted: false,
-    isDisabled: true,
-  };
+  const {
+    register,
+    formState: { errors, isDirty },
+    handleSubmit,
+    reset,
+  } = useForm<FormValues>({
+    mode: 'onSubmit',
+  });
 
-  refNameField: React.RefObject<HTMLInputElement> = React.createRef();
-  refPhoneField: React.RefObject<HTMLInputElement> = React.createRef();
-  refAdressField: React.RefObject<HTMLTextAreaElement> = React.createRef();
-  refDeliveryField: React.RefObject<HTMLSelectElement> = React.createRef();
-  refPaymentField: React.RefObject<HTMLInputElement> = React.createRef();
+  const onSubmit: SubmitHandler<FormValues> = (data) => {
+    console.log(data);
+    setIsSubmitted(() => true);
 
-  handleChange = (): void => {
-    this.setState({
-      isDisabled: false,
+    props.addCard({
+      name: data.nameField,
+      phone: data.phoneField,
+      adress: data.adressField,
+      delivery: data.deliveryField,
+      payment: data.paymentField ? 'card' : 'cash',
     });
+    reset(); //! очищает поля формы после успешного сабмита
+
+    setTimeout(() => {
+      setIsSubmitted(() => false);
+    }, 3000);
   };
 
-  validateFields = () => {
-    let isValid = true;
+  return (
+    <>
+      <form
+        className={styles['form']}
+        onSubmit={handleSubmit(onSubmit)}
+        id="form"
+        data-testid="form"
+      >
+        <label className={styles['form-label-input']} htmlFor="form-input-name">
+          Name:
+        </label>
+        <input
+          {...register('nameField', {
+            required: 'Enter your name',
+            pattern: {
+              value: /^[ a-zA-Zа-яА-Я]+$/,
+              message: 'The name must contain only letters',
+            },
+          })}
+          className={styles['form-input']}
+          type="text"
+          id="form-input-name"
+          data-testid="form-input-name"
+        />
+        {errors?.nameField && <ErrorMessage errorMessage={errors?.nameField?.message as string} />}
 
-    if (!this.state.nameField.length) {
-      isValid = false;
-      this.setState({
-        nameErrorMessage: 'Enter your name',
-      });
-    } else if (!/^[ a-zA-Zа-яА-Я]+$/.test(this.state.nameField)) {
-      isValid = false;
-      this.setState({
-        nameErrorMessage: 'The name must contain only letters',
-      });
-    } else {
-      this.setState({
-        nameErrorMessage: '',
-      });
-    }
+        <label className={styles['form-label-input']} htmlFor="form-input-phone">
+          Phone number:
+        </label>
+        <input
+          {...register('phoneField', {
+            required: 'Enter your phone number',
+          })}
+          className={styles['form-input']}
+          type="number"
+          id="form-input-phone"
+          data-testid="form-input-phone"
+        />
+        {errors?.phoneField && (
+          <ErrorMessage errorMessage={errors?.phoneField?.message as string} />
+        )}
 
-    if (!this.state.phoneField.length) {
-      isValid = false;
-      this.setState({
-        phoneErrorMessage: 'Enter your phone number',
-      });
-    } else {
-      this.setState({
-        phoneErrorMessage: '',
-      });
-    }
+        <label className={styles['form-label-textarea']} htmlFor="form-textarea">
+          Adress:
+        </label>
+        <textarea
+          {...register('adressField', {
+            required: 'Enter your adress',
+          })}
+          className={styles['form-textarea']}
+          id="form-textarea"
+          data-testid="form-textarea"
+        ></textarea>
+        {errors?.adressField && (
+          <ErrorMessage errorMessage={errors?.adressField?.message as string} />
+        )}
 
-    if (!this.state.adressField.length) {
-      isValid = false;
-      this.setState({
-        adressErrorMessage: 'Enter your adress',
-      });
-    } else {
-      this.setState({
-        adressErrorMessage: '',
-      });
-    }
-
-    if (!this.state.deliveryField) {
-      isValid = false;
-      this.setState({
-        deliveryErrorMessage: 'Choose a delivery method',
-      });
-    } else {
-      this.setState({
-        deliveryErrorMessage: '',
-      });
-    }
-
-    this.setState({
-      isDisabled: !isValid,
-    });
-
-    return isValid;
-  };
-
-  onSubmit = (): void => {
-    const isValid = this.validateFields();
-    console.log(isValid);
-
-    if (isValid) {
-      this.setState({
-        isSubmitted: true,
-        isDisabled: true,
-      });
-
-      this.props.addCard({
-        name: this.state.nameField,
-        phone: this.state.phoneField,
-        adress: this.state.adressField,
-        delivery: this.state.deliveryField,
-        payment: this.state.paymentField ? 'card' : 'cash',
-      });
-
-      (this.refNameField.current as HTMLInputElement).value = '';
-      (this.refPhoneField.current as HTMLInputElement).value = '';
-      (this.refAdressField.current as HTMLTextAreaElement).value = '';
-      (this.refDeliveryField.current as HTMLSelectElement).value = '';
-      (this.refPaymentField.current as HTMLInputElement).checked = false;
-
-      setTimeout(() => {
-        this.setState({
-          isSubmitted: false,
-        });
-      }, 3000);
-    } else {
-      console.log('Enter the valid data into fields');
-    }
-  };
-
-  handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    this.setState(
-      {
-        nameField: (this.refNameField.current as HTMLInputElement).value,
-        phoneField: (this.refPhoneField.current as HTMLInputElement).value,
-        adressField: (this.refAdressField.current as HTMLTextAreaElement).value,
-        deliveryField: (this.refDeliveryField.current as HTMLSelectElement).value,
-        paymentField: (this.refPaymentField.current as HTMLInputElement).checked,
-      },
-      () => this.onSubmit()
-    );
-  };
-
-  render(): ReactNode {
-    return (
-      <>
-        <form
-          className={styles['form']}
-          onSubmit={this.handleSubmit}
-          onChange={this.handleChange}
-          id="form"
-          data-testid="form"
+        <select
+          {...register('deliveryField', {
+            required: 'Choose a delivery method',
+          })}
+          className={styles['form-select']}
+          id="form-select"
+          data-testid="form-select"
         >
-          <label className={styles['form-label-input']} htmlFor="form-input-name">
-            Name:
-          </label>
+          <option value="">--Delivery method--</option>
+          <option value="self-delivery">Self-delivery</option>
+          <option value="courier delivery">Courier delivery</option>
+        </select>
+        {errors?.deliveryField && (
+          <ErrorMessage errorMessage={errors?.deliveryField?.message as string} />
+        )}
+
+        <label className={styles['toggle']}>
           <input
-            className={styles['form-input']}
-            type="text"
-            name="name"
-            id="form-input-name"
-            ref={this.refNameField}
-            data-testid="form-input-name"
+            {...register('paymentField')}
+            type="checkbox"
+            id="form-checkbox"
+            data-testid="form-checkbox"
           />
-          {this.state.nameErrorMessage && (
-            <ErrorMessage errorMessage={this.state.nameErrorMessage} />
-          )}
-          <label className={styles['form-label-input']} htmlFor="form-input-phone">
-            Phone number:
-          </label>
-          <input
-            className={styles['form-input']}
-            type="number"
-            name="name"
-            id="form-input-phone"
-            ref={this.refPhoneField}
-            data-testid="form-input-phone"
+          <span className={styles['slider']}></span>
+          <span className={styles['labels']} data-on="card" data-off="cash"></span>
+        </label>
+
+        <button
+          type="submit"
+          className={styles['form-button']}
+          value="Submit"
+          disabled={!isDirty}
+          data-testid="form-button"
+        >
+          Submit
+        </button>
+        <div
+          className={styles['form-saved']}
+          style={isSubmitted ? { visibility: 'visible' } : { visibility: 'hidden' }}
+        >
+          <img
+            className={styles['form-saved__icon']}
+            src="./images/checked-icon.svg"
+            width="20px"
+            height="20px"
+            alt="Checked"
           />
-          {this.state.phoneErrorMessage && (
-            <ErrorMessage errorMessage={this.state.phoneErrorMessage} />
-          )}
-          <label className={styles['form-label-textarea']} htmlFor="form-textarea">
-            Adress:
-          </label>
-          <textarea
-            className={styles['form-textarea']}
-            name=""
-            id="form-textarea"
-            ref={this.refAdressField}
-            data-testid="form-textarea"
-          ></textarea>
-          {this.state.adressErrorMessage && (
-            <ErrorMessage errorMessage={this.state.adressErrorMessage} />
-          )}
-          <select
-            className={styles['form-select']}
-            ref={this.refDeliveryField}
-            id="form-select"
-            data-testid="form-select"
-          >
-            <option value="">--Delivery method--</option>
-            <option value="self-delivery">Self-delivery</option>
-            <option value="courier delivery">Courier delivery</option>
-          </select>
-          {this.state.deliveryErrorMessage && (
-            <ErrorMessage errorMessage={this.state.deliveryErrorMessage} />
-          )}
-          <label className={styles['toggle']}>
-            <input
-              type="checkbox"
-              ref={this.refPaymentField}
-              id="form-checkbox"
-              data-testid="form-checkbox"
-            />
-            <span className={styles['slider']}></span>
-            <span className={styles['labels']} data-on="card" data-off="cash"></span>
-          </label>
-          <button
-            type="submit"
-            className={styles['form-button']}
-            value="Submit"
-            disabled={this.state.isDisabled}
-            data-testid="form-button"
-          >
-            Submit
-          </button>
-          <div
-            className={styles['form-saved']}
-            style={this.state.isSubmitted ? { visibility: 'visible' } : { visibility: 'hidden' }}
-          >
-            <img
-              className={styles['form-saved__icon']}
-              src="./images/checked-icon.svg"
-              width="20px"
-              height="20px"
-              alt="Checked"
-            />
-            <p className={styles['form-saved__text']}>The data was successfully saved</p>
-          </div>
-        </form>
-        <CardsList data={this.props.cards} />
-      </>
-    );
-  }
+          <p className={styles['form-saved__text']}>The data was successfully saved</p>
+        </div>
+      </form>
+      <CardsList data={props.cards} />
+    </>
+  );
 }
