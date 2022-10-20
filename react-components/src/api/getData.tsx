@@ -1,4 +1,4 @@
-import { IArtWorkData } from '../pages/HomePage';
+import { IArtWorkData } from '../pages/HomePage/HomePage';
 
 export const getData = async (): Promise<Array<IArtWorkData> | undefined> => {
   try {
