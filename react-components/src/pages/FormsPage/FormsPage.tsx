@@ -2,7 +2,7 @@ import React from 'react';
 import { ICard } from '../../components/Card/Card';
 import { Form } from '../../components/Form/Form';
 import { storeFormCards } from '../../store/store';
-import { StoreContext } from '../../context';
+import { FormContext } from '../../context';
 
 export function FormsPage() {
   // const [cardsList, setCardsList] = useState<Array<ICard>>([]);
@@ -13,10 +13,10 @@ export function FormsPage() {
   };
 
   return (
-    <StoreContext.Provider value={{ addCard }}>
+    <FormContext.Provider value={{ addCard }}>
       <div className="form-page" data-testid="form-page">
         <Form cards={storeFormCards} />
       </div>
-    </StoreContext.Provider>
+    </FormContext.Provider>
   );
 }

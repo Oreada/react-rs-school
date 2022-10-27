@@ -1,10 +1,10 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import { ICard } from '../Card/Card';
 import { CardsList } from '../CardsList/CardsList';
 import { ErrorMessage } from '../ErrorMessage/ErrorMessage';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import styles from './Form.module.css';
-import { StoreContext } from '../../context';
+import { useFormContext } from '../../context';
 
 interface FormProps {
   cards: Array<ICard>;
@@ -21,7 +21,7 @@ interface FormValues {
 export function Form(props: FormProps) {
   const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
 
-  const { addCard } = useContext(StoreContext); //! или просто useStoreContext(), т.к. там уже прописано: useContext(StoreContext)
+  const { addCard } = useFormContext();
 
   const {
     register,
