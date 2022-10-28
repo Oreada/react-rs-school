@@ -19,12 +19,17 @@ export const useFormContext = () => useContext(FormContext);
 export type HomePageGlobalContent = {
   store: Array<IArtWorkData>;
   setStore: (c: Array<IArtWorkData>) => void;
+  searchValue: string;
+  setSearchValue: (c: string) => void;
 };
 
 export const HomePageContext = createContext<HomePageGlobalContent>({
   store: [],
   // eslint-disable-next-line prettier/prettier
   setStore: () => { },
+  searchValue: '',
+  // eslint-disable-next-line prettier/prettier
+  setSearchValue: () => { },
 });
 
 export const useHomePageContext = () => useContext(HomePageContext);

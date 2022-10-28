@@ -20,7 +20,6 @@ interface HomePageState {
 
 export function HomePage() {
   const { store, setStore } = useHomePageContext();
-  console.log(store, store.length !== 0);
 
   const [homePageState, sethomePageState] = useState<HomePageState>({
     loading: false,
@@ -43,7 +42,7 @@ export function HomePage() {
   return (
     <main className="home-page" data-testid="home-page">
       <SearchBar changeHomePageState={changeHomePageState} />
-      <Sorting />
+      <Sorting changeHomePageState={changeHomePageState} />
       <ArtWorksList
         data={store}
         loading={homePageState.loading}
