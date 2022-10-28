@@ -9,9 +9,17 @@ import { HomePageContext } from './context';
 
 function App() {
   const [homePage, setHomePage] = useState<Array<IArtWorkData>>([]);
+  const [searchValue, setSearchValue] = useState('');
 
   return (
-    <HomePageContext.Provider value={{ store: homePage, setStore: setHomePage }}>
+    <HomePageContext.Provider
+      value={{
+        store: homePage,
+        setStore: setHomePage,
+        searchValue: searchValue,
+        setSearchValue: setSearchValue,
+      }}
+    >
       <div className="container">
         <Navigation />
         <Routes>
