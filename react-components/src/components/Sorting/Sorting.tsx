@@ -1,4 +1,4 @@
-import React, { useReducer } from 'react';
+import React, { useEffect, useReducer } from 'react';
 import { getSortedData } from '../../api/getSortedData';
 import { useHomePageContext } from '../../context';
 import { IArtWorkData } from '../../pages/HomePage/HomePage';
@@ -19,7 +19,18 @@ export function Sorting(props: SortingProps) {
   const [state, dispatch] = useReducer(sortingReducer, { objForSorting: {} });
   const sortingSelect: React.RefObject<HTMLSelectElement> = React.createRef();
 
+  useEffect(() => {
+    (sortingSelect.current as HTMLSelectElement).value =
+      localStorage.getItem('valueSortingSelect') || '';
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem('valueSortingSelect', (sortingSelect.current as HTMLSelectElement).value);
+  }, [sortingSelect]);
+
   const changeHandler = async (event: React.ChangeEvent<HTMLSelectElement>) => {
+    // setSearchValue()
+
     const action = {
       type: (sortingSelect.current as HTMLSelectElement).value as SortingActionOption,
     };
@@ -41,7 +52,7 @@ export function Sorting(props: SortingProps) {
   };
 
   return (
-    <div>
+    <div className={styles['selects-box']}>
       <select
         className={styles['sorting-select']}
         id="sorting-select"
@@ -49,13 +60,27 @@ export function Sorting(props: SortingProps) {
         ref={sortingSelect}
         onChange={changeHandler}
       >
-        <option value="">--Select the sorting method--</option>
-        <option value="title-ascending">Title ascending</option>
-        <option value="title-descending">Title descending</option>
-        <option value="author-ascending">Author&apos;s name ascending</option>
-        <option value="author-descending">Author&apos;s name descending</option>
-        <option value="date-ascending">Date ascending</option>
-        <option value="date-descending">Date descending</option>
+        <option className={styles['sorting-option']} value="">
+          -- Select the sorting method --
+        </option>
+        <option className={styles['sorting-option']} value="title-ascending">
+          Title ascending
+        </option>
+        <option className={styles['sorting-option']} value="title-descending">
+          Title descending
+        </option>
+        <option className={styles['sorting-option']} value="author-ascending">
+          Author&apos;s name ascending
+        </option>
+        <option className={styles['sorting-option']} value="author-descending">
+          Author&apos;s name descending
+        </option>
+        <option className={styles['sorting-option']} value="date-ascending">
+          Date ascending
+        </option>
+        <option className={styles['sorting-option']} value="date-descending">
+          Date descending
+        </option>
       </select>
     </div>
   );

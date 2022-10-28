@@ -10,7 +10,9 @@
 }
 
 .navigation__title {
-    font-weight: 600;
+    font-size: 14px;
+    /* font-weight: 600; */
+    text-transform: uppercase;
 }
 
 .navigation__links {
