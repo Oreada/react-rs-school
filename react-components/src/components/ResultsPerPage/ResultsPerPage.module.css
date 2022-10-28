@@ -1,4 +1,4 @@
-.sorting-select {
+.pagination-select {
     height: 40px;
 
     font-size: 14px;
@@ -12,4 +12,4 @@
     cursor: pointer;
 }
 
-.sorting-option {}
+.pagination-option {}

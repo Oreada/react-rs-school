@@ -2,13 +2,15 @@ import { IArtWorkData } from '../pages/HomePage/HomePage';
 
 export const getSortedData = async (
   value: string,
+  limit: string,
   obj: DateSorting | TitleSorting | AuthorSorting | unknown
 ): Promise<Array<IArtWorkData> | undefined> => {
   console.log('value=', value);
+  console.log('limit=', limit);
   console.log('obj=', obj);
   try {
     const response = await fetch(
-      `https://api.artic.edu/api/v1/artworks/search?q=${value}&query[term][is_public_domain]=true&fields=id,title,artist_title,date_display,image_id&page=1&limit=20`,
+      `https://api.artic.edu/api/v1/artworks/search?q=${value}&query[term][is_public_domain]=true&fields=id,title,artist_title,date_display,image_id&page=1&limit=${limit}`,
       {
         method: 'POST',
         headers: {

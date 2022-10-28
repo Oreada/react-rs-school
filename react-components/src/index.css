@@ -119,6 +119,14 @@ img {
     padding-top: 50px;
 }
 
+.home-page-selects {
+    margin-top: 30px;
+
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+}
+
 .form-page {
     display: flex;
     flex-direction: column;

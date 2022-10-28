@@ -14,7 +14,8 @@ interface SearchBarProps {
 
 export function SearchBar(props: SearchBarProps) {
   const { searchValue, setSearchValue } = useHomePageContext();
-  // const [searchBarState, setSearchBarState] = useState('');
+  const { objForSorting, setObjForSorting } = useHomePageContext();
+  const { limitValue, setLimitValue } = useHomePageContext();
 
   const changeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchValue(event.target.value);
@@ -34,7 +35,7 @@ export function SearchBar(props: SearchBarProps) {
 
     try {
       props.changeHomePageState([], true, '');
-      const artWorksList = await getSortedData(searchValue, {});
+      const artWorksList = await getSortedData(searchValue, limitValue, objForSorting);
       props.changeHomePageState(artWorksList as Array<IArtWorkData>, false, '');
     } catch (e: unknown) {
       const err = e as Error;
@@ -55,7 +56,7 @@ export function SearchBar(props: SearchBarProps) {
         <input
           type="search"
           className={styles['search-field']}
-          placeholder="Input something: 'Monet', 'Gogh', 'rabbit'..."
+          placeholder="Input something: 'Raphael', 'Gogh', 'rabbit'..."
           autoComplete="off"
           value={searchValue}
           name="search"
