@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import { searchData } from '../../api/searchData';
+import React, { useEffect } from 'react';
+import { getSortedData } from '../../api/getSortedData';
+import { useHomePageContext } from '../../context';
 import { IArtWorkData } from '../../pages/HomePage/HomePage';
 import styles from './SearchBar.module.css';
 
@@ -12,27 +13,28 @@ interface SearchBarProps {
 }
 
 export function SearchBar(props: SearchBarProps) {
-  const [searchBarState, setSearchBarState] = useState('');
+  const { searchValue, setSearchValue } = useHomePageContext();
+  // const [searchBarState, setSearchBarState] = useState('');
 
   const changeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchBarState(event.target.value);
+    setSearchValue(event.target.value);
   };
 
   useEffect(() => {
     const storageValue = localStorage.getItem('valueSearchBar') || '';
-    setSearchBarState(storageValue);
+    setSearchValue(storageValue);
   }, []);
 
   useEffect(() => {
-    localStorage.setItem('valueSearchBar', searchBarState);
-  }, [searchBarState]);
+    localStorage.setItem('valueSearchBar', searchValue);
+  }, [searchValue]);
 
   const searchHandler = async (event: React.MouseEvent<HTMLInputElement, MouseEvent>) => {
     event.preventDefault();
 
     try {
       props.changeHomePageState([], true, '');
-      const artWorksList = await searchData(searchBarState);
+      const artWorksList = await getSortedData(searchValue, {});
       props.changeHomePageState(artWorksList as Array<IArtWorkData>, false, '');
     } catch (e: unknown) {
       const err = e as Error;
@@ -55,7 +57,7 @@ export function SearchBar(props: SearchBarProps) {
           className={styles['search-field']}
           placeholder="Input something: 'Monet', 'Gogh', 'rabbit'..."
           autoComplete="off"
-          value={searchBarState}
+          value={searchValue}
           name="search"
           onChange={changeHandler}
           data-testid="input-search"
