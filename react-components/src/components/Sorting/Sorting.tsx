@@ -2,7 +2,7 @@ import React, { useEffect, useReducer } from 'react';
 import { AuthorSorting, DateSorting, getSortedData, TitleSorting } from '../../api/getSortedData';
 import { useHomePageContext } from '../../context';
 import { IArtWorkData } from '../../pages/HomePage/HomePage';
-import { SortingActionOption, sortingReducer } from '../reducer';
+import { SortingActionOption, sortingReducer } from '../../reducer';
 import styles from './Sorting.module.css';
 
 interface SortingProps {

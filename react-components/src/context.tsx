@@ -2,7 +2,7 @@ import React from 'react';
 import { createContext, useContext } from 'react';
 import { DateSorting, TitleSorting, AuthorSorting } from './api/getSortedData';
 import { ICard } from './components/Card/Card';
-import { SortingActionOption } from './components/reducer';
+import { SortingActionOption } from './reducer';
 import { ResultsPerPageOption } from './components/ResultsPerPage/ResultsPerPage';
 import { IArtWorkData } from './pages/HomePage/HomePage';
 

@@ -6,7 +6,7 @@ import { ErrorPage } from './pages/ErrorPage/ErrorPage';
 import { HomePage, IArtWorkData } from './pages/HomePage/HomePage';
 import { FormsPage } from './pages/FormsPage/FormsPage';
 import { HomePageContext } from './context';
-import { SortingActionOption } from './components/reducer';
+import { SortingActionOption } from './reducer';
 import { AuthorSorting, DateSorting, TitleSorting } from './api/getSortedData';
 import { ResultsPerPageOption } from './components/ResultsPerPage/ResultsPerPage';
 

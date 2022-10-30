@@ -1,4 +1,4 @@
-import { AuthorSorting, DateSorting, TitleSorting } from '../api/getSortedData';
+import { AuthorSorting, DateSorting, TitleSorting } from './api/getSortedData';
 
 // An enum with all the types of actions to use in our reducer
 export enum SortingActionOption {
