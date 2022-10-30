@@ -22,6 +22,8 @@ export function ResultsPerPage(props: ResultsPerPageProps) {
   const { searchValue, setSearchValue } = useHomePageContext();
   const { objForSorting, setObjForSorting } = useHomePageContext();
   const { limitValue, setLimitValue } = useHomePageContext();
+  const { pageCurrent, setPageCurrent } = useHomePageContext();
+  const { pageTotal, setPageTotal } = useHomePageContext();
 
   const resultsPerPageSelect: React.RefObject<HTMLSelectElement> = React.createRef();
 
@@ -47,12 +49,15 @@ export function ResultsPerPage(props: ResultsPerPageProps) {
 
     try {
       props.changeHomePageState([], true, '');
-      const artWorksList = await getSortedData(
+      const result = await getSortedData(
         searchValue,
         (resultsPerPageSelect.current as HTMLSelectElement).value,
-        objForSorting
+        objForSorting,
+        '1'
       );
-      props.changeHomePageState(artWorksList as Array<IArtWorkData>, false, '');
+      props.changeHomePageState(result?.artWorksList as Array<IArtWorkData>, false, '');
+      setPageTotal(result?.totalPages as string); //! тут получаю общее количество страниц
+      setPageCurrent('1'); //! сбиваю текущую страницу, т.к. изменяется общее количество страниц
     } catch (e: unknown) {
       const err = e as Error;
       props.changeHomePageState([], false, err.message);

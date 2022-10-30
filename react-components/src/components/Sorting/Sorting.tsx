@@ -18,6 +18,8 @@ export function Sorting(props: SortingProps) {
   const { sortingValue, setSortingValue } = useHomePageContext();
   const { objForSorting, setObjForSorting } = useHomePageContext();
   const { limitValue, setLimitValue } = useHomePageContext();
+  const { pageCurrent, setPageCurrent } = useHomePageContext();
+  const { pageTotal, setPageTotal } = useHomePageContext();
 
   const [state, dispatch] = useReducer(sortingReducer, { objForSorting: {} });
   const sortingSelect: React.RefObject<HTMLSelectElement> = React.createRef();
@@ -49,16 +51,15 @@ export function Sorting(props: SortingProps) {
     dispatch(action);
 
     const nextState = sortingReducer(state, action); //! для того чтобы получить актуальный стейт для вызова getSortedData
-    console.log('nextState=', nextState);
 
     setObjForSorting(nextState.objForSorting);
 
     try {
       props.changeHomePageState([], true, '');
-      console.log('nextState.objForSorting=', nextState.objForSorting);
-      console.log('sortingSelect.current=', (sortingSelect.current as HTMLSelectElement).value);
-      const artWorksList = await getSortedData(searchValue, limitValue, nextState.objForSorting);
-      props.changeHomePageState(artWorksList as Array<IArtWorkData>, false, '');
+      const result = await getSortedData(searchValue, limitValue, nextState.objForSorting, '1');
+      props.changeHomePageState(result?.artWorksList as Array<IArtWorkData>, false, '');
+      setPageTotal(result?.totalPages as string); //! тут получаю общее количество страниц
+      setPageCurrent('1'); //! сбиваю текущую страницу, т.к. изменяется общее количество страниц
     } catch (e: unknown) {
       const err = e as Error;
       props.changeHomePageState([], false, err.message);

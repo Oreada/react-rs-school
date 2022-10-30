@@ -30,6 +30,10 @@ export type HomePageGlobalContent = {
   setObjForSorting: (c: DateSorting | TitleSorting | AuthorSorting | unknown) => void;
   limitValue: ResultsPerPageOption | '';
   setLimitValue: (c: ResultsPerPageOption | '') => void;
+  pageCurrent: string;
+  setPageCurrent: (c: string) => void;
+  pageTotal: string;
+  setPageTotal: (c: string) => void;
 };
 
 export const HomePageContext = createContext<HomePageGlobalContent>({
@@ -48,6 +52,12 @@ export const HomePageContext = createContext<HomePageGlobalContent>({
   limitValue: '',
   // eslint-disable-next-line prettier/prettier
   setLimitValue: () => { },
+  pageCurrent: '',
+  // eslint-disable-next-line prettier/prettier
+  setPageCurrent: () => { },
+  pageTotal: '',
+  // eslint-disable-next-line prettier/prettier
+  setPageTotal: () => { },
 });
 
 export const useHomePageContext = () => useContext(HomePageContext);

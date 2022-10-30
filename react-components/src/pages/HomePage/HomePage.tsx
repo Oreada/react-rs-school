@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { ArtWorksList } from '../../components/ArtWorksList/ArtWorksList';
+import { Pagination } from '../../components/Pagination/Pagination';
 import { ResultsPerPage } from '../../components/ResultsPerPage/ResultsPerPage';
 import { SearchBar } from '../../components/SearchBar/SearchBar';
 import { Sorting } from '../../components/Sorting/Sorting';
@@ -47,11 +48,16 @@ export function HomePage() {
         <Sorting changeHomePageState={changeHomePageState} />
         <ResultsPerPage changeHomePageState={changeHomePageState} />
       </div>
-      <ArtWorksList
-        data={store}
-        loading={homePageState.loading}
-        errorMessage={homePageState.errorMessage}
-      />
+      <div className="home-page-list">
+        <ArtWorksList
+          data={store}
+          loading={homePageState.loading}
+          errorMessage={homePageState.errorMessage}
+        />
+      </div>
+      <div className="home-page-pagination">
+        <Pagination changeHomePageState={changeHomePageState} />
+      </div>
     </main>
   );
 }

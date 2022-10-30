@@ -18,6 +18,8 @@ function App() {
     DateSorting | TitleSorting | AuthorSorting | unknown
   >({});
   const [limitValue, setLimitValue] = useState<'' | ResultsPerPageOption>('');
+  const [pageCurrent, setPageCurrent] = useState('1');
+  const [pageTotal, setPageTotal] = useState('1');
 
   return (
     <HomePageContext.Provider
@@ -32,6 +34,10 @@ function App() {
         setObjForSorting: setObjForSorting,
         limitValue: limitValue,
         setLimitValue: setLimitValue,
+        pageCurrent: pageCurrent,
+        setPageCurrent: setPageCurrent,
+        pageTotal: pageTotal,
+        setPageTotal: setPageTotal,
       }}
     >
       <div className="container">

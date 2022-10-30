@@ -16,6 +16,8 @@ export function SearchBar(props: SearchBarProps) {
   const { searchValue, setSearchValue } = useHomePageContext();
   const { objForSorting, setObjForSorting } = useHomePageContext();
   const { limitValue, setLimitValue } = useHomePageContext();
+  const { pageCurrent, setPageCurrent } = useHomePageContext();
+  const { pageTotal, setPageTotal } = useHomePageContext();
 
   const changeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchValue(event.target.value);
@@ -35,8 +37,10 @@ export function SearchBar(props: SearchBarProps) {
 
     try {
       props.changeHomePageState([], true, '');
-      const artWorksList = await getSortedData(searchValue, limitValue, objForSorting);
-      props.changeHomePageState(artWorksList as Array<IArtWorkData>, false, '');
+      const result = await getSortedData(searchValue, limitValue, objForSorting, '1');
+      props.changeHomePageState(result?.artWorksList as Array<IArtWorkData>, false, '');
+      setPageTotal(result?.totalPages as string); //! тут получаю общее количество страниц
+      setPageCurrent('1'); //! сбиваю текущую страницу, т.к. изменяется общее количество страниц
     } catch (e: unknown) {
       const err = e as Error;
       props.changeHomePageState([], false, err.message);

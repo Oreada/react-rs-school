@@ -1,0 +1,56 @@
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+.pagination-arrow-left,
+.pagination-arrow-right {
+  display: block;
+  height: 30px;
+  width: 50px;
+
+  font-size: inherit;
+
+  background-color: #f9d342;
+  padding: 5px;
+
+  transition: all 0.5s ease 0s;
+
+  cursor: pointer;
+}
+
+.pagination-arrow-left {
+  background-image: url(./left-arrow-svgrepo-com.svg);
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+.pagination-arrow-right {
+  background-image: url(./right-arrow-svgrepo-com.svg);
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+.pagination-arrow-left:hover,
+.pagination-arrow-right:hover {
+  background-color: rgb(37, 57, 14);
+
+  transition: all 0.5s ease 0s;
+}
+
+.pagination-pages {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+}
+
+.pagination-current {
+  font-weight: 600;
+}
+
+.pagination-slash {}
+
+.pagination-total {}
