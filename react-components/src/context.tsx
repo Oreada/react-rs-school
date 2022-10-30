@@ -9,10 +9,15 @@ import { IArtWorkData } from './pages/HomePage/HomePage';
 export const Context = React.createContext('initial test value');
 
 export type FormGlobalContent = {
+  cardsList: Array<ICard>;
+  setCardsList: (c: Array<ICard>) => void;
   addCard: (card: ICard) => void;
 };
 
 export const FormContext = createContext<FormGlobalContent>({
+  cardsList: [],
+  // eslint-disable-next-line prettier/prettier
+  setCardsList: () => { },
   // eslint-disable-next-line prettier/prettier
   addCard: () => { },
 });

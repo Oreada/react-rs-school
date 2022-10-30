@@ -1,20 +1,13 @@
-import React, { useState } from 'react';
-import { ICard } from '../../components/Card/Card';
+import React from 'react';
 import { Form } from '../../components/Form/Form';
-import { FormContext } from '../../context';
+import { useFormContext } from '../../context';
 
 export function FormsPage() {
-  const [cardsList, setCardsList] = useState<Array<ICard>>([]);
-
-  const addCard = (card: ICard) => {
-    setCardsList((prev) => [...prev, card]);
-  };
+  const { cardsList, setCardsList } = useFormContext();
 
   return (
-    <FormContext.Provider value={{ addCard }}>
-      <div className="form-page" data-testid="form-page">
-        <Form cards={cardsList} />
-      </div>
-    </FormContext.Provider>
+    <div className="form-page" data-testid="form-page">
+      <Form cards={cardsList} />
+    </div>
   );
 }

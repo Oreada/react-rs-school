@@ -43,6 +43,7 @@ export function Form(props: FormProps) {
       delivery: data.deliveryField,
       payment: data.paymentField ? 'card' : 'cash',
     });
+
     reset(); //! очищает поля формы после успешного сабмита
 
     setTimeout(() => {

@@ -5,10 +5,11 @@ import { AboutPage } from './pages/AboutPage/AboutPage';
 import { ErrorPage } from './pages/ErrorPage/ErrorPage';
 import { HomePage, IArtWorkData } from './pages/HomePage/HomePage';
 import { FormsPage } from './pages/FormsPage/FormsPage';
-import { HomePageContext } from './context';
+import { FormContext, HomePageContext } from './context';
 import { SortingActionOption } from './reducer';
 import { AuthorSorting, DateSorting, TitleSorting } from './api/getSortedData';
 import { ResultsPerPageOption } from './components/ResultsPerPage/ResultsPerPage';
+import { ICard } from './components/Card/Card';
 
 function App() {
   const [homePage, setHomePage] = useState<Array<IArtWorkData>>([]);
@@ -20,6 +21,12 @@ function App() {
   const [limitValue, setLimitValue] = useState<'' | ResultsPerPageOption>('');
   const [pageCurrent, setPageCurrent] = useState('1');
   const [pageTotal, setPageTotal] = useState('1');
+
+  const [cardsList, setCardsList] = useState<Array<ICard>>([]);
+
+  const addCard = (card: ICard) => {
+    setCardsList([card, ...cardsList]);
+  };
 
   return (
     <HomePageContext.Provider
@@ -40,16 +47,18 @@ function App() {
         setPageTotal: setPageTotal,
       }}
     >
-      <div className="container">
-        <Navigation />
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/about" element={<AboutPage />} />
-          <Route path="/forms" element={<FormsPage />} />
-          <Route path="/404" element={<ErrorPage />} />
-          <Route path="*" element={<ErrorPage />} />
-        </Routes>
-      </div>
+      <FormContext.Provider value={{ addCard, cardsList, setCardsList }}>
+        <div className="container">
+          <Navigation />
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/about" element={<AboutPage />} />
+            <Route path="/forms" element={<FormsPage />} />
+            <Route path="/404" element={<ErrorPage />} />
+            <Route path="*" element={<ErrorPage />} />
+          </Routes>
+        </div>
+      </FormContext.Provider>
     </HomePageContext.Provider>
   );
 }
