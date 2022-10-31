@@ -1,10 +1,10 @@
 import React from 'react';
 import { getImagePath } from '../../api/helpers';
-import { IDetailsData } from '../ArtWorksList/ArtWorksList';
+import { IArtWorkData } from '../../pages/HomePage/HomePage';
 import styles from './Details.module.css';
 
 export interface IDetails {
-  data: IDetailsData | null;
+  data: IArtWorkData | null;
 }
 
 export function Details(props: IDetails) {

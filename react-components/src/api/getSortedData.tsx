@@ -54,7 +54,7 @@ export const getSortedData = async (
   console.log('page=', page);
   try {
     const response = await fetch(
-      `https://api.artic.edu/api/v1/artworks/search?q=${value}&query[term][is_public_domain]=true&fields=id,title,artist_title,date_display,image_id&page=${page}&limit=${limit}`,
+      `https://api.artic.edu/api/v1/artworks/search?q=${value}&query[term][is_public_domain]=true&fields=id,title,artist_title,date_display,artwork_type_title,dimensions,artist_display,image_id&page=${page}&limit=${limit}`,
       {
         method: 'POST',
         headers: {

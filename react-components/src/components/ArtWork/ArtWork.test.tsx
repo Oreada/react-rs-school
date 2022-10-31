@@ -1,10 +1,9 @@
 import { render, screen, waitFor } from '@testing-library/react';
 import { ArtWork } from './ArtWork';
-import { IDetailsData } from '../ArtWorksList/ArtWorksList';
 import { rest } from 'msw';
 import { setupServer } from 'msw/node';
 import userEvent from '@testing-library/user-event';
-import { HomePage } from '../../pages/HomePage/HomePage';
+import { HomePage, IArtWorkData } from '../../pages/HomePage/HomePage';
 
 const artWorkExample = {
   id: 55,
@@ -15,7 +14,7 @@ const artWorkExample = {
 };
 
 const onClickExample: (newModal: boolean) => void = jest.fn();
-const forDetailsExample: (dataDetails: IDetailsData | null, loadingDetails: boolean) => void =
+const forDetailsExample: (dataDetails: IArtWorkData | null, loadingDetails: boolean) => void =
   jest.fn();
 
 const server = setupServer(

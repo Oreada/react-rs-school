@@ -1,6 +1,6 @@
-import { IDetailsData } from '../components/ArtWorksList/ArtWorksList';
+import { IArtWorkData } from '../pages/HomePage/HomePage';
 
-export const getDetails = async (idArtWork: number): Promise<IDetailsData | undefined> => {
+export const getDetails = async (idArtWork: number): Promise<IArtWorkData | undefined> => {
   try {
     const response = await fetch(
       `https://api.artic.edu/api/v1/artworks/${idArtWork}?query[term][is_public_domain]=true&fields=id,title,artist_title,date_display,artwork_type_title,dimensions,artist_display,image_id&page=1&limit=20`

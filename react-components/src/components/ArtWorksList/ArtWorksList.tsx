@@ -7,17 +7,6 @@ import { Loader } from '../Loader/Loader';
 import { Modal } from '../Modal/Modal';
 import styles from './ArtWorksList.module.css';
 
-export interface IDetailsData {
-  id: number;
-  image_id: string;
-  artist_display: string;
-  artist_title: string;
-  artwork_type_title: string;
-  date_display: string;
-  dimensions: string;
-  title: string;
-}
-
 interface ArtWorksListProps {
   data: Array<IArtWorkData>;
   loading: boolean;
@@ -26,7 +15,7 @@ interface ArtWorksListProps {
 
 interface ArtWorksListState {
   modal: boolean;
-  details: IDetailsData | null;
+  details: IArtWorkData | null;
   loadingDetails: boolean;
 }
 
@@ -48,7 +37,7 @@ export function ArtWorksList(props: ArtWorksListProps) {
     console.log('changeModalState works');
   };
 
-  const changeDetailsState = (dataDetails: IDetailsData | null, loadingDetails: boolean) => {
+  const changeDetailsState = (dataDetails: IArtWorkData | null, loadingDetails: boolean) => {
     setListState((prev) => {
       return {
         modal: prev.modal, //! нужно менять на фолс при клике на область модального окна и менять на тру при клике на карточку

@@ -1,8 +1,9 @@
 import React from 'react';
-import { IDetailsData } from '../ArtWorksList/ArtWorksList';
 import { getImagePath } from '../../api/helpers';
 import { getDetails } from '../../api/getDetails';
 import styles from './ArtWork.module.css';
+import { useHomePageContext } from '../../context';
+import { IArtWorkData } from '../../pages/HomePage/HomePage';
 
 export interface IArtWork {
   id: number;
@@ -11,18 +12,24 @@ export interface IArtWork {
   date_display: string;
   title: string;
   onClick: (newModal: boolean) => void;
-  forDetails: (dataDetails: IDetailsData | null, loadingDetails: boolean) => void;
+  forDetails: (dataDetails: IArtWorkData | null, loadingDetails: boolean) => void;
 }
 
 export function ArtWork(props: IArtWork) {
+  const { store, setStore } = useHomePageContext();
+
   const clickHandler = async (event: React.MouseEvent<HTMLButtonElement>) => {
+    console.log(store);
+
     props.onClick(true);
     const id = Number((event.target as HTMLButtonElement).dataset.id);
+    console.log('filtration', store.filter((item) => item.id === id)[0]);
+    const workWithDetails = store.filter((item) => item.id === id)[0];
 
     try {
       props.forDetails(null, true);
-      const artWorkDetails = await getDetails(id);
-      props.forDetails(artWorkDetails as IDetailsData, false);
+      // const artWorkDetails = await getDetails(id);
+      props.forDetails(workWithDetails as IArtWorkData, false);
     } catch (e: unknown) {
       const err = e as Error;
       console.log(err.message); //! тут не вывожу сообщение об ошибке пользователю

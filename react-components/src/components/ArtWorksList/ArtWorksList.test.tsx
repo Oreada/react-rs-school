@@ -8,6 +8,9 @@ const artWorksListExample = [
     artist_title: 'Modigliani',
     date_display: '1915',
     title: 'Madam Pompadour',
+    artist_display: '',
+    artwork_type_title: '',
+    dimensions: '',
   },
   {
     id: 60,
@@ -15,6 +18,9 @@ const artWorksListExample = [
     artist_title: 'Gauguin',
     date_display: '1892',
     title: 'Te burao',
+    artist_display: '',
+    artwork_type_title: '',
+    dimensions: '',
   },
 ];
 

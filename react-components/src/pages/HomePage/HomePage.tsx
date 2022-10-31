@@ -10,8 +10,11 @@ import { useHomePageContext } from '../../context';
 export interface IArtWorkData {
   id: number;
   image_id: string;
+  artist_display: string;
   artist_title: string;
+  artwork_type_title: string;
   date_display: string;
+  dimensions: string;
   title: string;
 }
 
