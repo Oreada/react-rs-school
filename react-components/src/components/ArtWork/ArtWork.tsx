@@ -36,7 +36,7 @@ export function ArtWork(props: IArtWork) {
         </div>
 
         <Link
-          to={`/artwork/${idDetails}`}
+          to={`/artwork/${props.id}`}
           className={styles['artwork__button']}
           data-id={props.id}
           onClick={clickHandler}

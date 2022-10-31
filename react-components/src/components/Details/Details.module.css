@@ -3,6 +3,7 @@
 }
 
 .details__box {
+    margin-top: 50px;
     height: 100%;
     display: grid;
     /* justify-self: center; */

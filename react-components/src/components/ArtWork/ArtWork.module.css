@@ -40,7 +40,9 @@
 }
 
 .artwork__button {
-    display: block;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     min-width: 200px;
     height: 40px;
 
