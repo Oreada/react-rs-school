@@ -15,6 +15,12 @@ export function Navigation() {
           Home
         </NavLink>
         <NavLink
+          to="/artwork"
+          className={({ isActive }) => (isActive ? styles['link-active'] : styles['link'])}
+        >
+          Artwork
+        </NavLink>
+        <NavLink
           to="/about"
           className={({ isActive }) => (isActive ? styles['link-active'] : styles['link'])}
         >

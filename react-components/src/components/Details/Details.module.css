@@ -1,5 +1,8 @@
 .details {
     height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 
 .details__box {
@@ -39,4 +42,30 @@
 
 .details__item_artist {
     font-weight: 600;
+}
+
+.details__back {
+    align-self: center;
+    display: block;
+    height: 30px;
+    width: 50px;
+
+    font-size: inherit;
+
+    background-color: #f9d342;
+    padding: 5px;
+
+    transition: all 0.5s ease 0s;
+
+    cursor: pointer;
+
+    background-image: url(./left-arrow-svgrepo-com.svg);
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+.details__back:hover {
+    background-color: rgb(37, 57, 14);
+
+    transition: all 0.5s ease 0s;
 }

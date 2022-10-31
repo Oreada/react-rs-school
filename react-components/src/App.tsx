@@ -34,6 +34,8 @@ function App() {
     setCardsList([card, ...cardsList]);
   };
 
+  console.log('idDetails', idDetails);
+
   return (
     <HomePageContext.Provider
       value={{

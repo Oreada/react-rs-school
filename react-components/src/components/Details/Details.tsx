@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { getImagePath } from '../../api/helpers';
 import { IArtWorkData } from '../../pages/HomePage/HomePage';
 import styles from './Details.module.css';
@@ -31,6 +32,8 @@ export function Details(props: IDetails) {
           <div className={styles['details__item']}>{props.data?.artist_display as string}</div>
         </div>
       </div>
+
+      <Link to={'/'} className={styles['details__back']}></Link>
     </div>
   );
 }
