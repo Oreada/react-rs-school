@@ -39,6 +39,8 @@ export type HomePageGlobalContent = {
   setPageCurrent: (c: string) => void;
   pageTotal: string;
   setPageTotal: (c: string) => void;
+  idDetails: number;
+  setIdDetails: (c: number) => void;
 };
 
 export const HomePageContext = createContext<HomePageGlobalContent>({
@@ -63,6 +65,9 @@ export const HomePageContext = createContext<HomePageGlobalContent>({
   pageTotal: '',
   // eslint-disable-next-line prettier/prettier
   setPageTotal: () => { },
+  idDetails: 0,
+  // eslint-disable-next-line prettier/prettier
+  setIdDetails: () => { },
 });
 
 export const useHomePageContext = () => useContext(HomePageContext);

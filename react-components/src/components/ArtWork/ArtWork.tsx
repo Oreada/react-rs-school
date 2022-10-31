@@ -1,9 +1,8 @@
 import React from 'react';
 import { getImagePath } from '../../api/helpers';
-import { getDetails } from '../../api/getDetails';
 import styles from './ArtWork.module.css';
 import { useHomePageContext } from '../../context';
-import { IArtWorkData } from '../../pages/HomePage/HomePage';
+import { Link } from 'react-router-dom';
 
 export interface IArtWork {
   id: number;
@@ -11,29 +10,15 @@ export interface IArtWork {
   artist_title: string;
   date_display: string;
   title: string;
-  onClick: (newModal: boolean) => void;
-  forDetails: (dataDetails: IArtWorkData | null, loadingDetails: boolean) => void;
 }
 
 export function ArtWork(props: IArtWork) {
-  const { store, setStore } = useHomePageContext();
+  const { idDetails, setIdDetails } = useHomePageContext();
 
-  const clickHandler = async (event: React.MouseEvent<HTMLButtonElement>) => {
-    console.log(store);
-
-    props.onClick(true);
-    const id = Number((event.target as HTMLButtonElement).dataset.id);
-    console.log('filtration', store.filter((item) => item.id === id)[0]);
-    const workWithDetails = store.filter((item) => item.id === id)[0];
-
-    try {
-      props.forDetails(null, true);
-      // const artWorkDetails = await getDetails(id);
-      props.forDetails(workWithDetails as IArtWorkData, false);
-    } catch (e: unknown) {
-      const err = e as Error;
-      console.log(err.message); //! тут не вывожу сообщение об ошибке пользователю
-    }
+  const clickHandler = async (event: React.MouseEvent<HTMLAnchorElement>) => {
+    const idDetails = Number((event.target as HTMLAnchorElement).dataset.id);
+    console.log(idDetails);
+    setIdDetails(idDetails);
   };
 
   const imagePath = getImagePath(props.image_id);
@@ -49,14 +34,15 @@ export function ArtWork(props: IArtWork) {
           <div className={styles['info__item_artist']}>{props.artist_title}</div>
           <div className={styles['info__item_date']}>{props.date_display}</div>
         </div>
-        <button
+
+        <Link
+          to={`/artwork/${idDetails}`}
           className={styles['artwork__button']}
-          onClick={clickHandler}
           data-id={props.id}
-          data-testid="artwork-button"
+          onClick={clickHandler}
         >
           Read more
-        </button>
+        </Link>
       </div>
     </li>
   );

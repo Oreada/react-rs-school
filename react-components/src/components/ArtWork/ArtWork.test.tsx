@@ -3,7 +3,7 @@ import { ArtWork } from './ArtWork';
 import { rest } from 'msw';
 import { setupServer } from 'msw/node';
 import userEvent from '@testing-library/user-event';
-import { HomePage, IArtWorkData } from '../../pages/HomePage/HomePage';
+import { HomePage } from '../../pages/HomePage/HomePage';
 
 const artWorkExample = {
   id: 55,
@@ -13,9 +13,9 @@ const artWorkExample = {
   title: 'Madam Pompadour',
 };
 
-const onClickExample: (newModal: boolean) => void = jest.fn();
-const forDetailsExample: (dataDetails: IArtWorkData | null, loadingDetails: boolean) => void =
-  jest.fn();
+// const onClickExample: (newModal: boolean) => void = jest.fn();
+// const forDetailsExample: (dataDetails: IArtWorkData | null, loadingDetails: boolean) => void =
+//   jest.fn();
 
 const server = setupServer(
   rest.get('https://api.artic.edu/api/v1/artworks/27281', (req, res, ctx) => {
@@ -81,8 +81,6 @@ describe('ArtWork component', () => {
         artist_title={artWorkExample.artist_title}
         date_display={artWorkExample.date_display}
         title={artWorkExample.title}
-        onClick={onClickExample}
-        forDetails={forDetailsExample}
       />
     );
 
