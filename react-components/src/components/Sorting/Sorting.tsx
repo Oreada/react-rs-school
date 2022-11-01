@@ -14,12 +14,20 @@ interface SortingProps {
 }
 
 export function Sorting(props: SortingProps) {
-  const { searchValue, setSearchValue } = useHomePageContext();
-  const { sortingValue, setSortingValue } = useHomePageContext();
-  const { objForSorting, setObjForSorting } = useHomePageContext();
-  const { limitValue, setLimitValue } = useHomePageContext();
-  const { pageCurrent, setPageCurrent } = useHomePageContext();
-  const { pageTotal, setPageTotal } = useHomePageContext();
+  const {
+    searchValue,
+    setSearchValue,
+    objForSorting,
+    setObjForSorting,
+    limitValue,
+    setLimitValue,
+    pageCurrent,
+    setPageCurrent,
+    pageTotal,
+    setPageTotal,
+    sortingValue,
+    setSortingValue,
+  } = useHomePageContext();
 
   const [state, dispatch] = useReducer(sortingReducer, { objForSorting: {} });
   const sortingSelect: React.RefObject<HTMLSelectElement> = React.createRef();

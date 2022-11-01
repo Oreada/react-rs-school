@@ -19,11 +19,18 @@ export enum ResultsPerPageOption {
 }
 
 export function ResultsPerPage(props: ResultsPerPageProps) {
-  const { searchValue, setSearchValue } = useHomePageContext();
-  const { objForSorting, setObjForSorting } = useHomePageContext();
-  const { limitValue, setLimitValue } = useHomePageContext();
-  const { pageCurrent, setPageCurrent } = useHomePageContext();
-  const { pageTotal, setPageTotal } = useHomePageContext();
+  const {
+    searchValue,
+    setSearchValue,
+    objForSorting,
+    setObjForSorting,
+    limitValue,
+    setLimitValue,
+    pageCurrent,
+    setPageCurrent,
+    pageTotal,
+    setPageTotal,
+  } = useHomePageContext();
 
   const resultsPerPageSelect: React.RefObject<HTMLSelectElement> = React.createRef();
 

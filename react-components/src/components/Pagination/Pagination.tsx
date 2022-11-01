@@ -12,22 +12,29 @@ interface PaginationProps {
   ) => void;
 }
 
-export function Pagination(props: PaginationProps) {
-  const { searchValue, setSearchValue } = useHomePageContext();
-  const { objForSorting, setObjForSorting } = useHomePageContext();
-  const { limitValue, setLimitValue } = useHomePageContext();
-  const { pageCurrent, setPageCurrent } = useHomePageContext();
-  const { pageTotal, setPageTotal } = useHomePageContext();
+export function Pagination({ changeHomePageState }: PaginationProps) {
+  const {
+    searchValue,
+    setSearchValue,
+    objForSorting,
+    setObjForSorting,
+    limitValue,
+    setLimitValue,
+    pageCurrent,
+    setPageCurrent,
+    pageTotal,
+    setPageTotal,
+  } = useHomePageContext();
 
   const homePageFunc = async (currentPageNew: string) => {
     try {
-      props.changeHomePageState([], true, '');
+      changeHomePageState([], true, '');
       const result = await getSortedData(searchValue, limitValue, objForSorting, currentPageNew);
-      props.changeHomePageState(result?.artWorksList as Array<IArtWorkData>, false, '');
+      changeHomePageState(result?.artWorksList as Array<IArtWorkData>, false, '');
       setPageTotal(result?.totalPages as string); //! тут получаю общее количество страниц
     } catch (e: unknown) {
       const err = e as Error;
-      props.changeHomePageState([], false, err.message);
+      changeHomePageState([], false, err.message);
     }
   };
 

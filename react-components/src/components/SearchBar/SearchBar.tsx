@@ -13,11 +13,18 @@ interface SearchBarProps {
 }
 
 export function SearchBar(props: SearchBarProps) {
-  const { searchValue, setSearchValue } = useHomePageContext();
-  const { objForSorting, setObjForSorting } = useHomePageContext();
-  const { limitValue, setLimitValue } = useHomePageContext();
-  const { pageCurrent, setPageCurrent } = useHomePageContext();
-  const { pageTotal, setPageTotal } = useHomePageContext();
+  const {
+    searchValue,
+    setSearchValue,
+    objForSorting,
+    setObjForSorting,
+    limitValue,
+    setLimitValue,
+    pageCurrent,
+    setPageCurrent,
+    pageTotal,
+    setPageTotal,
+  } = useHomePageContext();
 
   const changeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchValue(event.target.value);
