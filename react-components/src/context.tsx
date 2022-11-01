@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import React from 'react';
 import { createContext, useContext } from 'react';
 import { DateSorting, TitleSorting, AuthorSorting } from './api/getSortedData';
@@ -16,9 +17,7 @@ export type FormGlobalContent = {
 
 export const FormContext = createContext<FormGlobalContent>({
   cardsList: [],
-  // eslint-disable-next-line prettier/prettier
   setCardsList: () => { },
-  // eslint-disable-next-line prettier/prettier
   addCard: () => { },
 });
 
@@ -45,28 +44,20 @@ export type HomePageGlobalContent = {
 
 export const HomePageContext = createContext<HomePageGlobalContent>({
   store: [],
-  // eslint-disable-next-line prettier/prettier
   setStore: () => { },
   searchValue: '',
-  // eslint-disable-next-line prettier/prettier
   setSearchValue: () => { },
   sortingValue: '',
-  // eslint-disable-next-line prettier/prettier
   setSortingValue: () => { },
   objForSorting: {},
-  // eslint-disable-next-line prettier/prettier
   setObjForSorting: () => { },
   limitValue: '',
-  // eslint-disable-next-line prettier/prettier
   setLimitValue: () => { },
   pageCurrent: '',
-  // eslint-disable-next-line prettier/prettier
   setPageCurrent: () => { },
   pageTotal: '',
-  // eslint-disable-next-line prettier/prettier
   setPageTotal: () => { },
   idDetails: 0,
-  // eslint-disable-next-line prettier/prettier
   setIdDetails: () => { },
 });
 
