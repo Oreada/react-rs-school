@@ -1,8 +1,14 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
+import { useHomePageContext } from '../../context';
 import styles from './Navigation.module.css';
 
 export function Navigation() {
+  const { idDetails, setIdDetails } = useHomePageContext();
+
+  const location = useLocation();
+  console.log('location', location.pathname, location.pathname === `/artwork/${idDetails}`);
+
   return (
     <nav className={styles.navigation} data-testid="navigation">
       <span className={styles.navigation__title}>Art Institute of Chicago</span>
@@ -14,12 +20,14 @@ export function Navigation() {
         >
           Home
         </NavLink>
-        <NavLink
-          to="/artwork"
-          className={({ isActive }) => (isActive ? styles['link-active'] : styles['link'])}
-        >
-          Artwork
-        </NavLink>
+        {location.pathname === `/artwork/${idDetails}` && (
+          <NavLink
+            to="/artwork"
+            className={({ isActive }) => (isActive ? styles['link-active'] : styles['link'])}
+          >
+            Artwork
+          </NavLink>
+        )}
         <NavLink
           to="/about"
           className={({ isActive }) => (isActive ? styles['link-active'] : styles['link'])}

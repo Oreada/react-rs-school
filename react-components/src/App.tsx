@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import { Navigation } from './components/Navigation/Navigation';
 import { AboutPage } from './pages/AboutPage/AboutPage';
 import { ErrorPage } from './pages/ErrorPage/ErrorPage';
@@ -62,11 +62,17 @@ function App() {
           <Navigation />
           <Routes>
             <Route path="/" element={<HomePage />} />
-            <Route path="/artwork/:name" element={<Details data={artWorkWithDetails} />} />
             <Route path="/about" element={<AboutPage />} />
             <Route path="/forms" element={<FormsPage />} />
             <Route path="/404" element={<ErrorPage />} />
             <Route path="*" element={<ErrorPage />} />
+            {/* <Route path="/artwork/:name" element={<Details data={artWorkWithDetails} />} /> */}
+            <Route
+              path="/artwork/:name"
+              element={
+                idDetails === 0 ? <Navigate to="/" /> : <Details data={artWorkWithDetails} />
+              }
+            />
           </Routes>
         </div>
       </FormContext.Provider>
