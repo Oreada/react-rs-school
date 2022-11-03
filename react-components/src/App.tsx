@@ -5,11 +5,10 @@ import { AboutPage } from './pages/AboutPage/AboutPage';
 import { ErrorPage } from './pages/ErrorPage/ErrorPage';
 import { HomePage, IArtWorkData } from './pages/HomePage/HomePage';
 import { FormsPage } from './pages/FormsPage/FormsPage';
-import { FormContext, HomePageContext } from './context';
+import { HomePageContext } from './context';
 import { SortingActionOption } from './reducer';
 import { AuthorSorting, DateSorting, TitleSorting } from './api/getSortedData';
 import { ResultsPerPageOption } from './components/ResultsPerPage/ResultsPerPage';
-import { ICard } from './components/Card/Card';
 import { Details } from './components/Details/Details';
 
 function App() {
@@ -27,12 +26,6 @@ function App() {
 
   console.log('filtration', homePage.filter((item) => item.id === idDetails)[0]);
   const artWorkWithDetails = homePage.filter((item) => item.id === idDetails)[0]; //! нахожу нужную карточку из стейта по ID
-
-  const [cardsList, setCardsList] = useState<Array<ICard>>([]);
-
-  const addCard = (card: ICard) => {
-    setCardsList([card, ...cardsList]);
-  };
 
   console.log('idDetails', idDetails);
 
@@ -57,25 +50,21 @@ function App() {
         setIdDetails: setIdDetails,
       }}
     >
-      <FormContext.Provider value={{ addCard, cardsList, setCardsList }}>
-        <div className="container">
-          <Navigation />
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/about" element={<AboutPage />} />
-            <Route path="/forms" element={<FormsPage />} />
-            <Route path="/404" element={<ErrorPage />} />
-            <Route path="*" element={<ErrorPage />} />
-            {/* <Route path="/artwork/:name" element={<Details data={artWorkWithDetails} />} /> */}
-            <Route
-              path="/artwork/:name"
-              element={
-                idDetails === 0 ? <Navigate to="/" /> : <Details data={artWorkWithDetails} />
-              }
-            />
-          </Routes>
-        </div>
-      </FormContext.Provider>
+      <div className="container">
+        <Navigation />
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/about" element={<AboutPage />} />
+          <Route path="/forms" element={<FormsPage />} />
+          <Route path="/404" element={<ErrorPage />} />
+          <Route path="*" element={<ErrorPage />} />
+          {/* <Route path="/artwork/:name" element={<Details data={artWorkWithDetails} />} /> */}
+          <Route
+            path="/artwork/:name"
+            element={idDetails === 0 ? <Navigate to="/" /> : <Details data={artWorkWithDetails} />}
+          />
+        </Routes>
+      </div>
     </HomePageContext.Provider>
   );
 }

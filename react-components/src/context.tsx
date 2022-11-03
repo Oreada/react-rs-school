@@ -2,26 +2,11 @@
 import React from 'react';
 import { createContext, useContext } from 'react';
 import { DateSorting, TitleSorting, AuthorSorting } from './api/getSortedData';
-import { ICard } from './components/Card/Card';
 import { SortingActionOption } from './reducer';
 import { ResultsPerPageOption } from './components/ResultsPerPage/ResultsPerPage';
 import { IArtWorkData } from './pages/HomePage/HomePage';
 
 export const Context = React.createContext('initial test value');
-
-export type FormGlobalContent = {
-  cardsList: Array<ICard>;
-  setCardsList: (c: Array<ICard>) => void;
-  addCard: (card: ICard) => void;
-};
-
-export const FormContext = createContext<FormGlobalContent>({
-  cardsList: [],
-  setCardsList: () => { },
-  addCard: () => { },
-});
-
-export const useFormContext = () => useContext(FormContext);
 
 export type HomePageGlobalContent = {
   store: Array<IArtWorkData>;

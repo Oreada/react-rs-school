@@ -4,7 +4,9 @@ import { CardsList } from '../CardsList/CardsList';
 import { ErrorMessage } from '../ErrorMessage/ErrorMessage';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import styles from './Form.module.css';
-import { useFormContext } from '../../context';
+import { useAppDispatch } from '../../store/hook';
+import { addFormCard } from '../../store/formCardsSlice';
+import { store } from '../../store';
 
 interface FormProps {
   cards: Array<ICard>;
@@ -21,7 +23,7 @@ interface FormValues {
 export function Form(props: FormProps) {
   const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
 
-  const { addCard } = useFormContext();
+  // const dispatch = useAppDispatch(); //! так почему-то не работает - ???
 
   const {
     register,
@@ -36,13 +38,15 @@ export function Form(props: FormProps) {
     console.log(data);
     setIsSubmitted(() => true);
 
-    addCard({
-      name: data.nameField,
-      phone: data.phoneField,
-      adress: data.adressField,
-      delivery: data.deliveryField,
-      payment: data.paymentField ? 'card' : 'cash',
-    });
+    store.dispatch(
+      addFormCard({
+        name: data.nameField,
+        phone: data.phoneField,
+        adress: data.adressField,
+        delivery: data.deliveryField,
+        payment: data.paymentField ? 'card' : 'cash',
+      })
+    );
 
     reset(); //! очищает поля формы после успешного сабмита
 
