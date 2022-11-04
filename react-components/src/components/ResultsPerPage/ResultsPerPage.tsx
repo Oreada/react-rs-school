@@ -2,7 +2,9 @@ import React, { useEffect } from 'react';
 import { getSortedData } from '../../api/getSortedData';
 import { useHomePageContext } from '../../context';
 import { IArtWorkData } from '../../pages/HomePage/HomePage';
+import { store } from '../../store';
 import { useAppSelector } from '../../store/hook';
+import { setLimit } from '../../store/limitSlice';
 import styles from './ResultsPerPage.module.css';
 
 interface ResultsPerPageProps {
@@ -22,14 +24,15 @@ export enum ResultsPerPageOption {
 export function ResultsPerPage(props: ResultsPerPageProps) {
   const searchValue = useAppSelector((state) => state.search.value); //! так достаём данные из redux store
   const objForSorting = useAppSelector((state) => state.objForSorting.obj); //! так достаём данные из redux store
+  const limitValue = useAppSelector((state) => state.limit.value); //! так достаём данные из redux store
 
   const {
     // searchValue,
     // setSearchValue,
     // objForSorting,
     // setObjForSorting,
-    limitValue,
-    setLimitValue,
+    // limitValue,
+    // setLimitValue,
     pageCurrent,
     setPageCurrent,
     pageTotal,
@@ -43,15 +46,25 @@ export function ResultsPerPage(props: ResultsPerPageProps) {
   }, []);
 
   useEffect(() => {
-    setLimitValue(
-      (resultsPerPageSelect.current as HTMLSelectElement).value as '' | ResultsPerPageOption
+    store.dispatch(
+      setLimit(
+        (resultsPerPageSelect.current as HTMLSelectElement).value as '' | ResultsPerPageOption
+      )
     );
-  }, [resultsPerPageSelect, setLimitValue]);
+    // setLimitValue(
+    //   (resultsPerPageSelect.current as HTMLSelectElement).value as '' | ResultsPerPageOption
+    // );
+  }, [resultsPerPageSelect, setLimit]);
 
   const changeHandler = async () => {
-    setLimitValue(
-      (resultsPerPageSelect.current as HTMLSelectElement).value as '' | ResultsPerPageOption
+    store.dispatch(
+      setLimit(
+        (resultsPerPageSelect.current as HTMLSelectElement).value as '' | ResultsPerPageOption
+      )
     );
+    // setLimitValue(
+    //   (resultsPerPageSelect.current as HTMLSelectElement).value as '' | ResultsPerPageOption
+    // );
 
     try {
       props.changeHomePageState([], true, '');

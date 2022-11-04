@@ -20,14 +20,15 @@ interface SortingProps {
 export function Sorting(props: SortingProps) {
   const searchValue = useAppSelector((state) => state.search.value); //! так достаём данные из redux store
   const sortingValue = useAppSelector((state) => state.sorting.value); //! так достаём данные из redux store
+  const limitValue = useAppSelector((state) => state.limit.value); //! так достаём данные из redux store
 
   const {
     // searchValue,
     // setSearchValue,
     // objForSorting,
     // setObjForSorting,
-    limitValue,
-    setLimitValue,
+    // limitValue,
+    // setLimitValue,
     pageCurrent,
     setPageCurrent,
     pageTotal,

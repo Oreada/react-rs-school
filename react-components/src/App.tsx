@@ -7,8 +7,8 @@ import { HomePage } from './pages/HomePage/HomePage';
 import { FormsPage } from './pages/FormsPage/FormsPage';
 import { HomePageContext } from './context';
 // import { SortingActionOption } from './reducer';
-import { AuthorSorting, DateSorting, TitleSorting } from './api/getSortedData';
-import { ResultsPerPageOption } from './components/ResultsPerPage/ResultsPerPage';
+// import { AuthorSorting, DateSorting, TitleSorting } from './api/getSortedData';
+// import { ResultsPerPageOption } from './components/ResultsPerPage/ResultsPerPage';
 import { Details } from './components/Details/Details';
 import { useAppSelector } from './store/hook';
 
@@ -21,7 +21,7 @@ function App() {
   // const [objForSorting, setObjForSorting] = useState<
   //   DateSorting | TitleSorting | AuthorSorting | unknown
   // >({});
-  const [limitValue, setLimitValue] = useState<'' | ResultsPerPageOption>('');
+  // const [limitValue, setLimitValue] = useState<'' | ResultsPerPageOption>('');
   const [pageCurrent, setPageCurrent] = useState('1');
   const [pageTotal, setPageTotal] = useState('1');
 
@@ -41,8 +41,8 @@ function App() {
         // setSortingValue: setSortingValue,
         // objForSorting: objForSorting,
         // setObjForSorting: setObjForSorting,
-        limitValue: limitValue,
-        setLimitValue: setLimitValue,
+        // limitValue: limitValue,
+        // setLimitValue: setLimitValue,
         pageCurrent: pageCurrent,
         setPageCurrent: setPageCurrent,
         pageTotal: pageTotal,

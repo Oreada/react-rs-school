@@ -2,7 +2,7 @@
 import { createContext, useContext } from 'react';
 // import { DateSorting, TitleSorting, AuthorSorting } from './api/getSortedData';
 // import { SortingActionOption } from './reducer';
-import { ResultsPerPageOption } from './components/ResultsPerPage/ResultsPerPage';
+// import { ResultsPerPageOption } from './components/ResultsPerPage/ResultsPerPage';
 
 export type HomePageGlobalContent = {
   // searchValue: string;
@@ -11,8 +11,8 @@ export type HomePageGlobalContent = {
   // setSortingValue: (c: SortingActionOption | '') => void;
   // objForSorting: DateSorting | TitleSorting | AuthorSorting | unknown;
   // setObjForSorting: (c: DateSorting | TitleSorting | AuthorSorting | unknown) => void;
-  limitValue: ResultsPerPageOption | '';
-  setLimitValue: (c: ResultsPerPageOption | '') => void;
+  // limitValue: ResultsPerPageOption | '';
+  // setLimitValue: (c: ResultsPerPageOption | '') => void;
   pageCurrent: string;
   setPageCurrent: (c: string) => void;
   pageTotal: string;
@@ -28,8 +28,8 @@ export const HomePageContext = createContext<HomePageGlobalContent>({
   // setSortingValue: () => { },
   // objForSorting: {},
   // setObjForSorting: () => { },
-  limitValue: '',
-  setLimitValue: () => { },
+  // limitValue: '',
+  // setLimitValue: () => { },
   pageCurrent: '',
   setPageCurrent: () => { },
   pageTotal: '',

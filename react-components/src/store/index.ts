@@ -4,6 +4,7 @@ import homePageArtworksReducer from './homePageArtworksSlice';
 import searchReducer from './searchSlice';
 import sortingReducer from './sortingSlice';
 import objForSortingReducer from './objForSortingSlice';
+import limitReducer from './limitSlice';
 
 export const store = configureStore({
   reducer: {
@@ -12,6 +13,7 @@ export const store = configureStore({
     search: searchReducer,
     sorting: sortingReducer,
     objForSorting: objForSortingReducer,
+    limit: limitReducer,
   },
 });
 
