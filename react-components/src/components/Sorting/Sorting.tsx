@@ -7,6 +7,7 @@ import { useAppSelector } from '../../store/hook';
 import { store } from '../../store';
 import styles from './Sorting.module.css';
 import { setSorting } from '../../store/sortingSlice';
+import { setObjForSorting } from '../../store/objForSortingSlice';
 
 interface SortingProps {
   changeHomePageState: (
@@ -23,8 +24,8 @@ export function Sorting(props: SortingProps) {
   const {
     // searchValue,
     // setSearchValue,
-    objForSorting,
-    setObjForSorting,
+    // objForSorting,
+    // setObjForSorting,
     limitValue,
     setLimitValue,
     pageCurrent,
@@ -57,7 +58,8 @@ export function Sorting(props: SortingProps) {
 
     const nextState = sortingReducer(state, action); //! для того чтобы получить актуальный стейт для вызова getSortedData
 
-    setObjForSorting(nextState.objForSorting);
+    store.dispatch(setObjForSorting(nextState.objForSorting));
+    // setObjForSorting(nextState.objForSorting);
 
     try {
       props.changeHomePageState([], true, '');

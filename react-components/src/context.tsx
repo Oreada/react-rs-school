@@ -1,6 +1,6 @@
 /* eslint-disable prettier/prettier */
 import { createContext, useContext } from 'react';
-import { DateSorting, TitleSorting, AuthorSorting } from './api/getSortedData';
+// import { DateSorting, TitleSorting, AuthorSorting } from './api/getSortedData';
 // import { SortingActionOption } from './reducer';
 import { ResultsPerPageOption } from './components/ResultsPerPage/ResultsPerPage';
 
@@ -9,8 +9,8 @@ export type HomePageGlobalContent = {
   // setSearchValue: (c: string) => void;
   // sortingValue: SortingActionOption | '';
   // setSortingValue: (c: SortingActionOption | '') => void;
-  objForSorting: DateSorting | TitleSorting | AuthorSorting | unknown;
-  setObjForSorting: (c: DateSorting | TitleSorting | AuthorSorting | unknown) => void;
+  // objForSorting: DateSorting | TitleSorting | AuthorSorting | unknown;
+  // setObjForSorting: (c: DateSorting | TitleSorting | AuthorSorting | unknown) => void;
   limitValue: ResultsPerPageOption | '';
   setLimitValue: (c: ResultsPerPageOption | '') => void;
   pageCurrent: string;
@@ -26,8 +26,8 @@ export const HomePageContext = createContext<HomePageGlobalContent>({
   // setSearchValue: () => { },
   // sortingValue: '',
   // setSortingValue: () => { },
-  objForSorting: {},
-  setObjForSorting: () => { },
+  // objForSorting: {},
+  // setObjForSorting: () => { },
   limitValue: '',
   setLimitValue: () => { },
   pageCurrent: '',

@@ -18,9 +18,9 @@ function App() {
 
   // const [searchValue, setSearchValue] = useState('');
   // const [sortingValue, setSortingValue] = useState<'' | SortingActionOption>('');
-  const [objForSorting, setObjForSorting] = useState<
-    DateSorting | TitleSorting | AuthorSorting | unknown
-  >({});
+  // const [objForSorting, setObjForSorting] = useState<
+  //   DateSorting | TitleSorting | AuthorSorting | unknown
+  // >({});
   const [limitValue, setLimitValue] = useState<'' | ResultsPerPageOption>('');
   const [pageCurrent, setPageCurrent] = useState('1');
   const [pageTotal, setPageTotal] = useState('1');
@@ -39,8 +39,8 @@ function App() {
         // setSearchValue: setSearchValue,
         // sortingValue: sortingValue,
         // setSortingValue: setSortingValue,
-        objForSorting: objForSorting,
-        setObjForSorting: setObjForSorting,
+        // objForSorting: objForSorting,
+        // setObjForSorting: setObjForSorting,
         limitValue: limitValue,
         setLimitValue: setLimitValue,
         pageCurrent: pageCurrent,

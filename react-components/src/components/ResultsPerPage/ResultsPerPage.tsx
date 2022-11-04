@@ -21,12 +21,13 @@ export enum ResultsPerPageOption {
 
 export function ResultsPerPage(props: ResultsPerPageProps) {
   const searchValue = useAppSelector((state) => state.search.value); //! так достаём данные из redux store
+  const objForSorting = useAppSelector((state) => state.objForSorting.obj); //! так достаём данные из redux store
 
   const {
     // searchValue,
     // setSearchValue,
-    objForSorting,
-    setObjForSorting,
+    // objForSorting,
+    // setObjForSorting,
     limitValue,
     setLimitValue,
     pageCurrent,
@@ -39,17 +40,12 @@ export function ResultsPerPage(props: ResultsPerPageProps) {
 
   useEffect(() => {
     (resultsPerPageSelect.current as HTMLSelectElement).value = limitValue;
-
-    //! сделать дополнительно сохранение в localStorage - ???
-    // см. пример в Sorting.tsx
   }, []);
 
   useEffect(() => {
     setLimitValue(
       (resultsPerPageSelect.current as HTMLSelectElement).value as '' | ResultsPerPageOption
     );
-    //! сделать дополнительно сохранение в localStorage - ???
-    // см. пример в Sorting.tsx
   }, [resultsPerPageSelect, setLimitValue]);
 
   const changeHandler = async () => {

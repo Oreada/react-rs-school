@@ -3,6 +3,7 @@ import formCardsReducer from './formCardsSlice';
 import homePageArtworksReducer from './homePageArtworksSlice';
 import searchReducer from './searchSlice';
 import sortingReducer from './sortingSlice';
+import objForSortingReducer from './objForSortingSlice';
 
 export const store = configureStore({
   reducer: {
@@ -10,6 +11,7 @@ export const store = configureStore({
     homePageArtworks: homePageArtworksReducer,
     search: searchReducer,
     sorting: sortingReducer,
+    objForSorting: objForSortingReducer,
   },
 });
 
