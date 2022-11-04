@@ -23,8 +23,8 @@ export enum ResultsPerPageOption {
 
 export function ResultsPerPage(props: ResultsPerPageProps) {
   const searchValue = useAppSelector((state) => state.search.value); //! так достаём данные из redux store
-  const objForSorting = useAppSelector((state) => state.objForSorting.obj); //! так достаём данные из redux store
-  const limitValue = useAppSelector((state) => state.limit.value); //! так достаём данные из redux store
+  const objForSorting = useAppSelector((state) => state.objForSorting.obj);
+  const limitValue = useAppSelector((state) => state.limit.value);
 
   const resultsPerPageSelect: React.RefObject<HTMLSelectElement> = React.createRef();
 

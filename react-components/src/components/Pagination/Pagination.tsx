@@ -16,10 +16,10 @@ interface PaginationProps {
 
 export function Pagination({ changeHomePageState }: PaginationProps) {
   const searchValue = useAppSelector((state) => state.search.value); //! так достаём данные из redux store
-  const objForSorting = useAppSelector((state) => state.objForSorting.obj); //! так достаём данные из redux store
-  const limitValue = useAppSelector((state) => state.limit.value); //! так достаём данные из redux store
-  const pageCurrent = useAppSelector((state) => state.pagination.pageCurrent); //! так достаём данные из redux store
-  const pageTotal = useAppSelector((state) => state.pagination.pageTotal); //! так достаём данные из redux store
+  const objForSorting = useAppSelector((state) => state.objForSorting.obj);
+  const limitValue = useAppSelector((state) => state.limit.value);
+  const pageCurrent = useAppSelector((state) => state.pagination.pageCurrent);
+  const pageTotal = useAppSelector((state) => state.pagination.pageTotal);
 
   const homePageFunc = async (currentPageNew: string) => {
     try {

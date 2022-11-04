@@ -17,8 +17,8 @@ interface SearchBarProps {
 
 export function SearchBar(props: SearchBarProps) {
   const searchValue = useAppSelector((state) => state.search.value); //! так достаём данные из redux store
-  const objForSorting = useAppSelector((state) => state.objForSorting.obj); //! так достаём данные из redux store
-  const limitValue = useAppSelector((state) => state.limit.value); //! так достаём данные из redux store
+  const objForSorting = useAppSelector((state) => state.objForSorting.obj);
+  const limitValue = useAppSelector((state) => state.limit.value);
 
   const changeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     store.dispatch(setSearch(event.target.value));

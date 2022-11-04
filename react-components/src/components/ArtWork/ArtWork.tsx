@@ -1,8 +1,9 @@
 import React from 'react';
 import { getImagePath } from '../../api/helpers';
 import styles from './ArtWork.module.css';
-import { useHomePageContext } from '../../context';
 import { Link } from 'react-router-dom';
+import { store } from '../../store';
+import { setIdDetails } from '../../store/idDetailsSlice';
 
 export interface IArtWork {
   id: number;
@@ -13,12 +14,10 @@ export interface IArtWork {
 }
 
 export function ArtWork(props: IArtWork) {
-  const { idDetails, setIdDetails } = useHomePageContext();
-
   const clickHandler = async (event: React.MouseEvent<HTMLAnchorElement>) => {
     const idDetails = Number((event.target as HTMLAnchorElement).dataset.id);
     console.log(idDetails);
-    setIdDetails(idDetails);
+    store.dispatch(setIdDetails(idDetails));
   };
 
   const imagePath = getImagePath(props.image_id);

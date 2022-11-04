@@ -1,10 +1,10 @@
 import React from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
-import { useHomePageContext } from '../../context';
+import { useAppSelector } from '../../store/hook';
 import styles from './Navigation.module.css';
 
 export function Navigation() {
-  const { idDetails, setIdDetails } = useHomePageContext();
+  const idDetails = useAppSelector((state) => state.idDetails.idDetails); //! так достаём данные из redux store
 
   const location = useLocation();
   console.log('location', location.pathname, location.pathname === `/artwork/${idDetails}`);

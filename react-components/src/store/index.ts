@@ -6,6 +6,7 @@ import sortingReducer from './sortingSlice';
 import objForSortingReducer from './objForSortingSlice';
 import limitReducer from './limitSlice';
 import paginationReducer from './paginationSlice';
+import idDetailsReducer from './idDetailsSlice';
 
 export const store = configureStore({
   reducer: {
@@ -16,6 +17,7 @@ export const store = configureStore({
     objForSorting: objForSortingReducer,
     limit: limitReducer,
     pagination: paginationReducer,
+    idDetails: idDetailsReducer,
   },
 });
 
