@@ -4,7 +4,9 @@ import { useHomePageContext } from '../../context';
 import { IArtWorkData } from '../../pages/HomePage/HomePage';
 import { SortingActionOption, sortingReducer } from '../../reducer';
 import { useAppSelector } from '../../store/hook';
+import { store } from '../../store';
 import styles from './Sorting.module.css';
+import { setSorting } from '../../store/sortingSlice';
 
 interface SortingProps {
   changeHomePageState: (
@@ -16,6 +18,7 @@ interface SortingProps {
 
 export function Sorting(props: SortingProps) {
   const searchValue = useAppSelector((state) => state.search.value); //! так достаём данные из redux store
+  const sortingValue = useAppSelector((state) => state.sorting.value); //! так достаём данные из redux store
 
   const {
     // searchValue,
@@ -28,8 +31,8 @@ export function Sorting(props: SortingProps) {
     setPageCurrent,
     pageTotal,
     setPageTotal,
-    sortingValue,
-    setSortingValue,
+    // sortingValue,
+    // setSortingValue,
   } = useHomePageContext();
 
   const [state, dispatch] = useReducer(sortingReducer, { objForSorting: {} });
@@ -37,23 +40,14 @@ export function Sorting(props: SortingProps) {
 
   useEffect(() => {
     (sortingSelect.current as HTMLSelectElement).value = sortingValue;
-
-    //! сделать дополнительно сохранение в localStorage - ???
-    // (sortingSelect.current as HTMLSelectElement).value =
-    //   localStorage.getItem('valueSortingSelect') || '';
-    // const action = {
-    //   type: (sortingSelect.current as HTMLSelectElement).value as SortingActionOption,
-    // };
-    // dispatch(action);
-    // const nextState = sortingReducer(state, action); //! для того чтобы получить актуальный стейт для setObjForSorting
-    // setObjForSorting(nextState.objForSorting as DateSorting | TitleSorting | AuthorSorting);
   }, []);
 
   useEffect(() => {
-    setSortingValue((sortingSelect.current as HTMLSelectElement).value as '' | SortingActionOption);
-    //! сделать дополнительно сохранение в localStorage - ???
-    // localStorage.setItem('valueSortingSelect', (sortingSelect.current as HTMLSelectElement).value);
-  }, [setSortingValue, sortingSelect]);
+    store.dispatch(
+      setSorting((sortingSelect.current as HTMLSelectElement).value as '' | SortingActionOption)
+    );
+    // setSortingValue((sortingSelect.current as HTMLSelectElement).value as '' | SortingActionOption);
+  }, [setSorting, sortingSelect]);
 
   const changeHandler = async () => {
     const action = {

@@ -6,7 +6,7 @@ import { ErrorPage } from './pages/ErrorPage/ErrorPage';
 import { HomePage } from './pages/HomePage/HomePage';
 import { FormsPage } from './pages/FormsPage/FormsPage';
 import { HomePageContext } from './context';
-import { SortingActionOption } from './reducer';
+// import { SortingActionOption } from './reducer';
 import { AuthorSorting, DateSorting, TitleSorting } from './api/getSortedData';
 import { ResultsPerPageOption } from './components/ResultsPerPage/ResultsPerPage';
 import { Details } from './components/Details/Details';
@@ -17,7 +17,7 @@ function App() {
   console.log(artworksList);
 
   // const [searchValue, setSearchValue] = useState('');
-  const [sortingValue, setSortingValue] = useState<'' | SortingActionOption>('');
+  // const [sortingValue, setSortingValue] = useState<'' | SortingActionOption>('');
   const [objForSorting, setObjForSorting] = useState<
     DateSorting | TitleSorting | AuthorSorting | unknown
   >({});
@@ -37,8 +37,8 @@ function App() {
       value={{
         // searchValue: searchValue,
         // setSearchValue: setSearchValue,
-        sortingValue: sortingValue,
-        setSortingValue: setSortingValue,
+        // sortingValue: sortingValue,
+        // setSortingValue: setSortingValue,
         objForSorting: objForSorting,
         setObjForSorting: setObjForSorting,
         limitValue: limitValue,
