@@ -1,16 +1,10 @@
 /* eslint-disable prettier/prettier */
-import React from 'react';
 import { createContext, useContext } from 'react';
 import { DateSorting, TitleSorting, AuthorSorting } from './api/getSortedData';
 import { SortingActionOption } from './reducer';
 import { ResultsPerPageOption } from './components/ResultsPerPage/ResultsPerPage';
-import { IArtWorkData } from './pages/HomePage/HomePage';
-
-export const Context = React.createContext('initial test value');
 
 export type HomePageGlobalContent = {
-  store: Array<IArtWorkData>;
-  setStore: (c: Array<IArtWorkData>) => void;
   searchValue: string;
   setSearchValue: (c: string) => void;
   sortingValue: SortingActionOption | '';
@@ -28,8 +22,6 @@ export type HomePageGlobalContent = {
 };
 
 export const HomePageContext = createContext<HomePageGlobalContent>({
-  store: [],
-  setStore: () => { },
   searchValue: '',
   setSearchValue: () => { },
   sortingValue: '',

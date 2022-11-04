@@ -3,16 +3,19 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 import { Navigation } from './components/Navigation/Navigation';
 import { AboutPage } from './pages/AboutPage/AboutPage';
 import { ErrorPage } from './pages/ErrorPage/ErrorPage';
-import { HomePage, IArtWorkData } from './pages/HomePage/HomePage';
+import { HomePage } from './pages/HomePage/HomePage';
 import { FormsPage } from './pages/FormsPage/FormsPage';
 import { HomePageContext } from './context';
 import { SortingActionOption } from './reducer';
 import { AuthorSorting, DateSorting, TitleSorting } from './api/getSortedData';
 import { ResultsPerPageOption } from './components/ResultsPerPage/ResultsPerPage';
 import { Details } from './components/Details/Details';
+import { useAppSelector } from './store/hook';
 
 function App() {
-  const [homePage, setHomePage] = useState<Array<IArtWorkData>>([]);
+  const artworksList = useAppSelector((state) => state.homePageArtworks.list); //! так достаём данные из redux store
+  console.log(artworksList);
+
   const [searchValue, setSearchValue] = useState('');
   const [sortingValue, setSortingValue] = useState<'' | SortingActionOption>('');
   const [objForSorting, setObjForSorting] = useState<
@@ -24,16 +27,14 @@ function App() {
 
   const [idDetails, setIdDetails] = useState(0);
 
-  console.log('filtration', homePage.filter((item) => item.id === idDetails)[0]);
-  const artWorkWithDetails = homePage.filter((item) => item.id === idDetails)[0]; //! нахожу нужную карточку из стейта по ID
+  console.log('filtration', artworksList.filter((item) => item.id === idDetails)[0]);
+  const artWorkWithDetails = artworksList.filter((item) => item.id === idDetails)[0]; //! нахожу нужную карточку из стейта по ID
 
   console.log('idDetails', idDetails);
 
   return (
     <HomePageContext.Provider
       value={{
-        store: homePage,
-        setStore: setHomePage,
         searchValue: searchValue,
         setSearchValue: setSearchValue,
         sortingValue: sortingValue,

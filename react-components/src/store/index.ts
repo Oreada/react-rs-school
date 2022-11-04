@@ -1,10 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
 import formCardsReducer from './formCardsSlice';
+import homePageArtworksReducer from './homePageArtworksSlice';
 
 export const store = configureStore({
   reducer: {
     formCards: formCardsReducer,
-    // user: userReduser, etc...
+    homePageArtworks: homePageArtworksReducer,
   },
 });
 

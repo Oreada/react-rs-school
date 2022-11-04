@@ -4,7 +4,9 @@ import { Pagination } from '../../components/Pagination/Pagination';
 import { ResultsPerPage } from '../../components/ResultsPerPage/ResultsPerPage';
 import { SearchBar } from '../../components/SearchBar/SearchBar';
 import { Sorting } from '../../components/Sorting/Sorting';
-import { useHomePageContext } from '../../context';
+import { useAppSelector } from '../../store/hook';
+import { store } from '../../store';
+import { setHomePageArtworks } from '../../store/homePageArtworksSlice';
 // import { screensaver } from '../../data/screensaver';
 
 export interface IArtWorkData {
@@ -24,7 +26,7 @@ interface HomePageState {
 }
 
 export function HomePage() {
-  const { store, setStore } = useHomePageContext();
+  const artworksList = useAppSelector((state) => state.homePageArtworks.list); //! так достаём данные из redux store
 
   const [homePageState, sethomePageState] = useState<HomePageState>({
     loading: false,
@@ -41,7 +43,7 @@ export function HomePage() {
       errorMessage: newErrorMessage,
     });
 
-    setStore(newList);
+    store.dispatch(setHomePageArtworks(newList));
   };
 
   return (
@@ -53,7 +55,7 @@ export function HomePage() {
       </div>
       <div className="home-page-list">
         <ArtWorksList
-          data={store}
+          data={artworksList}
           loading={homePageState.loading}
           errorMessage={homePageState.errorMessage}
         />
