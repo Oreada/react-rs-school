@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react';
 import { getSortedData } from '../../api/getSortedData';
-import { useHomePageContext } from '../../context';
 import { IArtWorkData } from '../../pages/HomePage/HomePage';
 import { store } from '../../store';
 import { useAppSelector } from '../../store/hook';
 import { setLimit } from '../../store/limitSlice';
+import { setPageCurrent, setPageTotal } from '../../store/paginationSlice';
 import styles from './ResultsPerPage.module.css';
 
 interface ResultsPerPageProps {
@@ -26,19 +26,6 @@ export function ResultsPerPage(props: ResultsPerPageProps) {
   const objForSorting = useAppSelector((state) => state.objForSorting.obj); //! так достаём данные из redux store
   const limitValue = useAppSelector((state) => state.limit.value); //! так достаём данные из redux store
 
-  const {
-    // searchValue,
-    // setSearchValue,
-    // objForSorting,
-    // setObjForSorting,
-    // limitValue,
-    // setLimitValue,
-    pageCurrent,
-    setPageCurrent,
-    pageTotal,
-    setPageTotal,
-  } = useHomePageContext();
-
   const resultsPerPageSelect: React.RefObject<HTMLSelectElement> = React.createRef();
 
   useEffect(() => {
@@ -51,9 +38,6 @@ export function ResultsPerPage(props: ResultsPerPageProps) {
         (resultsPerPageSelect.current as HTMLSelectElement).value as '' | ResultsPerPageOption
       )
     );
-    // setLimitValue(
-    //   (resultsPerPageSelect.current as HTMLSelectElement).value as '' | ResultsPerPageOption
-    // );
   }, [resultsPerPageSelect, setLimit]);
 
   const changeHandler = async () => {
@@ -62,9 +46,6 @@ export function ResultsPerPage(props: ResultsPerPageProps) {
         (resultsPerPageSelect.current as HTMLSelectElement).value as '' | ResultsPerPageOption
       )
     );
-    // setLimitValue(
-    //   (resultsPerPageSelect.current as HTMLSelectElement).value as '' | ResultsPerPageOption
-    // );
 
     try {
       props.changeHomePageState([], true, '');
@@ -75,8 +56,8 @@ export function ResultsPerPage(props: ResultsPerPageProps) {
         '1'
       );
       props.changeHomePageState(result?.artWorksList as Array<IArtWorkData>, false, '');
-      setPageTotal(result?.totalPages as string); //! тут получаю общее количество страниц
-      setPageCurrent('1'); //! сбиваю текущую страницу, т.к. изменяется общее количество страниц
+      store.dispatch(setPageTotal(result?.totalPages as string)); //! тут получаю общее количество страниц
+      store.dispatch(setPageCurrent('1')); //! сбиваю текущую страницу, т.к. изменяется общее количество страниц
     } catch (e: unknown) {
       const err = e as Error;
       props.changeHomePageState([], false, err.message);

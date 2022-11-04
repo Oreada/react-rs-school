@@ -1,6 +1,5 @@
 import React, { useEffect, useReducer } from 'react';
 import { getSortedData } from '../../api/getSortedData';
-import { useHomePageContext } from '../../context';
 import { IArtWorkData } from '../../pages/HomePage/HomePage';
 import { SortingActionOption, sortingReducer } from '../../reducer';
 import { useAppSelector } from '../../store/hook';
@@ -8,6 +7,7 @@ import { store } from '../../store';
 import styles from './Sorting.module.css';
 import { setSorting } from '../../store/sortingSlice';
 import { setObjForSorting } from '../../store/objForSortingSlice';
+import { setPageTotal, setPageCurrent } from '../../store/paginationSlice';
 
 interface SortingProps {
   changeHomePageState: (
@@ -22,21 +22,6 @@ export function Sorting(props: SortingProps) {
   const sortingValue = useAppSelector((state) => state.sorting.value); //! так достаём данные из redux store
   const limitValue = useAppSelector((state) => state.limit.value); //! так достаём данные из redux store
 
-  const {
-    // searchValue,
-    // setSearchValue,
-    // objForSorting,
-    // setObjForSorting,
-    // limitValue,
-    // setLimitValue,
-    pageCurrent,
-    setPageCurrent,
-    pageTotal,
-    setPageTotal,
-    // sortingValue,
-    // setSortingValue,
-  } = useHomePageContext();
-
   const [state, dispatch] = useReducer(sortingReducer, { objForSorting: {} });
   const sortingSelect: React.RefObject<HTMLSelectElement> = React.createRef();
 
@@ -48,7 +33,6 @@ export function Sorting(props: SortingProps) {
     store.dispatch(
       setSorting((sortingSelect.current as HTMLSelectElement).value as '' | SortingActionOption)
     );
-    // setSortingValue((sortingSelect.current as HTMLSelectElement).value as '' | SortingActionOption);
   }, [setSorting, sortingSelect]);
 
   const changeHandler = async () => {
@@ -60,14 +44,13 @@ export function Sorting(props: SortingProps) {
     const nextState = sortingReducer(state, action); //! для того чтобы получить актуальный стейт для вызова getSortedData
 
     store.dispatch(setObjForSorting(nextState.objForSorting));
-    // setObjForSorting(nextState.objForSorting);
 
     try {
       props.changeHomePageState([], true, '');
       const result = await getSortedData(searchValue, limitValue, nextState.objForSorting, '1');
       props.changeHomePageState(result?.artWorksList as Array<IArtWorkData>, false, '');
-      setPageTotal(result?.totalPages as string); //! тут получаю общее количество страниц
-      setPageCurrent('1'); //! сбиваю текущую страницу, т.к. изменяется общее количество страниц
+      store.dispatch(setPageTotal(result?.totalPages as string)); //! тут получаю общее количество страниц
+      store.dispatch(setPageCurrent('1')); //! сбиваю текущую страницу, т.к. изменяется общее количество страниц
     } catch (e: unknown) {
       const err = e as Error;
       props.changeHomePageState([], false, err.message);
