@@ -16,7 +16,7 @@ function App() {
   const artworksList = useAppSelector((state) => state.homePageArtworks.list); //! так достаём данные из redux store
   console.log(artworksList);
 
-  const [searchValue, setSearchValue] = useState('');
+  // const [searchValue, setSearchValue] = useState('');
   const [sortingValue, setSortingValue] = useState<'' | SortingActionOption>('');
   const [objForSorting, setObjForSorting] = useState<
     DateSorting | TitleSorting | AuthorSorting | unknown
@@ -35,8 +35,8 @@ function App() {
   return (
     <HomePageContext.Provider
       value={{
-        searchValue: searchValue,
-        setSearchValue: setSearchValue,
+        // searchValue: searchValue,
+        // setSearchValue: setSearchValue,
         sortingValue: sortingValue,
         setSortingValue: setSortingValue,
         objForSorting: objForSorting,

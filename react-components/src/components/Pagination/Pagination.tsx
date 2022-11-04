@@ -2,6 +2,7 @@ import React from 'react';
 import { getSortedData } from '../../api/getSortedData';
 import { useHomePageContext } from '../../context';
 import { IArtWorkData } from '../../pages/HomePage/HomePage';
+import { useAppSelector } from '../../store/hook';
 import styles from './Pagination.module.css';
 
 interface PaginationProps {
@@ -13,9 +14,11 @@ interface PaginationProps {
 }
 
 export function Pagination({ changeHomePageState }: PaginationProps) {
+  const searchValue = useAppSelector((state) => state.search.value); //! так достаём данные из redux store
+
   const {
-    searchValue,
-    setSearchValue,
+    // searchValue,
+    // setSearchValue,
     objForSorting,
     setObjForSorting,
     limitValue,

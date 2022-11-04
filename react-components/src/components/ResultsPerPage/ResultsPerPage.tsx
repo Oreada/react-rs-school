@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { getSortedData } from '../../api/getSortedData';
 import { useHomePageContext } from '../../context';
 import { IArtWorkData } from '../../pages/HomePage/HomePage';
+import { useAppSelector } from '../../store/hook';
 import styles from './ResultsPerPage.module.css';
 
 interface ResultsPerPageProps {
@@ -19,9 +20,11 @@ export enum ResultsPerPageOption {
 }
 
 export function ResultsPerPage(props: ResultsPerPageProps) {
+  const searchValue = useAppSelector((state) => state.search.value); //! так достаём данные из redux store
+
   const {
-    searchValue,
-    setSearchValue,
+    // searchValue,
+    // setSearchValue,
     objForSorting,
     setObjForSorting,
     limitValue,

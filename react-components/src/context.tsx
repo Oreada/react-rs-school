@@ -5,8 +5,8 @@ import { SortingActionOption } from './reducer';
 import { ResultsPerPageOption } from './components/ResultsPerPage/ResultsPerPage';
 
 export type HomePageGlobalContent = {
-  searchValue: string;
-  setSearchValue: (c: string) => void;
+  // searchValue: string;
+  // setSearchValue: (c: string) => void;
   sortingValue: SortingActionOption | '';
   setSortingValue: (c: SortingActionOption | '') => void;
   objForSorting: DateSorting | TitleSorting | AuthorSorting | unknown;
@@ -22,8 +22,8 @@ export type HomePageGlobalContent = {
 };
 
 export const HomePageContext = createContext<HomePageGlobalContent>({
-  searchValue: '',
-  setSearchValue: () => { },
+  // searchValue: '',
+  // setSearchValue: () => { },
   sortingValue: '',
   setSortingValue: () => { },
   objForSorting: {},

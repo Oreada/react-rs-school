@@ -3,6 +3,7 @@ import { getSortedData } from '../../api/getSortedData';
 import { useHomePageContext } from '../../context';
 import { IArtWorkData } from '../../pages/HomePage/HomePage';
 import { SortingActionOption, sortingReducer } from '../../reducer';
+import { useAppSelector } from '../../store/hook';
 import styles from './Sorting.module.css';
 
 interface SortingProps {
@@ -14,9 +15,11 @@ interface SortingProps {
 }
 
 export function Sorting(props: SortingProps) {
+  const searchValue = useAppSelector((state) => state.search.value); //! так достаём данные из redux store
+
   const {
-    searchValue,
-    setSearchValue,
+    // searchValue,
+    // setSearchValue,
     objForSorting,
     setObjForSorting,
     limitValue,

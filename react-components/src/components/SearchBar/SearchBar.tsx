@@ -2,7 +2,10 @@ import React, { useEffect } from 'react';
 import { getSortedData } from '../../api/getSortedData';
 import { useHomePageContext } from '../../context';
 import { IArtWorkData } from '../../pages/HomePage/HomePage';
+import { useAppSelector } from '../../store/hook';
+import { store } from '../../store';
 import styles from './SearchBar.module.css';
+import { setSearch } from '../../store/searchSlice';
 
 interface SearchBarProps {
   changeHomePageState: (
@@ -13,9 +16,11 @@ interface SearchBarProps {
 }
 
 export function SearchBar(props: SearchBarProps) {
+  const searchValue = useAppSelector((state) => state.search.value); //! так достаём данные из redux store
+
   const {
-    searchValue,
-    setSearchValue,
+    // searchValue,
+    // setSearchValue,
     objForSorting,
     setObjForSorting,
     limitValue,
@@ -27,12 +32,14 @@ export function SearchBar(props: SearchBarProps) {
   } = useHomePageContext();
 
   const changeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchValue(event.target.value);
+    store.dispatch(setSearch(event.target.value));
+    // setSearchValue(event.target.value);
   };
 
   useEffect(() => {
     const storageValue = localStorage.getItem('valueSearchBar') || '';
-    setSearchValue(storageValue);
+    store.dispatch(setSearch(storageValue));
+    // setSearchValue(storageValue);
   }, []);
 
   useEffect(() => {
