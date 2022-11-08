@@ -1,21 +1,11 @@
 import React, { useEffect } from 'react';
-import { getSortedData } from '../../api/getSortedData';
-import { IArtWorkData } from '../../pages/HomePage/HomePage';
 import { useAppSelector } from '../../store/hook';
 import { store } from '../../store';
 import styles from './SearchBar.module.css';
 import { setSearch } from '../../store/searchSlice';
-import { setPageTotal, setPageCurrent } from '../../store/paginationSlice';
+import { getData, setPageCurrent } from '../../store/homePageArtworksSlice';
 
-interface SearchBarProps {
-  changeHomePageState: (
-    newList: Array<IArtWorkData>,
-    newLoading: boolean,
-    newErrorMessage: string
-  ) => void;
-}
-
-export function SearchBar(props: SearchBarProps) {
+export function SearchBar() {
   const searchValue = useAppSelector((state) => state.search.value); //! так достаём данные из redux store
   const objForSorting = useAppSelector((state) => state.objForSorting.obj);
   const limitValue = useAppSelector((state) => state.limit.value);
@@ -36,16 +26,10 @@ export function SearchBar(props: SearchBarProps) {
   const searchHandler = async (event: React.MouseEvent<HTMLInputElement, MouseEvent>) => {
     event.preventDefault();
 
-    try {
-      props.changeHomePageState([], true, '');
-      const result = await getSortedData(searchValue, limitValue, objForSorting, '1');
-      props.changeHomePageState(result?.artWorksList as Array<IArtWorkData>, false, '');
-      store.dispatch(setPageTotal(result?.totalPages as string)); //! тут получаю общее количество страниц
-      store.dispatch(setPageCurrent('1')); //! сбиваю текущую страницу, т.к. изменяется общее количество страниц
-    } catch (e: unknown) {
-      const err = e as Error;
-      props.changeHomePageState([], false, err.message);
-    }
+    store.dispatch(setPageCurrent('1')); //! сбиваю текущую страницу, т.к. изменяется общее количество страниц
+    store.dispatch(
+      getData({ value: searchValue, limit: limitValue, obj: objForSorting, page: '1' })
+    );
   };
 
   return (

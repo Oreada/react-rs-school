@@ -1,19 +1,9 @@
 import React, { useEffect } from 'react';
-import { getSortedData } from '../../api/getSortedData';
-import { IArtWorkData } from '../../pages/HomePage/HomePage';
 import { store } from '../../store';
+import { getData, setPageCurrent } from '../../store/homePageArtworksSlice';
 import { useAppSelector } from '../../store/hook';
 import { setLimit } from '../../store/limitSlice';
-import { setPageCurrent, setPageTotal } from '../../store/paginationSlice';
 import styles from './ResultsPerPage.module.css';
-
-interface ResultsPerPageProps {
-  changeHomePageState: (
-    newList: Array<IArtWorkData>,
-    newLoading: boolean,
-    newErrorMessage: string
-  ) => void;
-}
 
 export enum ResultsPerPageOption {
   'twenty' = '20',
@@ -21,7 +11,7 @@ export enum ResultsPerPageOption {
   'fourty' = '40',
 }
 
-export function ResultsPerPage(props: ResultsPerPageProps) {
+export function ResultsPerPage() {
   const searchValue = useAppSelector((state) => state.search.value); //! так достаём данные из redux store
   const objForSorting = useAppSelector((state) => state.objForSorting.obj);
   const limitValue = useAppSelector((state) => state.limit.value);
@@ -38,7 +28,7 @@ export function ResultsPerPage(props: ResultsPerPageProps) {
         (resultsPerPageSelect.current as HTMLSelectElement).value as '' | ResultsPerPageOption
       )
     );
-  }, [resultsPerPageSelect, setLimit]);
+  }, [resultsPerPageSelect]);
 
   const changeHandler = async () => {
     store.dispatch(
@@ -47,21 +37,15 @@ export function ResultsPerPage(props: ResultsPerPageProps) {
       )
     );
 
-    try {
-      props.changeHomePageState([], true, '');
-      const result = await getSortedData(
-        searchValue,
-        (resultsPerPageSelect.current as HTMLSelectElement).value,
-        objForSorting,
-        '1'
-      );
-      props.changeHomePageState(result?.artWorksList as Array<IArtWorkData>, false, '');
-      store.dispatch(setPageTotal(result?.totalPages as string)); //! тут получаю общее количество страниц
-      store.dispatch(setPageCurrent('1')); //! сбиваю текущую страницу, т.к. изменяется общее количество страниц
-    } catch (e: unknown) {
-      const err = e as Error;
-      props.changeHomePageState([], false, err.message);
-    }
+    store.dispatch(setPageCurrent('1')); //! сбиваю текущую страницу, т.к. изменяется общее количество страниц
+    store.dispatch(
+      getData({
+        value: searchValue,
+        limit: (resultsPerPageSelect.current as HTMLSelectElement).value,
+        obj: objForSorting,
+        page: '1',
+      })
+    );
   };
 
   return (

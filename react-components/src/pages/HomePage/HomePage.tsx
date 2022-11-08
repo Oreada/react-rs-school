@@ -1,12 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { ArtWorksList } from '../../components/ArtWorksList/ArtWorksList';
 import { Pagination } from '../../components/Pagination/Pagination';
 import { ResultsPerPage } from '../../components/ResultsPerPage/ResultsPerPage';
 import { SearchBar } from '../../components/SearchBar/SearchBar';
 import { Sorting } from '../../components/Sorting/Sorting';
 import { useAppSelector } from '../../store/hook';
-import { store } from '../../store';
-import { setHomePageArtworks } from '../../store/homePageArtworksSlice';
 // import { screensaver } from '../../data/screensaver';
 
 export interface IArtWorkData {
@@ -20,48 +18,21 @@ export interface IArtWorkData {
   title: string;
 }
 
-interface HomePageState {
-  loading: boolean;
-  errorMessage: string;
-}
-
 export function HomePage() {
   const artworksList = useAppSelector((state) => state.homePageArtworks.list); //! так достаём данные из redux store
 
-  const [homePageState, sethomePageState] = useState<HomePageState>({
-    loading: false,
-    errorMessage: '',
-  });
-
-  const changeHomePageState = (
-    newList: Array<IArtWorkData>,
-    newLoading: boolean,
-    newErrorMessage: string
-  ) => {
-    sethomePageState({
-      loading: newLoading,
-      errorMessage: newErrorMessage,
-    });
-
-    store.dispatch(setHomePageArtworks(newList));
-  };
-
   return (
     <main className="home-page" data-testid="home-page">
-      <SearchBar changeHomePageState={changeHomePageState} />
+      <SearchBar />
       <div className="home-page-selects">
-        <Sorting changeHomePageState={changeHomePageState} />
-        <ResultsPerPage changeHomePageState={changeHomePageState} />
+        <Sorting />
+        <ResultsPerPage />
       </div>
       <div className="home-page-list">
-        <ArtWorksList
-          data={artworksList}
-          loading={homePageState.loading}
-          errorMessage={homePageState.errorMessage}
-        />
+        <ArtWorksList data={artworksList} />
       </div>
       <div className="home-page-pagination">
-        <Pagination changeHomePageState={changeHomePageState} />
+        <Pagination />
       </div>
     </main>
   );

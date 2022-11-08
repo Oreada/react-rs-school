@@ -3,9 +3,9 @@ import { SearchBar } from './SearchBar';
 import { rest } from 'msw';
 import { setupServer } from 'msw/node';
 import userEvent from '@testing-library/user-event';
-import { HomePage, IArtWorkData } from '../../pages/HomePage/HomePage';
+import { HomePage } from '../../pages/HomePage/HomePage';
 
-const changeArtWorks: (newList: Array<IArtWorkData>) => void = jest.fn();
+// const changeArtWorks: (newList: Array<IArtWorkData>) => void = jest.fn();
 
 const localStorageMock = (function () {
   let store: Record<string, never | string> = {};
@@ -117,15 +117,15 @@ describe('SearchBar', () => {
   });
 
   test('Calls localStorage setItem on unmount', () => {
-    render(<SearchBar changeHomePageState={changeArtWorks} />);
+    render(<SearchBar />);
     localStorageMock.setItem = jest.fn();
-    const { unmount } = render(<SearchBar changeHomePageState={changeArtWorks} />);
+    const { unmount } = render(<SearchBar />);
     unmount();
     expect(localStorageMock.setItem).toHaveBeenCalledTimes(1);
   });
 
   test('SearchBar renders', () => {
-    render(<SearchBar changeHomePageState={changeArtWorks} />);
+    render(<SearchBar />);
 
     expect(screen.getByTestId('form-search')).toBeInTheDocument();
   });

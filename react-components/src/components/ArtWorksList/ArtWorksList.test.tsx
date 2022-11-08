@@ -26,7 +26,7 @@ const artWorksListExample = [
 
 describe('ArtWorksList component', () => {
   test('ArtWorksList renders', () => {
-    render(<ArtWorksList data={artWorksListExample} loading={false} errorMessage={''} />);
+    render(<ArtWorksList data={artWorksListExample} />);
 
     expect(screen.getByTestId('artworks-list')).toBeInTheDocument();
   });

@@ -1,44 +1,24 @@
 import React from 'react';
-import { getSortedData } from '../../api/getSortedData';
-import { IArtWorkData } from '../../pages/HomePage/HomePage';
 import { store } from '../../store';
+import { getData, setPageCurrent } from '../../store/homePageArtworksSlice';
 import { useAppSelector } from '../../store/hook';
-import { setPageCurrent, setPageTotal } from '../../store/paginationSlice';
 import styles from './Pagination.module.css';
 
-interface PaginationProps {
-  changeHomePageState: (
-    newList: Array<IArtWorkData>,
-    newLoading: boolean,
-    newErrorMessage: string
-  ) => void;
-}
-
-export function Pagination({ changeHomePageState }: PaginationProps) {
+export function Pagination() {
   const searchValue = useAppSelector((state) => state.search.value); //! так достаём данные из redux store
   const objForSorting = useAppSelector((state) => state.objForSorting.obj);
   const limitValue = useAppSelector((state) => state.limit.value);
-  const pageCurrent = useAppSelector((state) => state.pagination.pageCurrent);
-  const pageTotal = useAppSelector((state) => state.pagination.pageTotal);
-
-  const homePageFunc = async (currentPageNew: string) => {
-    try {
-      changeHomePageState([], true, '');
-      const result = await getSortedData(searchValue, limitValue, objForSorting, currentPageNew);
-      changeHomePageState(result?.artWorksList as Array<IArtWorkData>, false, '');
-      store.dispatch(setPageTotal(result?.totalPages as string)); //! тут получаю общее количество страниц
-    } catch (e: unknown) {
-      const err = e as Error;
-      changeHomePageState([], false, err.message);
-    }
-  };
+  const pageCurrent = useAppSelector((state) => state.homePageArtworks.pageCurrent);
+  const pageTotal = useAppSelector((state) => state.homePageArtworks.pageTotal);
 
   const leftClickHandler = async () => {
     if (Number(pageCurrent) > 1) {
       const currentPageNew = String(Number(pageCurrent) - 1);
       store.dispatch(setPageCurrent(currentPageNew));
 
-      await homePageFunc(currentPageNew);
+      store.dispatch(
+        getData({ value: searchValue, limit: limitValue, obj: objForSorting, page: currentPageNew })
+      );
     }
   };
 
@@ -47,7 +27,9 @@ export function Pagination({ changeHomePageState }: PaginationProps) {
       const currentPageNew = String(Number(pageCurrent) + 1);
       store.dispatch(setPageCurrent(currentPageNew));
 
-      await homePageFunc(currentPageNew);
+      store.dispatch(
+        getData({ value: searchValue, limit: limitValue, obj: objForSorting, page: currentPageNew })
+      );
     }
   };
 

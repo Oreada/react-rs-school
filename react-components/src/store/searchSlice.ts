@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-type SearchState = {
+export type SearchState = {
   value: string;
 };
 

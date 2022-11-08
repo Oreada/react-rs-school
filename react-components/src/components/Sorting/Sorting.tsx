@@ -1,23 +1,13 @@
 import React, { useEffect, useReducer } from 'react';
-import { getSortedData } from '../../api/getSortedData';
-import { IArtWorkData } from '../../pages/HomePage/HomePage';
 import { SortingActionOption, sortingReducer } from '../../reducer';
 import { useAppSelector } from '../../store/hook';
 import { store } from '../../store';
 import styles from './Sorting.module.css';
 import { setSorting } from '../../store/sortingSlice';
 import { setObjForSorting } from '../../store/objForSortingSlice';
-import { setPageTotal, setPageCurrent } from '../../store/paginationSlice';
+import { getData, setPageCurrent } from '../../store/homePageArtworksSlice';
 
-interface SortingProps {
-  changeHomePageState: (
-    newList: Array<IArtWorkData>,
-    newLoading: boolean,
-    newErrorMessage: string
-  ) => void;
-}
-
-export function Sorting(props: SortingProps) {
+export function Sorting() {
   const searchValue = useAppSelector((state) => state.search.value); //! так достаём данные из redux store
   const sortingValue = useAppSelector((state) => state.sorting.value);
   const limitValue = useAppSelector((state) => state.limit.value);
@@ -33,7 +23,7 @@ export function Sorting(props: SortingProps) {
     store.dispatch(
       setSorting((sortingSelect.current as HTMLSelectElement).value as '' | SortingActionOption)
     );
-  }, [setSorting, sortingSelect]);
+  }, [sortingSelect]);
 
   const changeHandler = async () => {
     const action = {
@@ -45,16 +35,10 @@ export function Sorting(props: SortingProps) {
 
     store.dispatch(setObjForSorting(nextState.objForSorting));
 
-    try {
-      props.changeHomePageState([], true, '');
-      const result = await getSortedData(searchValue, limitValue, nextState.objForSorting, '1');
-      props.changeHomePageState(result?.artWorksList as Array<IArtWorkData>, false, '');
-      store.dispatch(setPageTotal(result?.totalPages as string)); //! тут получаю общее количество страниц
-      store.dispatch(setPageCurrent('1')); //! сбиваю текущую страницу, т.к. изменяется общее количество страниц
-    } catch (e: unknown) {
-      const err = e as Error;
-      props.changeHomePageState([], false, err.message);
-    }
+    store.dispatch(setPageCurrent('1')); //! сбиваю текущую страницу, т.к. изменяется общее количество страниц
+    store.dispatch(
+      getData({ value: searchValue, limit: limitValue, obj: nextState.objForSorting, page: '1' })
+    );
   };
 
   return (
