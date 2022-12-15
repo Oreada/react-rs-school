@@ -24,8 +24,7 @@
     "start": "craco start",
     "build": "craco build",
     "test": "craco test --coverage",
-    "eject": "craco eject",
-    "prepare": "husky install"
+    "eject": "craco eject"
   },
   "eslintConfig": {
     "extends": [
@@ -56,7 +55,6 @@
     "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-react": "^7.31.8",
-    "husky": "^8.0.1",
     "lint-staged": "^13.0.3",
     "msw": "^0.47.4",
     "postcss": "^8.4.16",
