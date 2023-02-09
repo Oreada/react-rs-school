@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useAppSelector } from '../../store/hook';
 import { store } from '../../store';
 import styles from './SearchBar.module.css';
@@ -13,15 +13,6 @@ export function SearchBar() {
   const changeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     store.dispatch(setSearch(event.target.value));
   };
-
-  useEffect(() => {
-    const storageValue = localStorage.getItem('valueSearchBar') || '';
-    store.dispatch(setSearch(storageValue));
-  }, []);
-
-  useEffect(() => {
-    localStorage.setItem('valueSearchBar', searchValue);
-  }, [searchValue]);
 
   const searchHandler = async (event: React.MouseEvent<HTMLInputElement, MouseEvent>) => {
     event.preventDefault();
