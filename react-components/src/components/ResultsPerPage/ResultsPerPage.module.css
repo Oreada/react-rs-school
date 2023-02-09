@@ -1,0 +1,15 @@
+.pagination-select {
+    height: 40px;
+
+    font-size: 14px;
+    font-weight: 600;
+    padding-left: 10px;
+    padding-right: 10px;
+    text-transform: uppercase;
+    color: rgb(37, 57, 14);
+    background-color: #f0ead6;
+
+    cursor: pointer;
+}
+
+.pagination-option {}

@@ -1,0 +1,34 @@
+.navigation {
+    height: 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 10px;
+    padding-right: 10px;
+    color: white;
+    background-color: rgb(37, 57, 14);
+}
+
+.navigation__title {
+    font-size: 14px;
+    /* font-weight: 600; */
+    text-transform: uppercase;
+}
+
+.navigation__links {
+    display: flex;
+    gap: 5px;
+}
+
+/* Specific styles for non-active links */
+.link {
+    color: white;
+    padding: 5px;
+}
+
+/* Specific styles for active links */
+.link-active {
+    color: black;
+    background: #f9d342;
+    padding: 5px;
+}

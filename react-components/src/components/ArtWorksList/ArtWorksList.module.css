@@ -1,0 +1,11 @@
+.artworks__list {
+    display: grid;
+    justify-content: center;
+    grid-template-columns: repeat(auto-fit, 240px);
+    grid-template-rows: repeat(auto-fit, auto);
+    column-gap: 30px;
+    row-gap: 30px;
+
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
