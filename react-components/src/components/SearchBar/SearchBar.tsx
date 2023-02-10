@@ -36,7 +36,7 @@ export function SearchBar() {
         <input
           type="search"
           className={styles['search-field']}
-          placeholder="Input something: 'Raphael', 'Gogh', 'rabbit'..."
+          placeholder="Input something: Raphael, Gogh, rabbit..."
           autoComplete="off"
           value={searchValue}
           name="search"
