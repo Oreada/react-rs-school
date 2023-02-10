@@ -6,8 +6,7 @@ import { SearchBar } from '../../components/SearchBar/SearchBar';
 import { Sorting } from '../../components/Sorting/Sorting';
 import { useAppSelector } from '../../store/hook';
 import { store } from '../../store';
-import { getData, setPageCurrent } from '../../store/homePageArtworksSlice';
-// import { screensaver } from '../../data/screensaver';
+import { getData } from '../../store/homePageArtworksSlice';
 
 export interface IArtWorkData {
   id: number;
