@@ -16,7 +16,6 @@ export interface IArtWork {
 export function ArtWork(props: IArtWork) {
   const clickHandler = async (event: React.MouseEvent<HTMLAnchorElement>) => {
     const idDetails = Number((event.target as HTMLAnchorElement).dataset.id);
-    console.log(idDetails);
     store.dispatch(setIdDetails(idDetails));
   };
 

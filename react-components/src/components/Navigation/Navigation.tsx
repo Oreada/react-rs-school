@@ -7,7 +7,7 @@ export function Navigation() {
   const idDetails = useAppSelector((state) => state.idDetails.idDetails); //! так достаём данные из redux store
 
   const location = useLocation();
-  console.log('location', location.pathname, location.pathname === `/artwork/${idDetails}`);
+  // console.log('location', location.pathname, location.pathname === `/artwork/${idDetails}`);
 
   return (
     <div className={styles['header-wrapper']}>

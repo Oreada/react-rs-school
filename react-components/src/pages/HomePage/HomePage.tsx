@@ -21,7 +21,6 @@ export interface IArtWorkData {
 
 export function HomePage() {
   const artworksList = useAppSelector((state) => state.homePageArtworks.list); //! так достаём данные из redux store
-  console.log('HomePage', artworksList);
 
   useEffect(() => {
     if (!artworksList.length) {

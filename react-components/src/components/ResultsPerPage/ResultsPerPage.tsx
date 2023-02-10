@@ -57,7 +57,7 @@ export function ResultsPerPage() {
       onChange={changeHandler}
     >
       <option className={styles['pagination-option']} value="">
-        -- Select number of results per page --
+        -- Results per page --
       </option>
       <option className={styles['pagination-option']} value={ResultsPerPageOption.twenty}>
         {ResultsPerPageOption.twenty}

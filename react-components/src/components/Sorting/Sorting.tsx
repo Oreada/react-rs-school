@@ -50,7 +50,7 @@ export function Sorting() {
       onChange={changeHandler}
     >
       <option className={styles['sorting-option']} value="">
-        -- Select the sorting method --
+        -- Sorting method --
       </option>
       <option className={styles['sorting-option']} value="title-ascending">
         Title ascending
