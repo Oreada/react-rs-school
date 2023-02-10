@@ -7,8 +7,10 @@ export function FormsPage() {
   console.log(cardsList);
 
   return (
-    <div className="form-page" data-testid="form-page">
-      <Form cards={cardsList} />
+    <div className="container">
+      <div className="form-page" data-testid="form-page">
+        <Form cards={cardsList} />
+      </div>
     </div>
   );
 }

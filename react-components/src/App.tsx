@@ -18,7 +18,7 @@ function App() {
   const artWorkWithDetails = artworksList.filter((item) => item.id === idDetails)[0]; //! нахожу нужную карточку из стейта по ID
 
   return (
-    <div className="container">
+    <div>
       <Navigation />
       <Routes>
         <Route path="/" element={<HomePage />} />

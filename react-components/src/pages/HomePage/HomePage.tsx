@@ -22,18 +22,20 @@ export function HomePage() {
   const artworksList = useAppSelector((state) => state.homePageArtworks.list); //! так достаём данные из redux store
 
   return (
-    <main className="home-page" data-testid="home-page">
-      <SearchBar />
-      <div className="home-page-selects">
-        <Sorting />
-        <ResultsPerPage />
-      </div>
-      <div className="home-page-list">
-        <ArtWorksList data={artworksList} />
-      </div>
-      <div className="home-page-pagination">
-        <Pagination />
-      </div>
-    </main>
+    <div className="container">
+      <main className="home-page" data-testid="home-page">
+        <SearchBar />
+        <div className="home-page-selects">
+          <Sorting />
+          <ResultsPerPage />
+        </div>
+        <div className="home-page-list">
+          <ArtWorksList data={artworksList} />
+        </div>
+        <div className="home-page-pagination">
+          <Pagination />
+        </div>
+      </main>
+    </div>
   );
 }
