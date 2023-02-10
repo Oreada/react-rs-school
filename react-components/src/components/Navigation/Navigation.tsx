@@ -23,12 +23,7 @@ export function Navigation() {
               Home
             </NavLink>
             {location.pathname === `/artwork/${idDetails}` && (
-              <NavLink
-                to="/artwork"
-                className={({ isActive }) => (isActive ? styles['link-active'] : styles['link'])}
-              >
-                Artwork
-              </NavLink>
+              <span className={styles.navigation__artwork}>Artwork</span>
             )}
             <NavLink
               to="/about"
