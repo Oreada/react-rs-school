@@ -24,7 +24,6 @@ export function HomePage() {
 
   useEffect(() => {
     if (!artworksList.length) {
-      console.log('Starting artworks!!!');
       store.dispatch(
         getData({
           value: '',

@@ -22,4 +22,4 @@ const searchSlice = createSlice({
 
 export const { setSearch } = searchSlice.actions;
 
-export default searchSlice.reducer; //! экспорт без имени! в файле index.ts импортировала его как searchReducer
+export default searchSlice.reducer; //! в файле index.ts импортировала его как searchReducer

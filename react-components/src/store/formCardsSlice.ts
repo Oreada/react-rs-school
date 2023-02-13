@@ -39,4 +39,4 @@ const formCardsSlice = createSlice({
 
 export const { addFormCard } = formCardsSlice.actions;
 
-export default formCardsSlice.reducer; //! экспорт без имени! в файле index.ts импортировала его как formCardsReducer
+export default formCardsSlice.reducer; //! в файле index.ts импортировала его как formCardsReducer

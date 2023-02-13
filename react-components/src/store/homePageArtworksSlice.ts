@@ -107,4 +107,4 @@ const homePageArtworksSlice = createSlice({
 
 export const { setHomePageArtworks, setPageCurrent } = homePageArtworksSlice.actions;
 
-export default homePageArtworksSlice.reducer; //! экспорт без имени! в файле index.ts импортировала его как homePageArtworksReducer
+export default homePageArtworksSlice.reducer; //! в файле index.ts импортировала его как homePageArtworksReducer
