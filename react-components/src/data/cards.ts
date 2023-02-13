@@ -2,6 +2,7 @@ import { ICard } from '../components/Card/Card';
 
 export const CARDS: Array<ICard> = [
   {
+    postcard: 'postcard example',
     name: 'name example',
     phone: 'phone example',
     adress: 'adress example',
@@ -9,6 +10,7 @@ export const CARDS: Array<ICard> = [
     payment: 'payment example',
   },
   {
+    postcard: 'postcard example2',
     name: 'name example2',
     phone: 'phone example2',
     adress: 'adress example2',

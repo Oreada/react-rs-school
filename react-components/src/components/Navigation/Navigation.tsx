@@ -35,7 +35,7 @@ export function Navigation() {
               to="/forms"
               className={({ isActive }) => (isActive ? styles['link-active'] : styles['link'])}
             >
-              Forms
+              Orders
             </NavLink>
           </span>
         </nav>

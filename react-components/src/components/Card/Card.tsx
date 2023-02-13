@@ -2,6 +2,7 @@ import React from 'react';
 import styles from './Card.module.css';
 
 export interface ICard {
+  postcard: string;
   name: string;
   phone: string;
   adress: string;
@@ -12,6 +13,7 @@ export interface ICard {
 export function Card(props: ICard) {
   return (
     <div className={styles['card']} data-testid="card">
+      <p className={styles['card__item']}>Postcard: {props.postcard}</p>
       <p className={styles['card__item']}>Name: {props.name}</p>
       <p className={styles['card__item']}>Phone number: {props.phone}</p>
       <p className={styles['card__item']}>Adress: {props.adress}</p>

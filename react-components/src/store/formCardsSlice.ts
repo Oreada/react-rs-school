@@ -6,6 +6,7 @@ type FormCardsState = {
 };
 
 type Payload = {
+  postcard: string;
   name: string;
   phone: string;
   adress: string;
@@ -22,11 +23,12 @@ const formCardsSlice = createSlice({
   initialState: initialState,
   reducers: {
     addFormCard(state, action: PayloadAction<Payload>) {
-      console.log('state=', state);
-      console.log('action=', action);
+      // console.log('state=', state);
+      // console.log('action=', action);
 
       state.list.push({
         //! с useState так нельзя, там мы делаем: [...prev, newObj]
+        postcard: action.payload.postcard,
         name: action.payload.name,
         phone: action.payload.phone,
         adress: action.payload.adress,

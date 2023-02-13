@@ -12,6 +12,7 @@ export function CardsList(props: CardsListProps) {
       {props.data.map((card: ICard, index: number) => (
         <Card
           key={index}
+          postcard={card.postcard}
           name={card.name}
           phone={card.phone}
           adress={card.adress}
