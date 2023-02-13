@@ -1,6 +1,6 @@
 My first React application!
 
-Deploy: https://oreada-react2022q3-task-6.netlify.app/
+Deploy: https://oreada-artwork-finder.netlify.app
 
 API: https://api.artic.edu/docs/
 
