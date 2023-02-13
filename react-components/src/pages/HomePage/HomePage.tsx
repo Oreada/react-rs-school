@@ -1,11 +1,12 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { ArtWorksList } from '../../components/ArtWorksList/ArtWorksList';
 import { Pagination } from '../../components/Pagination/Pagination';
 import { ResultsPerPage } from '../../components/ResultsPerPage/ResultsPerPage';
 import { SearchBar } from '../../components/SearchBar/SearchBar';
 import { Sorting } from '../../components/Sorting/Sorting';
 import { useAppSelector } from '../../store/hook';
-// import { screensaver } from '../../data/screensaver';
+import { store } from '../../store';
+import { getData } from '../../store/homePageArtworksSlice';
 
 export interface IArtWorkData {
   id: number;
@@ -21,19 +22,34 @@ export interface IArtWorkData {
 export function HomePage() {
   const artworksList = useAppSelector((state) => state.homePageArtworks.list); //! так достаём данные из redux store
 
+  useEffect(() => {
+    if (!artworksList.length) {
+      store.dispatch(
+        getData({
+          value: '',
+          limit: '',
+          obj: {},
+          page: '1',
+        })
+      );
+    }
+  }, []);
+
   return (
-    <main className="home-page" data-testid="home-page">
-      <SearchBar />
-      <div className="home-page-selects">
-        <Sorting />
-        <ResultsPerPage />
-      </div>
-      <div className="home-page-list">
-        <ArtWorksList data={artworksList} />
-      </div>
-      <div className="home-page-pagination">
-        <Pagination />
-      </div>
-    </main>
+    <div className="container">
+      <main className="home-page" data-testid="home-page">
+        <SearchBar />
+        <div className="home-page-selects">
+          <Sorting />
+          <ResultsPerPage />
+        </div>
+        <div className="home-page-list">
+          <ArtWorksList data={artworksList} />
+        </div>
+        <div className="home-page-pagination">
+          <Pagination />
+        </div>
+      </main>
+    </div>
   );
 }

@@ -23,4 +23,4 @@ const limitSlice = createSlice({
 
 export const { setLimit } = limitSlice.actions;
 
-export default limitSlice.reducer; //! экспорт без имени! в файле index.ts импортировала его как limitReducer
+export default limitSlice.reducer; //! в файле index.ts импортировала его как limitReducer

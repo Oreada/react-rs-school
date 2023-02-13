@@ -10,15 +10,11 @@ import { useAppSelector } from './store/hook';
 
 function App() {
   const artworksList = useAppSelector((state) => state.homePageArtworks.list); //! так достаём данные из redux store
-  console.log('artworksList', artworksList);
   const idDetails = useAppSelector((state) => state.idDetails.idDetails); //! так достаём данные из redux store
-  console.log('idDetails', idDetails);
-
-  console.log('filtration', artworksList.filter((item) => item.id === idDetails)[0]);
   const artWorkWithDetails = artworksList.filter((item) => item.id === idDetails)[0]; //! нахожу нужную карточку из стейта по ID
 
   return (
-    <div className="container">
+    <div>
       <Navigation />
       <Routes>
         <Route path="/" element={<HomePage />} />

@@ -48,10 +48,10 @@ export const getSortedData = async (
   obj: DateSorting | TitleSorting | AuthorSorting | unknown,
   page: string
 ): Promise<IGetData | undefined> => {
-  console.log('value=', value);
-  console.log('limit=', limit);
-  console.log('obj=', obj);
-  console.log('page=', page);
+  // console.log('value=', value);
+  // console.log('limit=', limit);
+  // console.log('obj=', obj);
+  // console.log('page=', page);
   try {
     const response = await fetch(
       `https://api.artic.edu/api/v1/artworks/search?q=${value}&query[term][is_public_domain]=true&fields=id,title,artist_title,date_display,artwork_type_title,dimensions,artist_display,image_id&page=${page}&limit=${limit}`,
@@ -72,7 +72,7 @@ export const getSortedData = async (
       throw new Error(`Incorrect content format`);
     }
     const artWorksList = respJson.data;
-    console.log('artWorksList', artWorksList);
+    // console.log('artWorksList', artWorksList);
 
     const totalPages = respJson.pagination.total_pages;
     const currentPage = respJson.pagination.current_page;

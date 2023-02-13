@@ -23,4 +23,4 @@ const objForSortingSlice = createSlice({
 
 export const { setObjForSorting } = objForSortingSlice.actions;
 
-export default objForSortingSlice.reducer; //! экспорт без имени! в файле index.ts импортировала его как objForSortingReducer
+export default objForSortingSlice.reducer; //! в файле index.ts импортировала его как objForSortingReducer

@@ -22,4 +22,4 @@ const idDetailsSlice = createSlice({
 
 export const { setIdDetails } = idDetailsSlice.actions;
 
-export default idDetailsSlice.reducer; //! экспорт без имени! в файле index.ts импортировала его как idDetailsReducer
+export default idDetailsSlice.reducer; //! в файле index.ts импортировала его как idDetailsReducer

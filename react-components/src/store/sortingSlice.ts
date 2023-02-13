@@ -23,4 +23,4 @@ const sortingSlice = createSlice({
 
 export const { setSorting } = sortingSlice.actions;
 
-export default sortingSlice.reducer; //! экспорт без имени! в файле index.ts импортировала его как sortingReducer
+export default sortingSlice.reducer; //! в файле index.ts импортировала его как sortingReducer
