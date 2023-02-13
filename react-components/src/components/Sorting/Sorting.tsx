@@ -17,6 +17,7 @@ export function Sorting() {
 
   useEffect(() => {
     (sortingSelect.current as HTMLSelectElement).value = sortingValue;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {

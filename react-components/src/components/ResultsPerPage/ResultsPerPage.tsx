@@ -20,6 +20,7 @@ export function ResultsPerPage() {
 
   useEffect(() => {
     (resultsPerPageSelect.current as HTMLSelectElement).value = limitValue;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
