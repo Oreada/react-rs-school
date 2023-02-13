@@ -6,6 +6,7 @@ describe('Card component', () => {
   test('Card renders', () => {
     render(
       <Card
+        postcard={CARDS[0].postcard}
         name={CARDS[0].name}
         phone={CARDS[0].phone}
         adress={CARDS[0].adress}

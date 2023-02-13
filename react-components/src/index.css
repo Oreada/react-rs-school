@@ -150,6 +150,15 @@ img {
     padding-top: 50px;
 }
 
+.form-title {
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: rgb(37, 57, 14);
+
+    margin-bottom: 50px;
+}
+
 /* -------- scrollbar ------------- */
 
 /* width */

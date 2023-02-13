@@ -13,6 +13,7 @@ interface FormProps {
 }
 
 interface FormValues {
+  postcardField: string;
   nameField: string;
   phoneField: string;
   adressField: string;
@@ -35,11 +36,12 @@ export function Form(props: FormProps) {
   });
 
   const onSubmit: SubmitHandler<FormValues> = (data) => {
-    console.log(data);
+    // console.log(data);
     setIsSubmitted(() => true);
 
     store.dispatch(
       addFormCard({
+        postcard: data.postcardField,
         name: data.nameField,
         phone: data.phoneField,
         adress: data.adressField,
@@ -63,6 +65,25 @@ export function Form(props: FormProps) {
         id="form"
         data-testid="form"
       >
+        <select
+          {...register('postcardField', {
+            required: 'Choose a postcard',
+          })}
+          className={styles['form-select']}
+        >
+          <option value="">--Postcard--</option>
+          <option value="Vincent van Gogh">
+            Vincent van Gogh &quot;The Poet&apos;s Garden&quot;
+          </option>
+          <option value="Claude Monet">Claude Monet &quot;Poppy Field&quot;</option>
+          <option value="Katsushika Hokusai">Katsushika Hokusai &quot;The Great Wave&quot;</option>
+          <option value="Edvard Munch">Edvard Munch &quot;The Girls on the Bridge&quot;</option>
+          <option value="Vasily Kandinsky">Vasily Kandinsky &quot;Improvisation №30&quot;</option>
+        </select>
+        {errors?.postcardField && (
+          <ErrorMessage errorMessage={errors?.postcardField?.message as string} />
+        )}
+
         <label className={styles['form-label-input']} htmlFor="form-input-name">
           Name:
         </label>
