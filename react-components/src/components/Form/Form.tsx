@@ -4,9 +4,8 @@ import { CardsList } from '../CardsList/CardsList';
 import { ErrorMessage } from '../ErrorMessage/ErrorMessage';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import styles from './Form.module.css';
-// import { useAppDispatch } from '../../store/hook';
+import { useAppDispatch } from '../../store/hook';
 import { addFormCard } from '../../store/formCardsSlice';
-import { store } from '../../store';
 
 interface FormProps {
   cards: Array<ICard>;
@@ -24,7 +23,7 @@ interface FormValues {
 export function Form(props: FormProps) {
   const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
 
-  // const dispatch = useAppDispatch(); //! так почему-то не работает - ???
+  const dispatch = useAppDispatch();
 
   const {
     register,
@@ -39,7 +38,7 @@ export function Form(props: FormProps) {
     // console.log(data);
     setIsSubmitted(() => true);
 
-    store.dispatch(
+    dispatch(
       addFormCard({
         postcard: data.postcardField,
         name: data.nameField,

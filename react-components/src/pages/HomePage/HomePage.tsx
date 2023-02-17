@@ -4,8 +4,7 @@ import { Pagination } from '../../components/Pagination/Pagination';
 import { ResultsPerPage } from '../../components/ResultsPerPage/ResultsPerPage';
 import { SearchBar } from '../../components/SearchBar/SearchBar';
 import { Sorting } from '../../components/Sorting/Sorting';
-import { useAppSelector } from '../../store/hook';
-import { store } from '../../store';
+import { useAppDispatch, useAppSelector } from '../../store/hook';
 import { getData } from '../../store/homePageArtworksSlice';
 
 export interface IArtWorkData {
@@ -22,9 +21,11 @@ export interface IArtWorkData {
 export function HomePage() {
   const artworksList = useAppSelector((state) => state.homePageArtworks.list); //! так достаём данные из redux store
 
+  const dispatch = useAppDispatch();
+
   useEffect(() => {
     if (!artworksList.length) {
-      store.dispatch(
+      dispatch(
         getData({
           value: '',
           limit: '',
