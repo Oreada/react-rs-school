@@ -1,7 +1,6 @@
 import React, { useEffect, useReducer } from 'react';
 import { SortingActionOption, sortingReducer } from '../../reducer';
-import { useAppSelector } from '../../store/hook';
-import { store } from '../../store';
+import { useAppDispatch, useAppSelector } from '../../store/hook';
 import styles from './Sorting.module.css';
 import { setSorting } from '../../store/sortingSlice';
 import { setObjForSorting } from '../../store/objForSortingSlice';
@@ -12,7 +11,9 @@ export function Sorting() {
   const sortingValue = useAppSelector((state) => state.sorting.value);
   const limitValue = useAppSelector((state) => state.limit.value);
 
-  const [state, dispatch] = useReducer(sortingReducer, { objForSorting: {} });
+  const dispatch = useAppDispatch();
+
+  const [state, dispatchSortingReducer] = useReducer(sortingReducer, { objForSorting: {} });
   const sortingSelect: React.RefObject<HTMLSelectElement> = React.createRef();
 
   useEffect(() => {
@@ -21,23 +22,24 @@ export function Sorting() {
   }, []);
 
   useEffect(() => {
-    store.dispatch(
+    dispatch(
       setSorting((sortingSelect.current as HTMLSelectElement).value as '' | SortingActionOption)
     );
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [sortingSelect]);
 
   const changeHandler = async () => {
     const action = {
       type: (sortingSelect.current as HTMLSelectElement).value as SortingActionOption,
     };
-    dispatch(action);
+    dispatchSortingReducer(action);
 
     const nextState = sortingReducer(state, action); //! для того чтобы получить актуальный стейт для вызова getSortedData
 
-    store.dispatch(setObjForSorting(nextState.objForSorting));
+    dispatch(setObjForSorting(nextState.objForSorting));
 
-    store.dispatch(setPageCurrent('1')); //! сбиваю текущую страницу, т.к. изменяется общее количество страниц
-    store.dispatch(
+    dispatch(setPageCurrent('1')); //! сбиваю текущую страницу, т.к. изменяется общее количество страниц
+    dispatch(
       getData({ value: searchValue, limit: limitValue, obj: nextState.objForSorting, page: '1' })
     );
   };

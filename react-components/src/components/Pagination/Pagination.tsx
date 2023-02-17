@@ -1,7 +1,6 @@
 import React from 'react';
-import { store } from '../../store';
 import { getData, setPageCurrent } from '../../store/homePageArtworksSlice';
-import { useAppSelector } from '../../store/hook';
+import { useAppDispatch, useAppSelector } from '../../store/hook';
 import styles from './Pagination.module.css';
 
 export function Pagination() {
@@ -11,12 +10,14 @@ export function Pagination() {
   const pageCurrent = useAppSelector((state) => state.homePageArtworks.pageCurrent);
   const pageTotal = useAppSelector((state) => state.homePageArtworks.pageTotal);
 
+  const dispatch = useAppDispatch();
+
   const leftClickHandler = async () => {
     if (Number(pageCurrent) > 1) {
       const currentPageNew = String(Number(pageCurrent) - 1);
-      store.dispatch(setPageCurrent(currentPageNew));
+      dispatch(setPageCurrent(currentPageNew));
 
-      store.dispatch(
+      dispatch(
         getData({ value: searchValue, limit: limitValue, obj: objForSorting, page: currentPageNew })
       );
     }
@@ -25,9 +26,9 @@ export function Pagination() {
   const rightClickHandler = async () => {
     if (Number(pageCurrent) < Number(pageTotal)) {
       const currentPageNew = String(Number(pageCurrent) + 1);
-      store.dispatch(setPageCurrent(currentPageNew));
+      dispatch(setPageCurrent(currentPageNew));
 
-      store.dispatch(
+      dispatch(
         getData({ value: searchValue, limit: limitValue, obj: objForSorting, page: currentPageNew })
       );
     }

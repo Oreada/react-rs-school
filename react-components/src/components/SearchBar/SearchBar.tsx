@@ -1,6 +1,5 @@
 import React from 'react';
-import { useAppSelector } from '../../store/hook';
-import { store } from '../../store';
+import { useAppDispatch, useAppSelector } from '../../store/hook';
 import styles from './SearchBar.module.css';
 import { setSearch } from '../../store/searchSlice';
 import { getData, setPageCurrent } from '../../store/homePageArtworksSlice';
@@ -10,17 +9,17 @@ export function SearchBar() {
   const objForSorting = useAppSelector((state) => state.objForSorting.obj);
   const limitValue = useAppSelector((state) => state.limit.value);
 
+  const dispatch = useAppDispatch();
+
   const changeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-    store.dispatch(setSearch(event.target.value));
+    dispatch(setSearch(event.target.value));
   };
 
   const searchHandler = async (event: React.MouseEvent<HTMLInputElement, MouseEvent>) => {
     event.preventDefault();
 
-    store.dispatch(setPageCurrent('1')); //! сбиваю текущую страницу, т.к. изменяется общее количество страниц
-    store.dispatch(
-      getData({ value: searchValue, limit: limitValue, obj: objForSorting, page: '1' })
-    );
+    dispatch(setPageCurrent('1')); //! сбиваю текущую страницу, т.к. изменяется общее количество страниц
+    dispatch(getData({ value: searchValue, limit: limitValue, obj: objForSorting, page: '1' }));
   };
 
   return (

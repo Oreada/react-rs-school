@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
-import { store } from '../../store';
 import { getData, setPageCurrent } from '../../store/homePageArtworksSlice';
-import { useAppSelector } from '../../store/hook';
+import { useAppDispatch, useAppSelector } from '../../store/hook';
 import { setLimit } from '../../store/limitSlice';
 import styles from './ResultsPerPage.module.css';
 
@@ -16,6 +15,8 @@ export function ResultsPerPage() {
   const objForSorting = useAppSelector((state) => state.objForSorting.obj);
   const limitValue = useAppSelector((state) => state.limit.value);
 
+  const dispatch = useAppDispatch();
+
   const resultsPerPageSelect: React.RefObject<HTMLSelectElement> = React.createRef();
 
   useEffect(() => {
@@ -24,22 +25,23 @@ export function ResultsPerPage() {
   }, []);
 
   useEffect(() => {
-    store.dispatch(
+    dispatch(
       setLimit(
         (resultsPerPageSelect.current as HTMLSelectElement).value as '' | ResultsPerPageOption
       )
     );
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [resultsPerPageSelect]);
 
   const changeHandler = async () => {
-    store.dispatch(
+    dispatch(
       setLimit(
         (resultsPerPageSelect.current as HTMLSelectElement).value as '' | ResultsPerPageOption
       )
     );
 
-    store.dispatch(setPageCurrent('1')); //! сбиваю текущую страницу, т.к. изменяется общее количество страниц
-    store.dispatch(
+    dispatch(setPageCurrent('1')); //! сбиваю текущую страницу, т.к. изменяется общее количество страниц
+    dispatch(
       getData({
         value: searchValue,
         limit: (resultsPerPageSelect.current as HTMLSelectElement).value,
